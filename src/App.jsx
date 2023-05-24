@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Routes, Route, Link, useLocation, NavLink } from "react-router-dom";
+
+import CoinList from "./pages/CoinList";
+import CoinPage from "./pages/CoinPage";
+import Portfolio from "./pages/Portfolio";
+
 import { ThemeProvider } from "styled-components";
-import { DarkTheme } from "./utils/DarkTheme";
+import { DarkTheme } from "./theme/DarkTheme";
 
 export default function App() {
   return (
@@ -20,9 +25,9 @@ export default function App() {
         </ul>
       </nav>
       <Routes>
-        <Route path="/" element={<h1>COINLIST</h1>} />
-        <Route path="/coinPage" element={<h1>COINPAGE</h1>} />
-        <Route path="/portfolio" element={<h1>PORTFOLIO</h1>} />
+        <Route path="/" element={<CoinList />} />
+        <Route path="/coinPage" element={<CoinPage />} />
+        <Route path="/portfolio" element={<Portfolio />} />
         <Route path="*" element={<h1>NOT FOUND</h1>} />
       </Routes>
     </ThemeProvider>
