@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Routes, Route, Link, useLocation, NavLink } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { DarkTheme } from "./utils/DarkTheme";
 
 export default function App() {
   return (
-    <>
+    <ThemeProvider theme={DarkTheme}>
       <nav>
         <ul>
           <li>
@@ -27,6 +29,6 @@ export default function App() {
         <Route path="/Portfolio" element={<h1>PORTFOLIO</h1>} />
         <Route path="*" element={<h1>NOT FOUND</h1>} />
       </Routes>
-    </>
+    </ThemeProvider>
   );
 }
