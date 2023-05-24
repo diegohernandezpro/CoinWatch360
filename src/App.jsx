@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Routes, Route, Link, useLocation, NavLink } from "react-router-dom";
 
-import CoinList from "./pages/CoinList";
-import CoinPage from "./pages/CoinPage";
-import Portfolio from "./pages/Portfolio";
+import { CoinList, CoinPage, Portfolio } from "@/pages";
 
 import { ThemeProvider } from "styled-components";
 import { DarkTheme } from "./theme/DarkTheme";
