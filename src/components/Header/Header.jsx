@@ -6,6 +6,8 @@ import {
   LeftNav,
   NavLinkWrapper,
 } from "./Header.styles";
+import Searchbar from "./SearchBar";
+
 import { NavLinkText } from "@/styles/Fonts";
 export default class Header extends React.Component {
   render() {
@@ -20,7 +22,9 @@ export default class Header extends React.Component {
               <NavLinkText>Portfolio</NavLinkText>
             </NavLinkWrapper>
           </RightNav>
-          <LeftNav></LeftNav>
+          <LeftNav>
+            <Searchbar />
+          </LeftNav>
         </Navigation>
       </Wrapper>
     );
