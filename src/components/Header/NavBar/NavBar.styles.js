@@ -13,7 +13,7 @@ export const Wrapper = styled.header`
 `;
 
 export const Navigation = styled.div`
-  height: 97px;
+  height: 6rem;
   width: 100%;
   background: ${({ theme }) => theme.nested.background};
   display: flex;
@@ -25,19 +25,21 @@ export const Navigation = styled.div`
 
 export const RightNav = styled.div`
   display: flex;
-  margin-right: 28px;
-  border: 1px solid blue;
+  margin-right: 1.75rem;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border: 1px solid blue; /////////////
 `;
 
 export const LeftNav = styled.div`
   display: flex;
-  margin-left: 90px;
+  margin-left: 5.625rem;
   align-items: center;
-  gap: 27px;
+  gap: 1.75rem;
 `;
 
 export const StyledNavLink = styled(NavLink)`
-  padding: 10px 40px;
+  padding: 0.625rem 2.5rem;
   border-radius: 10px;
   width: 1.5rem;
   height: 1.5rem;

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, useLocation, NavLink } from "react-router-dom";
 import {
   Wrapper,
   Navigation,
@@ -8,30 +7,26 @@ import {
   StyledNavLink,
 } from "./NavBar.styles";
 import Searchbar from "../SearchBar/SearchBar";
-
-import { NavLinkText } from "@/styles/Fonts";
+import CurrencySelector from "../CurrencySelector";
 
 export function NavBar() {
-  const { pathname } = useLocation();
-  console.log(
-    "🚀 ~ file: NavBar.jsx:16 ~ NavBar ~ pathname:",
-    pathname.slice(1)
-  );
-
   return (
     <Wrapper>
       <Navigation>
         <LeftNav>
-          <StyledNavLink exact to="/" activeClassName="active">
+          <StyledNavLink exact to="/">
             Coins
           </StyledNavLink>
 
-          <StyledNavLink exact to="/portfolio" activeClassName="active">
+          <StyledNavLink exact to="/portfolio">
             Portfolio
           </StyledNavLink>
         </LeftNav>
 
-        <RightNav>{/* <Searchbar /> */} SearchBar</RightNav>
+        <RightNav>
+          <Searchbar />
+          <CurrencySelector />
+        </RightNav>
       </Navigation>
     </Wrapper>
   );

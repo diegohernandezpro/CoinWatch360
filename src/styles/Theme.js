@@ -31,5 +31,10 @@ export const theme = {
       barColor: "#1ad761",
     },
     icon: "invert(0%)",
+    money: {
+      green: "#00ff5f",
+      red: "#FE1040",
+      background: "#191B1F",
+    },
   },
 };

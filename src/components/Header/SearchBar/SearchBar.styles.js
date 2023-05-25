@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.form`
-  width: 510px;
-  height: 63px;
-  background: ${(props) => props.theme.nested.active};
+  width: 31.8rem;
+  height: 3.93rem;
+  background: ${({ theme }) => theme.nested.active};
+  color: ${({ theme }) => theme.color};
   border-radius: 10px;
   display: flex;
-  gap: 20px;
+  gap: 1.25rem;
   align-items: center;
 
   :hover {
@@ -15,20 +16,20 @@ export const Wrapper = styled.form`
 `;
 
 export const Icon = styled.img`
-  margin-left: 20px;
-  height: 24px;
-  width: 24px;
+  margin-left: 1.25rem;
+  height: 1.5rem;
+  width: 1.5rem;
   filter: ${(props) => props.theme.icon};
 `;
 
 export const Input = styled.input`
-  font-size: 17px;
-  color: ${(props) => props.theme.color};
+  font-size: 1rem;
+  color: ${({ theme }) => theme.color};
   background: none;
   border: none;
   font-weight: bold;
 
   ::placeholder {
-    color: ${(props) => props.theme.color};
+    color: ${({ theme }) => theme.color};
   }
 `;
