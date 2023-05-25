@@ -29,7 +29,7 @@ export const Icon = styled.img`
   margin-left: 1.25rem;
   height: 1.5rem;
   width: 1.5rem;
-  filter: ${(props) => props.theme.icon};
+  //   filter: ${(props) => props.theme.icon};
 `;
 
 export const StyledDiv = styled.div`

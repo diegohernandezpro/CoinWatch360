@@ -30,8 +30,8 @@ export default class Infographic extends React.Component {
           <UpArrowGreen />
         </MarketCap>
         <TextNSlider text="$124.458" />
-        <TextNSlider text="44%" />
-        <TextNSlider text="21%" />
+        <TextNSlider text="44%" percentage={44} icon="bitcoin" />
+        <TextNSlider text="21%" percentage={21} icon="ethereum" />
       </Container>
     );
   }
