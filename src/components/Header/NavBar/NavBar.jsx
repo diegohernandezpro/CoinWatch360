@@ -8,6 +8,7 @@ import {
 } from "./NavBar.styles";
 import Searchbar from "../SearchBar/SearchBar";
 import CurrencySelector from "../CurrencySelector";
+import ThemeSelector from "../ThemeSelector";
 
 export function NavBar() {
   return (
@@ -26,6 +27,7 @@ export function NavBar() {
         <RightNav>
           <Searchbar />
           <CurrencySelector />
+          <ThemeSelector />
         </RightNav>
       </Navigation>
     </Wrapper>

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  border: 2px solid yellow;
   height: 3.93rem;
   width: 8.4rem;
   font-size: 1rem;
@@ -15,7 +14,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Icon = styled.div`
-  border: 1px solid orange;
   height: 2rem;
   width: 2rem;
   border-radius: 50%;
@@ -28,7 +26,6 @@ export const Icon = styled.div`
 `;
 
 export const Dropdown = styled.div`
-  border: 1px solid red;
   display: flex;
   align-items: center;
   gap: 0.5rem;

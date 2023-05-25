@@ -7,9 +7,7 @@ export const Wrapper = styled.header`
   height: 9.4rem;
   display: flex;
   flex-direction: column;
-  border-color: orange;
-  border-width: 1px;
-  border-style: dashed;
+  border: 1px dashed orange;
 `;
 
 export const Navigation = styled.div`
@@ -19,8 +17,6 @@ export const Navigation = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  border: 1px solid red;
 `;
 
 export const RightNav = styled.div`
@@ -28,7 +24,6 @@ export const RightNav = styled.div`
   margin-right: 1.75rem;
   justify-content: space-between;
   gap: 1.5rem;
-  border: 1px solid blue; /////////////
 `;
 
 export const LeftNav = styled.div`

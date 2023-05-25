@@ -6,6 +6,7 @@ import { CoinList, CoinPage, Portfolio } from "@/pages";
 import { Header } from "@/components";
 import { theme } from "./styles/Theme";
 import { GlobalStyle } from "./styles/GlobalStyles";
+import styled from "styled-components";
 
 class App extends React.Component {
   state = {
@@ -16,16 +17,25 @@ class App extends React.Component {
     return (
       <ThemeProvider theme={this.state.theme}>
         <GlobalStyle />
-        <Header />
-        <Routes>
-          <Route path="/" element={<CoinList />} />
-          <Route path="/coinPage" element={<CoinPage />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="*" element={<h1>NOT FOUND</h1>} />
-        </Routes>
+        <StyledDiv>
+          <Header />
+          <Routes>
+            <Route path="/" element={<CoinList />} />
+            <Route path="/coinPage" element={<CoinPage />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="*" element={<h1>NOT FOUND</h1>} />
+          </Routes>
+        </StyledDiv>
       </ThemeProvider>
     );
   }
 }
 
 export default App;
+
+const StyledDiv = styled.div`
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+`;

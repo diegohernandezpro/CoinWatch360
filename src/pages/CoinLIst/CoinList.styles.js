@@ -1,12 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  position: absolute;
-  width: 1920px;
-  height: 1848px;
-
-  border-color: ${({ theme }) => theme.nested.background};
-  border-width: 10px;
-  border-style: solid;
+  // border 10px solid ${({ theme }) => theme.nested.background};
   background: ${({ theme }) => theme.background};
+  flex: 1;
 `;
