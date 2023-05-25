@@ -6,8 +6,9 @@ export const Wrapper = styled.header`
   width: 100%;
   height: 9.4rem;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  border: 1px dashed orange;
 `;
 
 export const Navigation = styled.div`

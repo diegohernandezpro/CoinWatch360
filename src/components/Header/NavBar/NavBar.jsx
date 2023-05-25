@@ -9,6 +9,7 @@ import {
 import Searchbar from "../SearchBar/SearchBar";
 import CurrencySelector from "../CurrencySelector";
 import ThemeSelector from "../ThemeSelector";
+import Infographic from "../Infographics";
 
 export function NavBar() {
   return (
@@ -30,6 +31,7 @@ export function NavBar() {
           <ThemeSelector />
         </RightNav>
       </Navigation>
+      <Infographic />
     </Wrapper>
   );
 }
