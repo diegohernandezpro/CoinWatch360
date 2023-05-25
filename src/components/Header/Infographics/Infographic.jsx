@@ -1,23 +1,38 @@
 import React from "react";
 import axios from "axios";
-import {
-  Container,
-  CoinWrapper,
-  StyledDiv,
-  MarketCap,
-  SliderWrapper,
-  Slider,
-} from "./Infographic.styles";
+// import { REACT_APP_GLOBAL } from "process.env";
+import { Container, CoinWrapper, MarketCap } from "./Infographic.styles";
 import { TextNSlider } from "./TextNSlider";
 import { UpArrowGreen, DownArrowGreen } from "../../../styles/Arrows";
 export default class Infographic extends React.Component {
-  state = {};
+  state = { isLoading: false, hasError: true };
 
-  getInfo() {
+  async getCoinInfo() {
     try {
+      const {
+        data: { data },
+      } = await axios.get("https://api.coingecko.com/api/v3/global");
+      console.log(data.total_market_cap.usd);
+
+      this.setState({
+        isLoading: false,
+        hasError: false,
+        numCoins: data.active_cryptocurrencies,
+        numExchange: data.markets,
+        marketCap: data.total_market_cap.usd,
+        marketCapChange: data.market_cap_change_percentage_24h_usd,
+        volume: data.total_volume.usd,
+        volumePercentage: 0,
+        bitCap: data.market_cap_percentage.btc,
+        ethCap: data.market_cap_percentage.eth,
+      });
     } catch (err) {
-      console.log(err);
+      console.log("Eror in GetCoinInfo", err);
     }
+  }
+
+  componentDidMount() {
+    this.getCoinInfo();
   }
 
   render() {
