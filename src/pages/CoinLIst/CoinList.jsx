@@ -1,18 +1,12 @@
 import React from "react";
 import axios from "axios";
+import { Table } from "@/components";
 
 import {
   Container,
   Wrapper,
   ChartsContainer,
   ChartWrapper,
-  TableContainer,
-  StyledP,
-  TableName,
-  TablePrice,
-  TableTimeChange,
-  TableVolume,
-  TableSparkline,
 } from "./CoinList.styles";
 
 export default class CoinList extends React.Component {
@@ -24,17 +18,7 @@ export default class CoinList extends React.Component {
             <ChartWrapper>chart1</ChartWrapper>
             <ChartWrapper>chart2</ChartWrapper>
           </ChartsContainer>
-          <StyledP>Your Overview</StyledP>
-          <TableContainer>
-            <TableName>Name</TableName>
-            <TablePrice>Price</TablePrice>
-            <TableTimeChange>1h%</TableTimeChange>
-            <TableTimeChange>24h%</TableTimeChange>
-            <TableTimeChange>7h%</TableTimeChange>
-            <TableVolume>24h Volume/Market Cap</TableVolume>
-            <TableVolume>Circulating/Total Supply</TableVolume>
-            <TableSparkline>Last 7d</TableSparkline>
-          </TableContainer>
+          <Table />
         </Wrapper>
       </Container>
     );

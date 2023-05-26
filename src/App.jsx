@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import { Routes, Route, Link, useLocation, NavLink } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
-
+import styled, { ThemeProvider } from "styled-components";
+import { Routes, Route } from "react-router-dom";
 import { CoinList, CoinPage, Portfolio } from "@/pages";
 import { Header } from "@/components";
-import { theme } from "./styles/Theme";
-import { GlobalStyle } from "./styles/GlobalStyles";
-import styled from "styled-components";
+import { theme, GlobalStyle } from "@/styles";
 
 class App extends React.Component {
   state = {
