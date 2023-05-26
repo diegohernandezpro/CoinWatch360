@@ -5,6 +5,7 @@ import {
   RightNav,
   LeftNav,
   StyledNavLink,
+  StyledDiv,
 } from "./NavBar.styles";
 import Searchbar from "../SearchBar/SearchBar";
 import CurrencySelector from "../CurrencySelector";
@@ -31,7 +32,9 @@ export function NavBar() {
           <ThemeSelector />
         </RightNav>
       </Navigation>
-      <Infographic />
+      <StyledDiv>
+        <Infographic />
+      </StyledDiv>
     </Wrapper>
   );
 }

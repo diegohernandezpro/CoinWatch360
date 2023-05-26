@@ -52,3 +52,13 @@ export const StyledNavLink = styled(NavLink)`
     background-color: ${({ theme }) => theme.nested.active};
   }
 `;
+
+export const StyledDiv = styled.div`
+  width: Calc(100% - 1rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5rem solid ${({ theme }) => theme.nested.background};
+  border-bottom: 0px solid transparent;
+  border-top: 0px solid transparent;
+`;
