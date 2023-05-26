@@ -27,8 +27,8 @@ export const MarketCap = styled.div`
 
 export const Icon = styled.img`
   margin-left: 1.25rem;
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 1rem;
+  width: 1rem;
 `;
 
 export const StyledDiv = styled.div`

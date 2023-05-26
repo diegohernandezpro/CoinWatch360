@@ -20,7 +20,7 @@ export default class Infographic extends React.Component {
         numExchange: data.markets,
         marketCap: data.total_market_cap.usd, //change from usd to currentCoin
         marketCapChange: data.market_cap_change_percentage_24h_usd,
-        volume: data.total_volume.usd,
+        volume: data.total_volume.usd, //change from usd to currentCoin
         bitCap: data.market_cap_percentage.btc,
         ethCap: data.market_cap_percentage.eth,
       });
