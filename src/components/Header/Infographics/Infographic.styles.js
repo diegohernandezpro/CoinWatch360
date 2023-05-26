@@ -15,7 +15,6 @@ export const CoinWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: scroll;
 `;
 
 export const MarketCap = styled.div`
@@ -24,14 +23,12 @@ export const MarketCap = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  overflow: scroll;
 `;
 
 export const Icon = styled.img`
   margin-left: 1.25rem;
   height: 1.5rem;
   width: 1.5rem;
-  overflow: scroll;
 `;
 
 export const StyledDiv = styled.div`
@@ -39,7 +36,6 @@ export const StyledDiv = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  overflow: scroll;
 `;
 
 export const SliderWrapper = styled.div`
@@ -47,13 +43,12 @@ export const SliderWrapper = styled.div`
   height: 0.8rem;
   background: #2172e5;
   border-radius: 12px;
-  overflow: scroll;
+  overflow: hidden;
 `;
 
 export const Slider = styled.div`
-  width: 2rem;
+  width: ${({ percentage }) => 3.4 * (percentage / 100)}rem;
   height: 0.8rem;
   background: #ffffff;
   border-radius: 12px;
-  overflow: scroll;
 `;

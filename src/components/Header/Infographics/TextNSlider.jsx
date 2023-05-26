@@ -15,7 +15,7 @@ export function TextNSlider(props) {
       {icon && <Icon src={getIcon(icon)} />}
       <span>{text}</span>
       <SliderWrapper>
-        <Slider />
+        <Slider percentage={percentage} />
       </SliderWrapper>
     </StyledDiv>
   );
