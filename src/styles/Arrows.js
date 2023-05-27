@@ -29,5 +29,6 @@ export const NeutralDot = styled.div`
   height: 0.5rem;
   width: 0.5rem;
   border-radius: 50%;
-  background: ${(props) => props.background};
+  background: ${({ color }) => color};
+  // background: hotPink;
 `;

@@ -1,16 +1,15 @@
-import React from "react";
 import {
   TableName,
   TablePrice,
   TableTimeChange,
-  TableVolume,
   TableSparkline,
   TableRow,
   TableNum,
   PercentDiv,
 } from "./NewRow.styles";
+import { Slider } from "../Slider/Slider";
 import { UpArrowGreen, DownArrowRed } from "@/styles";
-import { formatPrice, formatPercentage } from "../../../utils/NumberFormat";
+import { formatPrice, formatPercentage } from "@/utils";
 
 export const NewRow = ({ coin }) => {
   const rank = coin.market_cap_rank;
@@ -45,8 +44,8 @@ export const NewRow = ({ coin }) => {
       <TableTimeChange>{getPercentage(percentage1h)}</TableTimeChange>
       <TableTimeChange>{getPercentage(percentage24h)}</TableTimeChange>
       <TableTimeChange>{getPercentage(percentage7d)}</TableTimeChange>
-      <TableVolume>Sliding bar</TableVolume>
-      <TableVolume>Sliding bar</TableVolume>
+      <Slider />
+      <Slider />
       <TableSparkline>Sparkline</TableSparkline>
     </TableRow>
   );

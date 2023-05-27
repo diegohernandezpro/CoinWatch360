@@ -47,14 +47,6 @@ export const TableTimeChange = styled.div`
   padding-left: 0.5rem;
 `;
 
-export const TableVolume = styled.div`
-  width: 14rem;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding-left: 0.5rem;
-`;
-
 export const TableSparkline = styled.div`
   width: 10rem;
   height: 100%;

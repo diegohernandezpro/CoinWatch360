@@ -5,7 +5,7 @@ import {
   TableVolume,
   TableSparkline,
   TableNum,
-} from "../NewRow/NewRow.styles";
+} from "./Heading.styles";
 
 import { HeadingTableRow } from "./Heading.styles";
 
