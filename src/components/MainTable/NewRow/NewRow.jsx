@@ -18,6 +18,10 @@ export const NewRow = ({ coin }) => {
   const percentage1h = coin.price_change_percentage_1h_in_currency;
   const percentage24h = coin.price_change_percentage_24h_in_currency;
   const percentage7d = coin.price_change_percentage_7d_in_currency;
+  const totalVolume = coin.total_volume;
+  const marketCap = coin.market_cap;
+  const circulatingSupply = coin.circulating_supply;
+  const totalSupply = coin.total_supply;
 
   const getPercentage = (percentage) => {
     if (percentage > 0) {
@@ -44,8 +48,8 @@ export const NewRow = ({ coin }) => {
       <TableTimeChange>{getPercentage(percentage1h)}</TableTimeChange>
       <TableTimeChange>{getPercentage(percentage24h)}</TableTimeChange>
       <TableTimeChange>{getPercentage(percentage7d)}</TableTimeChange>
-      <Slider />
-      <Slider />
+      <Slider base={marketCap} fill={totalVolume} />
+      <Slider base={circulatingSupply} fill={totalSupply} />
       <TableSparkline>Sparkline</TableSparkline>
     </TableRow>
   );

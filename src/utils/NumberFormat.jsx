@@ -12,7 +12,8 @@ export const formatPercentage = (percentage) => {
   return numeral(Math.abs(percentage)).format("0.0") + "%";
 };
 
-export const formatNum = (price) => numeral(price).format("($0.00 a)"); //shortenAndDecimal
+export const formatNum = (price) =>
+  "$" + numeral(price).format("(0.00 a)").toUpperCase(); //shortenAndDecimal
 
 export const formatLargeNum = (num) => numeral(num).format("(0.00 a)");
 
