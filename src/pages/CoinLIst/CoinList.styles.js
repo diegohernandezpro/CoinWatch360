@@ -13,7 +13,7 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
   width: 100%;
-  border: 2px solid red;
+  // border: 2px solid red;
 `;
 
 export const ChartsContainer = styled.div`
