@@ -1,9 +1,6 @@
 import React from "react";
 import axios from "axios";
-<<<<<<< HEAD
-=======
 // import jsonData from "../testData.json";
->>>>>>> Landing-Page-Table
 
 import { TableContainer, StyledP, TableWrapper } from "./Table.styles";
 
