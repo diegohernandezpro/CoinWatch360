@@ -6,6 +6,7 @@ import {
   TableRow,
   TableNum,
   PercentDiv,
+  Icon,
 } from "./NewRow.styles";
 import { Slider } from "../Slider/Slider";
 import { Sparkline } from "../SparkLine/Sparkline";
@@ -24,6 +25,7 @@ export const NewRow = ({ coin }) => {
   const circulatingSupply = coin.circulating_supply;
   const totalSupply = coin.total_supply;
   const SparklineData = coin.sparkline_in_7d.price;
+  const icon = coin.image;
 
   const getPercentage = (percentage) => {
     if (percentage > 0) {
@@ -45,13 +47,16 @@ export const NewRow = ({ coin }) => {
   return (
     <TableRow>
       <TableNum>{rank}</TableNum>
-      <TableName>{name}</TableName>
+      <TableName>
+        <Icon src={icon} />
+        {name}
+      </TableName>
       <TablePrice>{price}</TablePrice>
       <TableTimeChange>{getPercentage(percentage1h)}</TableTimeChange>
       <TableTimeChange>{getPercentage(percentage24h)}</TableTimeChange>
       <TableTimeChange>{getPercentage(percentage7d)}</TableTimeChange>
-      <Slider base={marketCap} fill={totalVolume} />
-      <Slider base={circulatingSupply} fill={totalSupply} />
+      <Slider base={marketCap} fill={totalVolume} rank={rank} />
+      <Slider base={circulatingSupply} fill={totalSupply} rank={rank} />
       <TableSparkline>
         <Sparkline pricePoints={SparklineData} />
       </TableSparkline>

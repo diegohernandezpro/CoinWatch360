@@ -1,4 +1,4 @@
-export { theme } from "./Theme";
+export { theme, sliderColors } from "./Theme";
 export { GlobalStyle } from "./GlobalStyles";
 export {
   UpArrowGreen,

@@ -14,7 +14,7 @@ export const TableVolume = styled.div`
 export const SliderWrapper = styled.div`
   width: 12.5rem;
   height: 0.6rem;
-  background: #fff;
+  background: ${({ color }) => color};
   border-radius: 12px;
   overflow: hidden;
 `;
@@ -22,7 +22,7 @@ export const SliderWrapper = styled.div`
 export const SliderFill = styled.div`
   width: ${({ percentage }) => 12.5 * (percentage / 100)}rem;
   height: 0.6rem;
-  background: #2172e5;
+  background: ${({ color }) => color};
   border-radius: 12px;
 `;
 

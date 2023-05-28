@@ -7,13 +7,9 @@ export const HeadingTableRow = styled.div`
   height: 3.2rem;
   width; 100%;
   margin-bottom: 0.5rem;
-  position: sticky;
-  top: 0px;
-  background: black;
 `;
 
 export const TableNum = styled.div`
-  // border: 1px dashed red;
   width: 2rem;
   height: 100%;
   display: flex;

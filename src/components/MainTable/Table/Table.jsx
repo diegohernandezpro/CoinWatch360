@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import jsonData from "../testData.json";
 
-import { TableContainer, StyledP } from "./Table.styles";
+import { TableContainer, StyledP, TableWrapper } from "./Table.styles";
 
 import { Heading } from "../Heading/Heading";
 import { NewRow } from "../NewRow/NewRow";
@@ -40,9 +40,11 @@ export default class Table extends React.Component {
         <StyledP>Your Overview</StyledP>
         <TableContainer>
           <Heading />
-          {this.state.coinList.map((coin) => {
-            return <NewRow key={coin.id} coin={coin} />;
-          })}
+          <TableWrapper>
+            {this.state.coinList.map((coin) => {
+              return <NewRow key={coin.id} coin={coin} />;
+            })}
+          </TableWrapper>
         </TableContainer>
       </>
     );

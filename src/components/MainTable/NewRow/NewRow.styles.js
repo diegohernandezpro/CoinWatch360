@@ -22,12 +22,19 @@ export const TableNum = styled.div`
 `;
 
 export const TableName = styled.div`
-  // border: 1px dashed red;
   width: 19rem;
   height: 100%;
   display: flex;
   align-items: center;
   padding-left: 0.5rem;
+  // border: 1px dashed red;
+  border-radius: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background: ${theme.dark.nested.active};
+    border: 0.2rem outset ${theme.dark.nested.background};
+  }
 `;
 
 export const TablePrice = styled.div`
@@ -61,8 +68,9 @@ export const TableSparkline = styled.div`
 `;
 
 export const Icon = styled.img`
-  width: 1rem;
-  height: 1rem;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1.5rem;
 `;
 
 export const PercentDiv = styled.span`

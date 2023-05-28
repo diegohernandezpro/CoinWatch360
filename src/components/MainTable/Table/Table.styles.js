@@ -16,6 +16,10 @@ export const TableContainer = styled.div`
   background: ${({ theme }) => theme.nested.background};
   border-radius: 0.5rem;
   overflow: auto;
-  border: 2px solid yellowgreen;
   position: relative;
+`;
+
+export const TableWrapper = styled.div`
+  // border: 1px dashed orange;
+  overflow: auto;
 `;
