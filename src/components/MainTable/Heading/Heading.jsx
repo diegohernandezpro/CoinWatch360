@@ -4,13 +4,14 @@ import {
   TableTimeChange,
   TableVolume,
   TableSparkline,
-  TableRow,
   TableNum,
-} from "../Table/Table.styles";
+} from "./Heading.styles";
+
+import { HeadingTableRow } from "./Heading.styles";
 
 export const Heading = () => {
   return (
-    <TableRow>
+    <HeadingTableRow>
       <TableNum>#</TableNum>
       <TableName>Name</TableName>
       <TablePrice>Price</TablePrice>
@@ -20,6 +21,6 @@ export const Heading = () => {
       <TableVolume>24h Volume/Market Cap</TableVolume>
       <TableVolume>Circulating/Total Supply</TableVolume>
       <TableSparkline>Last 7d</TableSparkline>
-    </TableRow>
+    </HeadingTableRow>
   );
 };

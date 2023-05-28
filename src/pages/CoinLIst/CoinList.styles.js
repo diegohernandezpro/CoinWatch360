@@ -15,3 +15,20 @@ export const Wrapper = styled.div`
   width: 100%;
   // border: 2px solid red;
 `;
+<<<<<<< HEAD
+=======
+
+export const ChartsContainer = styled.div`
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  border: 2px solid blue;
+  height: 21rem;
+  overflow: visible;
+`;
+
+export const ChartWrapper = styled.div`
+  border: 1px solid yellowgreen;
+  width: 100%;
+`;
+>>>>>>> Landing-Page-Table
