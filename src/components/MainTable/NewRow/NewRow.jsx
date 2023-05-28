@@ -29,14 +29,14 @@ export const NewRow = ({ coin }) => {
     if (percentage > 0) {
       return (
         <>
-          <UpArrowGreen />{" "}
+          <UpArrowGreen />
           <PercentDiv color="green">{formatPercentage(percentage)}</PercentDiv>
         </>
       );
     }
     return (
       <>
-        <DownArrowRed />{" "}
+        <DownArrowRed />
         <PercentDiv color="red">{formatPercentage(percentage)}</PercentDiv>
       </>
     );
@@ -53,7 +53,7 @@ export const NewRow = ({ coin }) => {
       <Slider base={marketCap} fill={totalVolume} />
       <Slider base={circulatingSupply} fill={totalSupply} />
       <TableSparkline>
-        <Sparkline dataPoints={SparklineData} />
+        <Sparkline pricePoints={SparklineData} />
       </TableSparkline>
     </TableRow>
   );

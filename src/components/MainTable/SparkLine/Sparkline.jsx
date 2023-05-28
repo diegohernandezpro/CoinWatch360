@@ -1,4 +1,3 @@
-import React from "react";
 import { Container } from "./Sparkline.styles";
 import {
   Chart as ChartJS,
@@ -11,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { theme } from "@/styles";
 
 ChartJS.register(
   CategoryScale,
@@ -22,32 +22,26 @@ ChartJS.register(
   Legend
 );
 
-export const Sparkline = ({ dataPoints }) => {
-  console.log(
-    "🚀 ~ file: Sparkline.jsx:26 ~ Sparkline ~ dataPoints:",
-    dataPoints
-  );
+export const Sparkline = ({ pricePoints }) => {
+  // Check if pricePoints is defined;
+  if (!Array.isArray(pricePoints)) {
+    return;
+  }
 
-  const labels = ["2017", "2018", "2019", "2020", "2021", "2022"];
-
-  const getLabels = (array) => array.map((_, index) => index);
+  const getLabels = (array) => array.map((_, index) => index + 1);
 
   const lineData = () => {
-    // let borderColor = "";
-    // if (dataPoints[0] > dataPoints[dataPoints.length - 1]) {
-    //   borderColor = "rgba(254, 16, 64, 1)";
-    // } else {
-    //   borderColor = "rgba(0, 255, 95, 1)";
-    // }
-
     return {
-      labels: getLabels(["2017", "2018", "2019", "2020", "2021", "2022"]),
+      labels: getLabels(pricePoints),
       datasets: [
         {
-          //   label: "React",
-          data: [32, 41, 51, 60, 51, 95],
-          tension: 0.3,
-          borderColor: "pink",
+          data: pricePoints,
+          borderColor:
+            pricePoints[0] > pricePoints[pricePoints.length - 1]
+              ? theme.dark.money.red
+              : theme.dark.money.green,
+          tension: 0.5,
+          borderWidth: 3,
           fill: false,
         },
       ],
@@ -55,6 +49,7 @@ export const Sparkline = ({ dataPoints }) => {
   };
 
   const options = {
+    responsive: true, // Make the chart responsive to the container size
     plugins: {
       legend: {
         display: false,
@@ -63,54 +58,18 @@ export const Sparkline = ({ dataPoints }) => {
     maintainAspectRatio: false,
     elements: {
       point: {
-        radius: 2,
+        radius: 0,
       },
     },
     scales: {
       x: {
-        grid: {
-          display: false,
-          drawBorder: true,
-        },
-        ticks: {
-          display: false,
-          beginAtZero: false,
-          maxTicksLimit: 5,
-        },
+        display: false,
       },
       y: {
-        grid: {
-          display: false,
-          drawBorder: false,
-        },
-        ticks: {
-          display: false,
-          beginAtZero: true,
-          maxTicksLimit: 5,
-        },
+        display: false,
       },
     },
   };
-
-  //   const options = {
-  //     plugins: {
-  //       legend: {
-  //         position: "none",
-  //       },
-  //     },
-  //   };
-
-  //   const data = {
-  //     labels,
-  //     datasets: [
-  //       {
-  //         label: "React",
-  //         data: [32, 41, 51, 60, 51, 95],
-  //         backgroundColor: "red",
-  //         borderColor: "pink",
-  //       },
-  //     ],
-  //   };
 
   return (
     <Container>

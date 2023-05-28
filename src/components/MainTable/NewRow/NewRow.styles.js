@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "@/styles";
 
 export const TableRow = styled.div`
   // border: 3px ridge orange;
@@ -55,8 +56,8 @@ export const TableSparkline = styled.div`
   justify-content: center;
   padding-left: 0.5rem;
   height: 100%;
-  border: 2px dashed red;
-  overflow: visible; ///change
+  // border: 2px dashed orange;
+  overflow: hidden; //change later
 `;
 
 export const Icon = styled.img`
@@ -66,5 +67,6 @@ export const Icon = styled.img`
 
 export const PercentDiv = styled.span`
   margin-left: 0.5rem;
-  color: ${({ color }) => (color === "green" ? "#00ff5f" : "#FE1040")};
+  color: ${({ color }) =>
+    color === "green" ? theme.dark.money.green : theme.dark.money.red};
 `;
