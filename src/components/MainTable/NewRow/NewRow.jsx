@@ -1,3 +1,5 @@
+import styled from "styled-components";
+
 import {
   TableName,
   TablePrice,
@@ -16,6 +18,7 @@ import { formatPrice, formatPercentage } from "@/utils";
 export const NewRow = ({ coin }) => {
   const rank = coin.market_cap_rank;
   const name = coin.name;
+  const symbol = coin.symbol.toUpperCase();
   const price = formatPrice(coin.current_price);
   const percentage1h = coin.price_change_percentage_1h_in_currency;
   const percentage24h = coin.price_change_percentage_24h_in_currency;
@@ -49,7 +52,7 @@ export const NewRow = ({ coin }) => {
       <TableNum>{rank}</TableNum>
       <TableName>
         <Icon src={icon} />
-        {name}
+        {name} ({symbol})
       </TableName>
       <TablePrice>{price}</TablePrice>
       <TableTimeChange>{getPercentage(percentage1h)}</TableTimeChange>

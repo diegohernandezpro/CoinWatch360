@@ -19,20 +19,20 @@ export const TableNum = styled.div`
 `;
 
 export const TableName = styled.div`
-  // border: 1px dashed red;
   width: 19rem;
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   padding-left: 0.5rem;
 `;
 
 export const TablePrice = styled.div`
-  // border: 1px dashed red;
   width: 8.3rem;
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   padding-left: 0.5rem;
 `;
 
@@ -41,6 +41,7 @@ export const TableTimeChange = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   padding-left: 0.5rem;
 `;
 
@@ -49,6 +50,7 @@ export const TableVolume = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-left: 0.5rem;
 `;
 
@@ -57,6 +59,7 @@ export const TableSparkline = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-left: 0.5rem;
   height: 100%;
 `;
