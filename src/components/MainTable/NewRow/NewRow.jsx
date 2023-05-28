@@ -8,6 +8,7 @@ import {
   PercentDiv,
 } from "./NewRow.styles";
 import { Slider } from "../Slider/Slider";
+import { Sparkline } from "../SparkLine/Sparkline";
 import { UpArrowGreen, DownArrowRed } from "@/styles";
 import { formatPrice, formatPercentage } from "@/utils";
 
@@ -22,6 +23,7 @@ export const NewRow = ({ coin }) => {
   const marketCap = coin.market_cap;
   const circulatingSupply = coin.circulating_supply;
   const totalSupply = coin.total_supply;
+  const SparklineData = coin.sparkline_in_7d.price;
 
   const getPercentage = (percentage) => {
     if (percentage > 0) {
@@ -50,7 +52,9 @@ export const NewRow = ({ coin }) => {
       <TableTimeChange>{getPercentage(percentage7d)}</TableTimeChange>
       <Slider base={marketCap} fill={totalVolume} />
       <Slider base={circulatingSupply} fill={totalSupply} />
-      <TableSparkline>Sparkline</TableSparkline>
+      <TableSparkline>
+        <Sparkline dataPoints={SparklineData} />
+      </TableSparkline>
     </TableRow>
   );
 };

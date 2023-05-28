@@ -22,6 +22,7 @@ export const ChartsContainer = styled.div`
   justify-content: center;
   border: 2px solid blue;
   height: 21rem;
+  overflow: visible;
 `;
 
 export const ChartWrapper = styled.div`
