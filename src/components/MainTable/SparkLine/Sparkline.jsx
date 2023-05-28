@@ -23,9 +23,14 @@ ChartJS.register(
 );
 
 export const Sparkline = ({ dataPoints }) => {
+  console.log(
+    "🚀 ~ file: Sparkline.jsx:26 ~ Sparkline ~ dataPoints:",
+    dataPoints
+  );
+
   const labels = ["2017", "2018", "2019", "2020", "2021", "2022"];
 
-  //   const getLabels = (arr) => arr.map((_, index) => index);
+  const getLabels = (array) => array.map((_, index) => index);
 
   const lineData = () => {
     // let borderColor = "";
@@ -36,15 +41,10 @@ export const Sparkline = ({ dataPoints }) => {
     // }
 
     return {
-      //   data: [32, 41, 51, 60, 51, 95],
-      //   tension: 0.4,
-      //   borderColor: "red",
-      //   fill: false,
-
-      labels,
+      labels: getLabels(["2017", "2018", "2019", "2020", "2021", "2022"]),
       datasets: [
         {
-          label: "React",
+          //   label: "React",
           data: [32, 41, 51, 60, 51, 95],
           tension: 0.3,
           borderColor: "pink",
