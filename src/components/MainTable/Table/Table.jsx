@@ -1,11 +1,10 @@
 import React from "react";
 import axios from "axios";
-// import jsonData from "../testData.json";
-
-import { TableContainer, StyledP, TableWrapper } from "./Table.styles";
-
+import jsonData from "../testData.json";
+import { ErrorPage } from "@/pages";
 import { Heading } from "../Heading/Heading";
 import { NewRow } from "../NewRow/NewRow";
+import { TableContainer, StyledP, TableWrapper } from "./Table.styles";
 
 export default class Table extends React.Component {
   state = {
@@ -27,6 +26,7 @@ export default class Table extends React.Component {
     } catch (error) {
       this.setState({ isLoading: false, hasError: true });
       console.log("🚀 Table ~ getCoinData= ~ error:", error);
+      <ErrorPage />;
     }
   };
 
@@ -41,6 +41,7 @@ export default class Table extends React.Component {
         <TableContainer>
           <Heading />
           <TableWrapper>
+            {this.state.hasError && <ErrorPage />}
             {this.state.coinList.map((coin) => {
               return <NewRow key={coin.id} coin={coin} />;
             })}

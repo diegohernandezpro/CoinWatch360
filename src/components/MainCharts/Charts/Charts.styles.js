@@ -1,14 +1,19 @@
 import styled from "styled-components";
 
 export const ChartWrapper = styled.div`
-  border: 1px solid yellowgreen;
+  background: ${({ theme }) => theme.nested.background};
+  border-radius: 1rem;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ChartsContainer = styled.div`
   display: flex;
   gap: 4rem;
   justify-content: center;
-  border: 2px solid blue;
+  // border: 2px solid blue;
   height: 21rem;
+  margin-top: 2rem;
 `;
