@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { LineChart } from "../LineChart";
-import { BarChart } from "../BarChart/";
-import { ChartWrapper, ChartsContainer } from "./Charts.styles";
 import chartTest from "../chartTest.json";
-
+import { Chart } from "../Chart";
+import { ChartWrapper, ChartsContainer } from "./Charts.styles";
+import { ChartSummary } from "../ChartSummary";
 export default class Charts extends React.Component {
   state = {
     isLoading: false,
@@ -17,7 +16,7 @@ export default class Charts extends React.Component {
       this.setState({ isLoading: true });
 
       // const { data } = await axios(
-      //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily}`
+      //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily`
       // );
 
       const data = chartTest;
@@ -27,23 +26,18 @@ export default class Charts extends React.Component {
       const label = data.prices.map((el) => {
         return new Date(el[0]).getDate();
       });
-      const lastThirtyDays = label.slice(1);
-      const priceThirtyDays = market.slice(1);
 
       const marketBar = data.total_volumes.map((el) => el[1]);
       const labelBar = data.total_volumes.map((el) => {
         return new Date(el[0]).getDate();
       });
 
-      // console.log("🚀 ~ lastThirtyDays:", lastThirtyDays);
-      // console.log("🚀 ~ priceThirtyDays:", priceThirtyDays);
-
       this.setState({ isLoading: false, chartData: data });
       this.setState({
-        chartMarket: priceThirtyDays,
-        chartLabel: lastThirtyDays,
-        chartMarketBar: marketBar.slice(1),
-        chartLabelBar: labelBar.slice(1),
+        chartMarketLine: market,
+        chartLabelLine: label,
+        chartMarketBar: marketBar,
+        chartLabelBar: labelBar,
       });
     } catch (err) {
       console.log("Error in getData ", err);
@@ -58,16 +52,22 @@ export default class Charts extends React.Component {
     return (
       <ChartsContainer>
         <ChartWrapper>
-          <LineChart
-            label={this.state.chartLabel}
-            data={this.state.chartMarket}
-          />
+          <Chart
+            label={this.state.chartLabelLine}
+            data={this.state.chartMarketLine}
+            type="line"
+          >
+            <ChartSummary />
+          </Chart>
         </ChartWrapper>
         <ChartWrapper>
-          <BarChart
+          <Chart
             label={this.state.chartLabelBar}
             data={this.state.chartMarketBar}
-          />
+            type="bar"
+          >
+            <ChartSummary />
+          </Chart>
         </ChartWrapper>
       </ChartsContainer>
     );
