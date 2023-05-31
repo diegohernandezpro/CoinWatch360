@@ -27,10 +27,6 @@ export const Sparkline = ({ pricePoints }) => {
   if (!Array.isArray(pricePoints)) {
     return;
   }
-  // console.log(
-  //   "🚀 ~ file: Sparkline.jsx:26 ~ Sparkline ~ pricePoints:",
-  //   pricePoints
-  // );
 
   const getLabels = (array) => array.map((_, index) => index + 1);
 
