@@ -7,13 +7,15 @@ export const ChartWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  // border: 2px dashed lightblue;
+  padding: 0.5rem;
 `;
 
 export const ChartsContainer = styled.div`
   display: flex;
   gap: 4rem;
   justify-content: center;
-  // border: 2px solid blue;
   height: 21rem;
   margin-top: 2rem;
+  // border: 2px dashed pink;
 `;

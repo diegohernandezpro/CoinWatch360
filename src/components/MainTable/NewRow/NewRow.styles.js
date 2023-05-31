@@ -59,12 +59,8 @@ export const TableSparkline = styled.div`
   width: 10rem;
   height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding-left: 0.5rem;
-  height: 100%;
-  // border: 2px dashed orange;
-  overflow: hidden; //change later
+  align-items: center;
 `;
 
 export const Icon = styled.img`

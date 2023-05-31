@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 import {
   TableName,
   TablePrice,
@@ -47,6 +45,9 @@ export const NewRow = ({ coin }) => {
     );
   };
 
+  const getTenDataPoints = (pricePoints) =>
+    pricePoints.filter((_, i) => i % 28 === 0);
+
   return (
     <TableRow>
       <TableNum>{rank}</TableNum>
@@ -61,7 +62,7 @@ export const NewRow = ({ coin }) => {
       <Slider base={marketCap} fill={totalVolume} rank={rank} />
       <Slider base={circulatingSupply} fill={totalSupply} rank={rank} />
       <TableSparkline>
-        <Sparkline pricePoints={SparklineData} />
+        <Sparkline pricePoints={getTenDataPoints(SparklineData)} />
       </TableSparkline>
     </TableRow>
   );

@@ -1,4 +1,4 @@
-import { Container } from "./Sparkline.styles";
+import { Wrapper } from "./Sparkline.styles";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -27,6 +27,10 @@ export const Sparkline = ({ pricePoints }) => {
   if (!Array.isArray(pricePoints)) {
     return;
   }
+  // console.log(
+  //   "🚀 ~ file: Sparkline.jsx:26 ~ Sparkline ~ pricePoints:",
+  //   pricePoints
+  // );
 
   const getLabels = (array) => array.map((_, index) => index + 1);
 
@@ -72,8 +76,8 @@ export const Sparkline = ({ pricePoints }) => {
   };
 
   return (
-    <Container>
-      <Line data={lineData()} options={options} width={"115"} height={"70"} />
-    </Container>
+    <Wrapper>
+      <Line data={lineData()} options={options} width={"115"} height={"110"} />
+    </Wrapper>
   );
 };
