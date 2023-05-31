@@ -6,7 +6,7 @@ export const ChartsContainer = styled.div`
   justify-content: center;
   height: 23rem;
   margin-top: 2rem;
-  border: 2px dashed pink;
+  // border: 2px dashed pink;
 `;
 
 export const ChartWrapper = styled.div`
@@ -20,6 +20,6 @@ export const ChartWrapper = styled.div`
   align-items: flex-start;
 
   padding: 0.5rem;
-  border: 1px dashed lightblue;
+  // border: 1px dashed lightblue;
   overflow: hidden;
 `;

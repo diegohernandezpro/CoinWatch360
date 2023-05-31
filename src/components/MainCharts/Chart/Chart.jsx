@@ -53,7 +53,7 @@ export const Chart = ({ label, data, type, ...rest }) => {
           }
           return gradient;
         },
-        pointRadius: 2,
+        pointRadius: 0,
         borderWidth: 3,
         fill: true,
       },

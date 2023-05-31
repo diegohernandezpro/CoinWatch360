@@ -1,9 +1,11 @@
 import { Container } from "./ChartSummary.styles";
 
-export const ChartSummary = (props) => {
+export const ChartSummary = ({ heading, price, currency, date }) => {
   return (
     <Container>
-      <h1>BTC</h1>
+      <div>{heading}</div>
+      <h2>{`${currency}${price}`}</h2>
+      <div>{date}</div>
     </Container>
   );
 };
