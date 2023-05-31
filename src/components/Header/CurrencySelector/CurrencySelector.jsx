@@ -1,17 +1,14 @@
-import React from "react";
 import { Wrapper, Icon, Dropdown } from "./CurrencySelector.styles";
-import { UpArrowGreen, DownArrowGreen } from "../../../styles/Arrows";
+import { UpArrowGreen, DownArrowGreen } from "@/styles";
 
-export default class CurrencySelector extends React.Component {
-  render() {
-    return (
-      <Wrapper>
-        <Icon>$</Icon>
-        <Dropdown>
-          USD
-          <DownArrowGreen />
-        </Dropdown>
-      </Wrapper>
-    );
-  }
-}
+export const CurrencySelector = () => {
+  return (
+    <Wrapper>
+      <Icon>$</Icon>
+      <Dropdown>
+        USD
+        <DownArrowGreen />
+      </Dropdown>
+    </Wrapper>
+  );
+};

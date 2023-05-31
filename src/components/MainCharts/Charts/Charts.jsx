@@ -1,26 +1,24 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import chartTest from "../chartTest.json";
-import { Chart } from "../Chart";
-import { ChartWrapper, ChartsContainer } from "./Charts.styles";
-import { ChartSummary } from "../ChartSummary";
+import { Chart, ChartSummary } from "@/components/MainCharts";
 import { formatNum } from "@/utils";
-export default class Charts extends React.Component {
-  state = {
-    isLoading: false,
-    hasError: false,
-    chartData: [],
-  };
+import { ChartWrapper, ChartsContainer } from "./Charts.styles";
 
-  getData = async () => {
+export const Charts = () => {
+  const [isLoading, setLoading] = useState(false);
+  const [hasError, setError] = useState(false);
+  const [chartData, setChartData] = useState([]);
+
+  const getData = async () => {
     try {
-      this.setState({ isLoading: true });
+      setLoading(true);
 
-      const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily`
-      );
+      // const { data } = await axios(
+      //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily`
+      // );
 
-      // const data = chartTest;
+      const data = chartTest;
 
       const marketLine = data.prices.map((el) => el[1]);
       const labelLine = data.prices.map((el) => {
@@ -41,58 +39,60 @@ export default class Charts extends React.Component {
       const options = { day: "numeric", month: "long", year: "numeric" };
       const today = new Date().toLocaleDateString(undefined, options);
 
-      this.setState({
-        isLoading: false,
-        chartMarketLine: marketLine,
-        chartLabelLine: labelLine,
-        chartMarketBar: marketBar,
-        chartLabelBar: labelBar,
-        avgLine: marketAvgLine,
-        avgBar: marketAvgBar,
-        today,
+      setLoading(false);
+      setChartData((prevState) => {
+        return {
+          ...prevState,
+          chartMarketLine: marketLine,
+          chartLabelLine: labelLine,
+          chartMarketBar: marketBar,
+          chartLabelBar: labelBar,
+          avgLine: marketAvgLine,
+          avgBar: marketAvgBar,
+          today,
+        };
       });
     } catch (err) {
-      this.setState({ isLoading: false, hasError: true });
+      setLoading(false);
+      setError(true);
       console.log("Error in getData ", err);
     }
   };
 
-  componentDidMount() {
-    this.getData();
-  }
+  useEffect(() => {
+    getData();
+  }, []);
 
-  render() {
-    return (
-      <ChartsContainer>
-        <ChartWrapper>
-          <Chart
-            label={this.state.chartLabelLine}
-            data={this.state.chartMarketLine}
-            type="line"
-          >
-            <ChartSummary
-              heading="Bitcoin"
-              price={this.state.avgLine}
-              currency="$"
-              date={this.state.today}
-            />
-          </Chart>
-        </ChartWrapper>
-        <ChartWrapper>
-          <Chart
-            label={this.state.chartLabelBar}
-            data={this.state.chartMarketBar}
-            type="bar"
-          >
-            <ChartSummary
-              heading="Volume 24h"
-              price={this.state.avgBar}
-              currency="$"
-              date={this.state.today}
-            />
-          </Chart>
-        </ChartWrapper>
-      </ChartsContainer>
-    );
-  }
-}
+  return (
+    <ChartsContainer>
+      <ChartWrapper>
+        <Chart
+          label={chartData.chartLabelLine}
+          data={chartData.chartMarketLine}
+          type="line"
+        >
+          <ChartSummary
+            heading="Bitcoin"
+            price={chartData.avgLine}
+            currency="$"
+            date={chartData.today}
+          />
+        </Chart>
+      </ChartWrapper>
+      <ChartWrapper>
+        <Chart
+          label={chartData.chartLabelBar}
+          data={chartData.chartMarketBar}
+          type="bar"
+        >
+          <ChartSummary
+            heading="Volume 24h"
+            price={chartData.avgBar}
+            currency="$"
+            date={chartData.today}
+          />
+        </Chart>
+      </ChartWrapper>
+    </ChartsContainer>
+  );
+};

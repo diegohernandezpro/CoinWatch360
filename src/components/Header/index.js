@@ -1,9 +1,9 @@
 export { NavBar as Header } from "./NavBar";
 
-// export { default as CurrencySelector } from "./CurrencySelector";
+export { CurrencySelector } from "./CurrencySelector";
 
-// export { default as Infographics } from "./Infographics";
+export { Infographic } from "./Infographics";
 
-// export { default as SearchBar } from "./SearchBar";
+export { SearchBar } from "./SearchBar";
 
-// export { default as ThemeSelector } from "./ThemeSelector";
+export { ThemeSelector } from "./ThemeSelector";

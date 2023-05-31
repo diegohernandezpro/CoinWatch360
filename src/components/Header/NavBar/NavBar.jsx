@@ -1,4 +1,10 @@
-import React from "react";
+import {
+  SearchBar,
+  CurrencySelector,
+  ThemeSelector,
+  Infographic,
+} from "@/components/Header";
+
 import {
   Wrapper,
   Navigation,
@@ -7,10 +13,6 @@ import {
   StyledNavLink,
   StyledDiv,
 } from "./NavBar.styles";
-import Searchbar from "../SearchBar/SearchBar";
-import CurrencySelector from "../CurrencySelector";
-import ThemeSelector from "../ThemeSelector";
-import Infographic from "../Infographics";
 
 export function NavBar() {
   return (
@@ -27,7 +29,7 @@ export function NavBar() {
         </LeftNav>
 
         <RightNav>
-          <Searchbar />
+          <SearchBar />
           <CurrencySelector />
           <ThemeSelector />
         </RightNav>

@@ -1,1 +1,1 @@
-export { default } from "./Infographic";
+export { Infographic } from "./Infographic";
