@@ -25,7 +25,6 @@ ChartJS.register(
   Legend,
   Filler
 );
-// { label, data, type }, ...rest
 
 export const Chart = ({ label, data, type, ...rest }) => {
   const dataPoints = {

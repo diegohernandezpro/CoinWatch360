@@ -16,12 +16,11 @@ export default class Charts extends React.Component {
     try {
       this.setState({ isLoading: true });
 
-      // const { data } = await axios(
-      //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily`
-      // );
+      const { data } = await axios(
+        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily`
+      );
 
-      const data = chartTest;
-      // console.log("🚀 ~ file: Charts.jsx:23 ~ Charts ~ getData= ~ data:", data);
+      // const data = chartTest;
 
       const marketLine = data.prices.map((el) => el[1]);
       const labelLine = data.prices.map((el) => {
