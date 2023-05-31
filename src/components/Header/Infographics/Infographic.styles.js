@@ -22,7 +22,7 @@ export const MarketCap = styled.div`
   width: 7rem;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.6rem;
 `;
 
 export const Icon = styled.img`
@@ -35,7 +35,7 @@ export const StyledDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.6rem;
 `;
 
 export const SliderWrapper = styled.div`

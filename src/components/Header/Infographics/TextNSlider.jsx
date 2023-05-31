@@ -1,18 +1,9 @@
-import { StyledDiv, SliderWrapper, Slider, Icon } from "./Infographic.styles";
+import { StyledDiv, SliderWrapper, Slider } from "./Infographic.styles";
 
-export function TextNSlider(props) {
-  const { text, icon, percentage } = props;
-
-  function getIcon(icon) {
-    if (icon === "bitcoin") {
-      return "icons/bitcoin.svg";
-    }
-    return "icons/ethereum.svg";
-  }
-
+export function TextNSlider({ text, percentage, ...rest }) {
   return (
     <StyledDiv>
-      {icon && <Icon src={getIcon(icon)} />}
+      {rest.children}
       <span>{text}</span>
       <SliderWrapper>
         <Slider percentage={percentage} />

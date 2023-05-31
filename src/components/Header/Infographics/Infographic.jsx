@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, CoinWrapper, MarketCap } from "./Infographic.styles";
+import { Container, CoinWrapper, MarketCap, Icon } from "./Infographic.styles";
 import { TextNSlider } from "./TextNSlider";
-import { UpArrowGreen, DownArrowGreen } from "../../../styles/Arrows";
+import {
+  UpArrowGreen,
+  DownArrowGreen,
+  NeutralDot,
+} from "../../../styles/Arrows";
 
 export const Infographic = () => {
   const [isLoading, setLoading] = useState(false);
@@ -50,17 +54,31 @@ export const Infographic = () => {
   ).toFixed(2);
   const { numCoins, numExchange } = coinsData;
 
+  const getIcon = (icon) => {
+    if (icon === "bitcoin") {
+      return "icons/bitcoin.svg";
+    }
+    return "icons/ethereum.svg";
+  };
+
   return (
     <Container>
       <CoinWrapper>Coins {numCoins}</CoinWrapper>
       <CoinWrapper>Exchange {numExchange}</CoinWrapper>
       <MarketCap>
+        <NeutralDot color="#2172e5" />
         <span>${marketCap}T</span>
         <UpArrowGreen />
       </MarketCap>
-      <TextNSlider text={`$${volume}B`} percentage={volumeVsMarketCap} />
-      <TextNSlider text={`${bitCap}%`} percentage={bitCap} icon="bitcoin" />
-      <TextNSlider text={`${ethCap}%`} percentage={ethCap} icon="ethereum" />
+      <TextNSlider text={`$${volume}B`} percentage={volumeVsMarketCap}>
+        <NeutralDot color="#fff" />
+      </TextNSlider>
+      <TextNSlider text={`${bitCap}%`} percentage={bitCap} icon="bitcoin">
+        <Icon src={getIcon("bitcoin")} />
+      </TextNSlider>
+      <TextNSlider text={`${ethCap}%`} percentage={ethCap} icon="ethereum">
+        <Icon src={getIcon("etherum")} />
+      </TextNSlider>
     </Container>
   );
 };
