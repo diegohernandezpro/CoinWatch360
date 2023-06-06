@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 export const Wrapper = styled.form`
   width: 31.8rem;
@@ -20,16 +20,33 @@ export const Icon = styled.img`
   height: 1.5rem;
   width: 1.5rem;
   filter: ${(props) => props.theme.icon};
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const Input = styled.input`
-  font-size: 1rem;
   color: ${({ theme }) => theme.color};
   background: none;
-  border: none;
+  font-size: 1rem;
   font-weight: bold;
-
-  ::placeholder {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  animation: ${(props) =>
+    props.isFocused
+      ? css`
+          ${blinkAnimation} 1s infinite
+        `
+      : "none"};
+  &:placeholder {
     color: ${({ theme }) => theme.color};
   }
+`;
+
+const blinkAnimation = keyframes`
+  from { opacity: 1; }
+  to { opacity: 0; }
 `;
