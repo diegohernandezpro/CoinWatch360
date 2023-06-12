@@ -35,18 +35,8 @@ export const Input = styled.input`
   height: 100%;
   border: none;
   outline: none;
-  animation: ${(props) =>
-    props.isFocused
-      ? css`
-          ${blinkAnimation} 1s infinite
-        `
-      : "none"};
+
   &:placeholder {
     color: ${({ theme }) => theme.color};
   }
-`;
-
-const blinkAnimation = keyframes`
-  from { opacity: 1; }
-  to { opacity: 0; }
 `;
