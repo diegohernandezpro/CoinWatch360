@@ -18,7 +18,7 @@ export const Charts = () => {
       //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily`
       // );
 
-      const data = chartTest;
+      const data = chartTest; //change to api call later.
 
       const marketLine = data.prices.map((el) => el[1]);
       const labelLine = data.prices.map((el) => {

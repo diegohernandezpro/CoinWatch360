@@ -18,7 +18,7 @@ class App extends React.Component {
           <Header />
           <Routes>
             <Route path="/" element={<CoinList />} />
-            <Route path="/coinPage" element={<CoinPage />} />
+            <Route path="/coin" element={<CoinPage />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="*" element={<h1>NOT FOUND</h1>} />
           </Routes>

@@ -1,11 +1,15 @@
 import styled, { css, keyframes } from "styled-components";
 
-export const Wrapper = styled.form`
+export const Wrapper = styled.div`
+  position: relative;
+`;
+
+export const Form = styled.form`
   width: 31.8rem;
   height: 3.93rem;
   background: ${({ theme }) => theme.nested.active};
   color: ${({ theme }) => theme.color};
-  border-radius: 10px;
+  border-radius: 0.8rem;
   display: flex;
   gap: 1.25rem;
   align-items: center;
