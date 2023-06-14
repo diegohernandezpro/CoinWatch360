@@ -1,53 +1,72 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import { debounce } from "lodash";
 import searchBitcoin from "./searchBitcoin.json";
 import { Wrapper, Form, Icon, Input } from "./SearchBar.styles";
 import { SearchResult } from "./SearchResult/SearchResult";
 
 export const SearchBar = () => {
-  const [isFocused, setIsFocused] = useState(false);
   const [searchTerm, setSearch] = useState("");
   const [results, setResults] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const prevSearchTermRef = useRef();
+  const prevSerachTerm = prevSearchTermRef.current;
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(false);
 
   const handleChange = (e) => {
-    setSearch(e.target.value);
+    const searchQuery = e.target.value;
+    setSearch(searchQuery);
     console.log({ searchTerm });
+    debouncedGetCoins(searchQuery);
+  };
+
+  const handleBlur = () => {
+    setIsVisible(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getCoins(searchTerm);
   };
 
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
+  const handleLinkChange = () => {
+    setSearch("");
+    console.log("setting searchTerm to empty");
+    setIsVisible(false);
   };
 
   const getCoins = async (coinName) => {
-    setLoading(true);
     try {
-      // const { data } = await axios(
-      //   `https://api.coingecko.com/api/v3/search?query=${coinName}`
-      // );
-      const data = searchBitcoin; //change to get the api call
-      // console.log(data.coins);
+      setLoading(true);
+      const { data } = await axios(
+        `https://api.coingecko.com/api/v3/search?query=${coinName}`
+      );
+      // const data = searchBitcoin; //change to this line when out of API calls per minute
 
       setResults(data.coins);
+      setIsVisible(true);
       setLoading(false);
     } catch (err) {
       console.log("ERROR IN GETCOINS", err);
+      setResults(["API call FAILED"]);
       setLoading(false);
       setError(true);
     }
   };
 
-  //useEffect for componentDidUpdate - when seraching for a new coin.
+  const debouncedGetCoins = debounce(getCoins, 1000);
+
+  //ComponentDidMount
+  useEffect(() => {
+    if (searchTerm !== prevSerachTerm) {
+      setResults([]);
+    }
+  }, []);
+
+  //ComponentDidUpdate
+  useEffect(() => {
+    prevSearchTermRef.current = searchTerm; //update prevSearchTerm to the new current SearchTerm each time a new SearchTime is inputted
+  }, [searchTerm]);
 
   return (
     <Wrapper>
@@ -57,16 +76,16 @@ export const SearchBar = () => {
         <Input
           type="text"
           placeholder="Search..."
-          // isFocused={isFocused}
-          onFocus={handleFocus}
+          value={searchTerm}
           onBlur={handleBlur}
           onChange={handleChange}
         />
       </Form>
       <SearchResult
         results={results}
-        isFocused={isFocused}
+        isVisible={isVisible}
         isLoading={isLoading}
+        handleLinkChange={handleLinkChange}
       />
     </Wrapper>
   );

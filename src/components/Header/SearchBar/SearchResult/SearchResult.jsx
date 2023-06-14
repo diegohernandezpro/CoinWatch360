@@ -1,24 +1,33 @@
 import {
-  DropDownDiv,
-  ResultRow,
+  DropDownUl,
+  ResultRowLi,
   Icon,
   StyledLink,
 } from "./SearchResult.styles";
 
-export const SearchResult = ({ results, isFocused, isLoading }) => {
+export const SearchResult = ({
+  results,
+  isVisible,
+  isLoading,
+  handleLinkChange,
+}) => {
   //add the loading section so when div focused loading green circle appears
   return (
     <>
-      {isFocused && (
-        <DropDownDiv>
+      {isVisible && (
+        <DropDownUl>
           {results.map(({ name, symbol, large, id }) => (
-            <ResultRow>
-              <StyledLink to={`/coin/${id}`}>
-                <Icon src={large} /> {name} ({symbol})
+            <ResultRowLi key={id}>
+              <StyledLink
+                to={`/coin/${id}`}
+                onClick={handleLinkChange}
+                key={id}
+              >
+                {name} ({symbol})
               </StyledLink>
-            </ResultRow>
+            </ResultRowLi>
           ))}
-        </DropDownDiv>
+        </DropDownUl>
       )}
     </>
   );
