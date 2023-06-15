@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   height: 3.93rem;
   width: 8.4rem;
   font-size: 1rem;
@@ -25,13 +25,27 @@ export const Icon = styled.div`
   font-size: 1rem;
 `;
 
-export const Dropdown = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   :hover {
     cursor: pointer;
   }
+`;
+
+export const StyledSelect = styled.select`
+  width: 3.5rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 1rem;
+  outline: none;
 `;
