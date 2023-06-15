@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   Wrapper,
@@ -7,7 +7,7 @@ import {
   StyledSelect,
 } from "./CurrencySelector.styles";
 
-export const CurrencySelector = () => {
+export const CurrencySelector = (props) => {
   const [currency, setCurrency] = useState("USD");
   const [currencySymbol, setCurrencySymbol] = useState("$");
 
@@ -34,6 +34,11 @@ export const CurrencySelector = () => {
         break;
     }
   };
+
+  //componentDidUpdate
+  useEffect(() => {
+    props.handleCurrency(currency, currencySymbol);
+  }, [currency]);
 
   return (
     <Container>

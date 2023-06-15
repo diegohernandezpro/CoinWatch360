@@ -6,7 +6,7 @@ export const Container = styled.div`
   font-size: 1rem;
   border-radius: 12px;
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
   justify-content: center;
   align-items: center;
   background: ${({ theme }) => theme.nested.active};

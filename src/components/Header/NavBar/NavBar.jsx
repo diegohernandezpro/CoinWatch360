@@ -14,7 +14,7 @@ import {
   StyledDiv,
 } from "./NavBar.styles";
 
-export function NavBar() {
+export function NavBar(props) {
   return (
     <Wrapper>
       <Navigation>
@@ -30,7 +30,7 @@ export function NavBar() {
 
         <RightNav>
           <SearchBar />
-          <CurrencySelector />
+          <CurrencySelector handleCurrency={props.handleCurrency} />
           <ThemeSelector />
         </RightNav>
       </Navigation>
