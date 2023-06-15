@@ -10,14 +10,13 @@ export const SearchBar = () => {
   const [results, setResults] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const prevSearchTermRef = useRef();
-  const prevSerachTerm = prevSearchTermRef.current;
+  const prevSearchTerm = prevSearchTermRef.current;
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(false);
 
   const handleChange = (e) => {
     const searchQuery = e.target.value;
     setSearch(searchQuery);
-    console.log({ searchTerm });
     debouncedGetCoins(searchQuery);
   };
 
@@ -25,11 +24,16 @@ export const SearchBar = () => {
     setIsVisible(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleFocus = () => {
+    setIsVisible(true);
   };
 
-  const handleLinkChange = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getCoins(searchTerm);
+  };
+
+  const handleLinkChange = (e) => {
     setSearch("");
     console.log("setting searchTerm to empty");
     setIsVisible(false);
@@ -47,8 +51,7 @@ export const SearchBar = () => {
       setIsVisible(true);
       setLoading(false);
     } catch (err) {
-      console.log("ERROR IN GETCOINS", err);
-      setResults(["API call FAILED"]);
+      console.log("ERROR IN GETCOINS()", err);
       setLoading(false);
       setError(true);
     }
@@ -58,7 +61,7 @@ export const SearchBar = () => {
 
   //ComponentDidMount
   useEffect(() => {
-    if (searchTerm !== prevSerachTerm) {
+    if (searchTerm !== prevSearchTerm) {
       setResults([]);
     }
   }, []);
@@ -71,7 +74,7 @@ export const SearchBar = () => {
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>
-        <Icon src="icons/search.svg" />
+        <Icon src="icons/search.svg" onClick={handleSubmit} />
 
         <Input
           type="text"
@@ -79,6 +82,7 @@ export const SearchBar = () => {
           value={searchTerm}
           onBlur={handleBlur}
           onChange={handleChange}
+          onFocus={handleFocus}
         />
       </Form>
       <SearchResult

@@ -17,9 +17,9 @@ class App extends React.Component {
         <StyledDiv>
           <Header />
           <Routes>
-            <Route path="/" element={<CoinList />} />
-            <Route path="/coin" element={<CoinPage />} />
-            <Route path="/portfolio" element={<Portfolio />} />
+            <Route exact="true" path="/" element={<CoinList />} />
+            <Route exact="true" path="/coin" element={<CoinPage />} />
+            <Route exact="true" path="/portfolio" element={<Portfolio />} />
             <Route path="*" element={<h1>NOT FOUND</h1>} />
           </Routes>
         </StyledDiv>

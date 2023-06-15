@@ -1,8 +1,8 @@
 import {
   DropDownUl,
   ResultRowLi,
-  Icon,
   StyledLink,
+  LoadingWheel,
 } from "./SearchResult.styles";
 
 export const SearchResult = ({
@@ -16,13 +16,9 @@ export const SearchResult = ({
     <>
       {isVisible && (
         <DropDownUl>
-          {results.map(({ name, symbol, large, id }) => (
+          {results.map(({ name, symbol, id }) => (
             <ResultRowLi key={id}>
-              <StyledLink
-                to={`/coin/${id}`}
-                onClick={handleLinkChange}
-                key={id}
-              >
+              <StyledLink to={`/coin/${id}`} onClick={handleLinkChange}>
                 {name} ({symbol})
               </StyledLink>
             </ResultRowLi>

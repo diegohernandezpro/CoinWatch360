@@ -19,11 +19,11 @@ export function NavBar() {
     <Wrapper>
       <Navigation>
         <LeftNav>
-          <StyledNavLink exact to="/">
+          <StyledNavLink exact="true" to="/">
             Coins
           </StyledNavLink>
 
-          <StyledNavLink exact to="/portfolio">
+          <StyledNavLink exact="true" to="/portfolio">
             Portfolio
           </StyledNavLink>
         </LeftNav>
