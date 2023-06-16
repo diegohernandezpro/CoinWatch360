@@ -9,8 +9,14 @@ export default class CoinList extends React.Component {
     return (
       <Container>
         <Wrapper>
-          <Charts />
-          <Table />
+          <Charts
+            currency={this.props.currency}
+            currencySymbol={this.props.currencySymbol}
+          />
+          <Table
+            currency={this.props.currency}
+            currencySymbol={this.props.currencySymbol}
+          />
         </Wrapper>
       </Container>
     );

@@ -1,11 +1,11 @@
 import numeral from "numeral";
 
-export const formatPrice = (price) => {
-  if (price.toString().length < 4) {
-    return numeral(price).format("($ 0.00)");
-  } else {
-    return "$ " + price;
+export const formatPrice = (price, currencySymbol) => {
+  if (price !== null && price.toString().length < 3) {
+    price = `${price}.00`;
   }
+
+  return `${currencySymbol} ${price}`;
 };
 
 export const formatPercentage = (percentage) => {
@@ -14,8 +14,11 @@ export const formatPercentage = (percentage) => {
 
 // export const formatPriceAvg = (price) => numeral(price).format("(0.00 a)");
 
-export const formatNum = (price) =>
-  numeral(price).format("(00.00 a)").toUpperCase(); //shortenAndDecimal
+export const formatNum = (price, currencySymbol) => {
+  // console.log({ currencySymbol });
+  const formattingPattern = `${currencySymbol} 0[.]00a`;
+  return numeral(price).format(formattingPattern).toUpperCase();
+};
 
 // export const formatLargeNum = (num) => numeral(num).format("(0.00 a)");
 

@@ -5,17 +5,17 @@ import { Chart, ChartSummary } from "@/components/MainCharts";
 import { formatNum } from "@/utils";
 import { ChartWrapper, ChartsContainer } from "./Charts.styles";
 
-export const Charts = () => {
+export const Charts = ({ currency, currencySymbol }) => {
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(false);
   const [chartData, setChartData] = useState([]);
 
-  const getData = async () => {
+  const getData = async (currency, currencySymbol) => {
     try {
       setLoading(true);
 
       // const { data } = await axios(
-      //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily`
+      //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=30&interval=daily`
       // );
 
       const data = chartTest; //change to api call later.
@@ -59,9 +59,15 @@ export const Charts = () => {
     }
   };
 
+  //componentDidMount
   useEffect(() => {
-    getData();
+    getData(currency, currencySymbol);
   }, []);
+
+  //componentDidUpdate
+  useEffect(() => {
+    getData(currency, currencySymbol);
+  }, [currency]);
 
   return (
     <ChartsContainer>
@@ -74,7 +80,7 @@ export const Charts = () => {
           <ChartSummary
             heading="Bitcoin"
             price={chartData.avgLine}
-            currency="$"
+            currency={currencySymbol}
             date={chartData.today}
           />
         </Chart>
@@ -88,7 +94,7 @@ export const Charts = () => {
           <ChartSummary
             heading="Volume 24h"
             price={chartData.avgBar}
-            currency="$"
+            currency={currencySymbol}
             date={chartData.today}
           />
         </Chart>
