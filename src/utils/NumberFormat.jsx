@@ -15,7 +15,6 @@ export const formatPercentage = (percentage) => {
 // export const formatPriceAvg = (price) => numeral(price).format("(0.00 a)");
 
 export const formatNum = (price, currencySymbol) => {
-  // console.log({ currencySymbol });
   const formattingPattern = `${currencySymbol} 0[.]00a`;
   return numeral(price).format(formattingPattern).toUpperCase();
 };

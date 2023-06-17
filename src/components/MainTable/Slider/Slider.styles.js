@@ -26,8 +26,12 @@ export const SliderFill = styled.div`
   border-radius: 12px;
 `;
 
-export const Text = styled.div`
-  color: ${({ color }) => color};
+export const StyledText = styled.span.attrs((props) => ({
+  style: {
+    color: props.color,
+  },
+}))`
+  /* Add your styles here */
 `;
 
 export const ValuesSpan = styled.span`

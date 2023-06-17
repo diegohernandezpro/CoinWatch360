@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
-
 import {
   TableVolume,
   SliderWrapper,
   SliderFill,
   ValuesSpan,
   Values,
-  Text,
+  StyledText,
 } from "./Slider.styles";
 import { NeutralDot, sliderColors } from "@/styles";
 import { formatNum } from "@/utils";
 
 export const Slider = ({ base, fill, rank, currencySymbol }) => {
-  // const baseSlider = formatNum(base, currencySymbol);
-  // const baseFiller = formatNum(fill, currencySymbol);
-  // const percentage = (fill / base) * 100;
-
   const [baseSlider, setBaseSlider] = useState(() =>
     formatNum(base, currencySymbol)
   );
@@ -36,29 +31,42 @@ export const Slider = ({ base, fill, rank, currencySymbol }) => {
   const fillColor = getColor(rank)[1];
 
   useEffect(() => {
-    // console.log("--> UPDATED BASE symbol: ", currencySymbol);
     setBaseSlider(formatNum(base, currencySymbol));
   }, [currencySymbol, base]);
 
   useEffect(() => {
-    // console.log("--> UPDATED FILL symbol: ", currencySymbol);
     setBaseFiller(formatNum(fill, currencySymbol));
   }, [currencySymbol, fill]);
 
   // useEffect(() => {
-  //   console.log("CurrencySymbol Changed --> UPDATED");
-  // }, [currencySymbol]);
+  //   let isMounted = true;
+
+  //   const updateFormattedValues = () => {
+  //     if (!isMounted) {
+  //       return;
+  //     }
+
+  //     setBaseSlider(formatNum(base, currencySymbol));
+  //     setBaseFiller(formatNum(fill, currencySymbol));
+  //   };
+
+  //   updateFormattedValues();
+
+  //   return () => {
+  //     isMounted = false;
+  //   };
+  // }, [currencySymbol, base, fill]);
 
   return (
     <TableVolume>
       <ValuesSpan>
         <Values>
           <NeutralDot color={fillColor} />
-          <Text color={fillColor}>{baseFiller}</Text>
+          <StyledText color={fillColor}>{baseFiller}</StyledText>
         </Values>
         <Values>
           <NeutralDot color={baseColor} />
-          <Text color={baseColor}>{baseSlider}</Text>
+          <StyledText color={baseColor}>{baseSlider}</StyledText>
         </Values>
       </ValuesSpan>
       <SliderWrapper color={baseColor}>
