@@ -23,7 +23,6 @@ ChartJS.register(
 );
 
 export const Sparkline = ({ pricePoints }) => {
-  // Check if pricePoints is defined;
   if (!Array.isArray(pricePoints)) {
     return;
   }

@@ -32,8 +32,8 @@ export const TableName = styled.div`
   cursor: pointer;
 
   &:hover {
-    background: ${theme.dark.nested.active};
-    border: 0.2rem outset ${theme.dark.nested.background};
+    background: ${({ theme }) => theme.nested.active};
+    border: 0.2rem outset ${({ theme }) => theme.nested.background};
   }
 `;
 
@@ -71,6 +71,6 @@ export const Icon = styled.img`
 
 export const PercentDiv = styled.span`
   margin-left: 0.5rem;
-  color: ${({ color }) =>
-    color === "green" ? theme.dark.money.green : theme.dark.money.red};
+  color: ${({ color, theme }) =>
+    color === "green" ? theme.money.green : theme.money.red};
 `;

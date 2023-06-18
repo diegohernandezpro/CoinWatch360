@@ -14,4 +14,8 @@ export const Icon = styled.img`
   height: 1.5rem;
   width: 1.5rem;
   filter: ${(props) => props.theme.icon};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

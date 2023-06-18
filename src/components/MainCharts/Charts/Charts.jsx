@@ -5,7 +5,7 @@ import { Chart, ChartSummary } from "@/components/MainCharts";
 import { formatNum } from "@/utils";
 import { ChartWrapper, ChartsContainer } from "./Charts.styles";
 
-export const Charts = ({ currency, currencySymbol }) => {
+export const Charts = ({ currency, currencySymbol, ...rest }) => {
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(false);
   const [chartData, setChartData] = useState([]);

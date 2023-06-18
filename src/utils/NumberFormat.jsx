@@ -12,11 +12,13 @@ export const formatPercentage = (percentage) => {
   return numeral(Math.abs(percentage)).format("0.0") + "%";
 };
 
-// export const formatPriceAvg = (price) => numeral(price).format("(0.00 a)");
-
 export const formatNum = (price, currencySymbol) => {
-  const formattingPattern = `${currencySymbol} 0[.]00a`;
-  return numeral(price).format(formattingPattern).toUpperCase();
+  if (currencySymbol) {
+    return `${currencySymbol} ${numeral(price)
+      .format("0[.]00 a")
+      .toUpperCase()}`;
+  }
+  return `${numeral(price).format("0[.]00 a").toUpperCase()}`;
 };
 
 // export const formatLargeNum = (num) => numeral(num).format("(0.00 a)");

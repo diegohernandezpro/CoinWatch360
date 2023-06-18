@@ -38,25 +38,6 @@ export const Slider = ({ base, fill, rank, currencySymbol }) => {
     setBaseFiller(formatNum(fill, currencySymbol));
   }, [currencySymbol, fill]);
 
-  // useEffect(() => {
-  //   let isMounted = true;
-
-  //   const updateFormattedValues = () => {
-  //     if (!isMounted) {
-  //       return;
-  //     }
-
-  //     setBaseSlider(formatNum(base, currencySymbol));
-  //     setBaseFiller(formatNum(fill, currencySymbol));
-  //   };
-
-  //   updateFormattedValues();
-
-  //   return () => {
-  //     isMounted = false;
-  //   };
-  // }, [currencySymbol, base, fill]);
-
   return (
     <TableVolume>
       <ValuesSpan>

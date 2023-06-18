@@ -8,7 +8,7 @@ export const theme = {
     },
     chart: {
       color: "#707070",
-      lineColor: "#00ff5f",
+      lineColor: "#0CF864",
       barColor: "#2172e5",
     },
     icon: "invert(100%)",
@@ -19,22 +19,27 @@ export const theme = {
     },
   },
   light: {
-    background: "#fcfcfc",
+    // ADBBC2
+    background: "#E0E0E0",
     color: "#191b1f",
     nested: {
-      background: "#ffffff",
-      active: "#fcfcfc",
+      background: "#ADBBC2",
+      active: "#DAE3E5",
     },
+
     chart: {
       color: "#2c2f36",
       lineColor: "#2550ea",
-      barColor: "#1ad761",
+      barColor: "#167837",
     },
     icon: "invert(0%)",
     money: {
-      green: "#00ff5f",
-      red: "#FE1040",
-      background: "#191B1F",
+      // // green: "#1BA27A",
+      green: "#05714F",
+      // green: "#00ff5f",
+
+      red: "#F04E42",
+      background: "#ADBBC2",
     },
   },
 };

@@ -7,22 +7,29 @@ import { theme, GlobalStyle } from "@/styles";
 
 export default class App extends React.Component {
   state = {
-    theme: theme.dark,
+    themeType: true,
     currency: "USD",
     currencySymbol: "$",
   };
 
   handleCurrency = (currency, currencySymbol) => {
-    // console.log("IN APP", { currency, currencySymbol });
     this.setState({ currency, currencySymbol });
+  };
+
+  toogleTheme = () => {
+    this.setState({ themeType: !this.state.themeType });
   };
 
   render() {
     return (
-      <ThemeProvider theme={this.state.theme}>
+      <ThemeProvider theme={this.state.themeType ? theme.dark : theme.light}>
         <GlobalStyle />
         <StyledDiv>
-          <Header handleCurrency={this.handleCurrency} />
+          <Header
+            handleCurrency={this.handleCurrency}
+            theme={this.state.themeType ? theme.dark : theme.light}
+            toogleTheme={this.toogleTheme}
+          />
           <Routes>
             <Route
               exact="true"
@@ -43,10 +50,6 @@ export default class App extends React.Component {
     );
   }
 }
-
-// const [theme, setTheme] = useState(theme.dark);
-// const [currency, setCurrency] = useState("USD");
-// const [currencySymbol, setCurrencySymbol] = useState("$");
 
 const StyledDiv = styled.div`
   height: 100vh;
