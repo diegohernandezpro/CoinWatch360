@@ -31,7 +31,7 @@ export function NavBar(props) {
         <RightNav>
           <SearchBar />
           <CurrencySelector handleCurrency={props.handleCurrency} />
-          <ThemeSelector toogleTheme={props.toogleTheme} />
+          <ThemeSelector toggleTheme={props.toggleTheme} />
         </RightNav>
       </Navigation>
       <StyledDiv>

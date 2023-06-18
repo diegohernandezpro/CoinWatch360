@@ -1,3 +1,7 @@
+import { UpArrowGreen, DownArrowRed } from "@/styles";
+import { formatPrice, formatPercentage } from "@/utils";
+import { Slider } from "../Slider/Slider";
+import { Sparkline } from "../SparkLine/Sparkline";
 import {
   TableName,
   TablePrice,
@@ -7,11 +11,8 @@ import {
   TableNum,
   PercentDiv,
   Icon,
+  StyledLink,
 } from "./NewRow.styles";
-import { Slider } from "../Slider/Slider";
-import { Sparkline } from "../SparkLine/Sparkline";
-import { UpArrowGreen, DownArrowRed } from "@/styles";
-import { formatPrice, formatPercentage } from "@/utils";
 
 export const NewRow = ({ coin, currencySymbol }) => {
   const rank = coin.market_cap_rank;
@@ -51,10 +52,12 @@ export const NewRow = ({ coin, currencySymbol }) => {
   return (
     <TableRow>
       <TableNum>{rank}</TableNum>
-      <TableName>
-        <Icon src={icon} />
-        {name} ({symbol})
-      </TableName>
+      <StyledLink to={`/coin/${coin.id}`}>
+        <TableName>
+          <Icon src={icon} />
+          {name} ({symbol})
+        </TableName>
+      </StyledLink>
       <TablePrice>{price}</TablePrice>
       <TableTimeChange>{getPercentage(percentage1h)}</TableTimeChange>
       <TableTimeChange>{getPercentage(percentage24h)}</TableTimeChange>

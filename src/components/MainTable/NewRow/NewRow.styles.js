@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { theme } from "@/styles";
 
 export const TableRow = styled.div`
@@ -73,4 +74,9 @@ export const PercentDiv = styled.span`
   margin-left: 0.5rem;
   color: ${({ color, theme }) =>
     color === "green" ? theme.money.green : theme.money.red};
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;

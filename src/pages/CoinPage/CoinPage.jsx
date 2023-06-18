@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
-export default class CoinPage extends React.Component {
-  render() {
-    return <h1>CoinPage</h1>;
-  }
-}
+export const CoinPage = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [coin, setCoin] = useState(null);
+
+  return <h1>CoinPage</h1>;
+};
