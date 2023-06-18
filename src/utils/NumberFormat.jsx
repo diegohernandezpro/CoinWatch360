@@ -20,9 +20,3 @@ export const formatNum = (price, currencySymbol) => {
   }
   return `${numeral(price).format("0[.]00 a").toUpperCase()}`;
 };
-
-// export const formatLargeNum = (num) => numeral(num).format("(0.00 a)");
-
-// export const addCommasNoDec = (num) => numeral(num).format("0,0"); //not added to index.js
-
-// export const fiveSigFigs = (num) => numeral(num).format("0.0000"); //not added to index.js

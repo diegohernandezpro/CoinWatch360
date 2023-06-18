@@ -41,7 +41,7 @@ export default class App extends React.Component {
                 />
               }
             />
-            <Route exact="true" path="/coin" element={<CoinPage />} />
+            <Route path="/coin" element={<CoinPage />} />
             <Route exact="true" path="/portfolio" element={<Portfolio />} />
             <Route path="*" element={<h1>NOT FOUND</h1>} />
           </Routes>
