@@ -6,7 +6,7 @@ import { Heading } from "../Heading/Heading";
 import { NewRow } from "../NewRow/NewRow";
 import { TableContainer, StyledP, TableWrapper } from "./Table.styles";
 
-export const Table = ({ currency, currencySymbol }) => {
+export const Table = ({ currency, currencySymbol, selectCoin }) => {
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(false);
   const [coinList, setCoinList] = useState([]);
@@ -48,6 +48,7 @@ export const Table = ({ currency, currencySymbol }) => {
                 key={coin.id}
                 coin={coin}
                 currencySymbol={currencySymbol}
+                selectCoin={selectCoin}
               />
             );
           })}

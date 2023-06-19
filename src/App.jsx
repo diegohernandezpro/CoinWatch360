@@ -5,51 +5,61 @@ import { CoinList, CoinPage, Portfolio } from "@/pages";
 import { Header } from "@/components";
 import { theme, GlobalStyle } from "@/styles";
 
-export default class App extends React.Component {
-  state = {
-    themeType: true,
-    currency: "USD",
+export const App = () => {
+  const [currency, setCurrency] = useState({
+    type: "USD",
     currencySymbol: "$",
+  });
+  const [dark, setTheme] = useState(true);
+  const [coin, setCoin] = useState({ type: "bitcoin" });
+
+  const handleCurrency = (type, currencySymbol) => {
+    setCurrency({ type, currencySymbol });
   };
 
-  handleCurrency = (currency, currencySymbol) => {
-    this.setState({ currency, currencySymbol });
+  const toggleTheme = () => {
+    setTheme(!dark);
   };
 
-  toogleTheme = () => {
-    this.setState({ themeType: !this.state.themeType });
+  const selectCoin = (coin) => {
+    // console.log("coin: ", coin);
+    setCoin({ type: coin.toLowerCase() });
   };
 
-  render() {
-    return (
-      <ThemeProvider theme={this.state.themeType ? theme.dark : theme.light}>
-        <GlobalStyle />
-        <StyledDiv>
-          <Header
-            handleCurrency={this.handleCurrency}
-            theme={this.state.themeType ? theme.dark : theme.light}
-            toogleTheme={this.toogleTheme}
+  return (
+    <ThemeProvider theme={dark ? theme.dark : theme.light}>
+      <GlobalStyle />
+      <StyledDiv>
+        <Header handleCurrency={handleCurrency} toggleTheme={toggleTheme} />
+        <Routes>
+          <Route
+            exact="true"
+            path="/"
+            element={
+              <CoinList
+                currency={currency.type}
+                currencySymbol={currency.currencySymbol}
+                selectCoin={selectCoin}
+              />
+            }
           />
-          <Routes>
-            <Route
-              exact="true"
-              path="/"
-              element={
-                <CoinList
-                  currency={this.state.currency}
-                  currencySymbol={this.state.currencySymbol}
-                />
-              }
-            />
-            <Route exact="true" path="/coin" element={<CoinPage />} />
-            <Route exact="true" path="/portfolio" element={<Portfolio />} />
-            <Route path="*" element={<h1>NOT FOUND</h1>} />
-          </Routes>
-        </StyledDiv>
-      </ThemeProvider>
-    );
-  }
-}
+          <Route
+            path="/coin/:id"
+            element={
+              <CoinPage
+                coin={coin}
+                currency={currency.type}
+                currencySymbol={currency.currencySymbol}
+              />
+            }
+          />
+          <Route exact="true" path="/portfolio" element={<Portfolio />} />
+          <Route path="*" element={<h1>NOT FOUND</h1>} />
+        </Routes>
+      </StyledDiv>
+    </ThemeProvider>
+  );
+};
 
 const StyledDiv = styled.div`
   height: 100vh;

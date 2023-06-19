@@ -8,6 +8,10 @@ export const formatPrice = (price, currencySymbol) => {
   return `${currencySymbol} ${price}`;
 };
 
+export const formatCoinPrice = (price, currencySymbol) => {
+  return `${currencySymbol}${numeral(price).format("0,0.0 ")}`;
+};
+
 export const formatPercentage = (percentage) => {
   return numeral(Math.abs(percentage)).format("0.0") + "%";
 };
@@ -20,9 +24,3 @@ export const formatNum = (price, currencySymbol) => {
   }
   return `${numeral(price).format("0[.]00 a").toUpperCase()}`;
 };
-
-// export const formatLargeNum = (num) => numeral(num).format("(0.00 a)");
-
-// export const addCommasNoDec = (num) => numeral(num).format("0,0"); //not added to index.js
-
-// export const fiveSigFigs = (num) => numeral(num).format("0.0000"); //not added to index.js
