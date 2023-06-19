@@ -14,11 +14,11 @@ export const Charts = ({ currency, currencySymbol, ...rest }) => {
     try {
       setLoading(true);
 
-      // const { data } = await axios(
-      //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=30&interval=daily`
-      // );
+      const { data } = await axios(
+        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=30&interval=daily`
+      );
 
-      const data = chartTest; //change to api call later.
+      // const data = chartTest; //change to api call later.
 
       const marketLine = data.prices.map((el) => el[1]);
       const labelLine = data.prices.map((el) => {
