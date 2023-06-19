@@ -15,7 +15,7 @@ export const SliderWrapper = styled.div`
   height: 0.6rem;
   background: ${({ color }) => color};
   border-radius: 12px;
-  overflow: visible;
+  overflow: hidden;
 `;
 
 export const SliderFill = styled.div`

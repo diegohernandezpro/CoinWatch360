@@ -3,6 +3,8 @@ import numeral from "numeral";
 export const formatPrice = (price, currencySymbol) => {
   if (price !== null && price.toString().length < 3) {
     price = `${price}.00`;
+  } else {
+    price = `${numeral(price).format("0,0.0 ")}`;
   }
 
   return `${currencySymbol} ${price}`;
