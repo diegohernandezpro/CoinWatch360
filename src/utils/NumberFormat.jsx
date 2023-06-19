@@ -8,6 +8,10 @@ export const formatPrice = (price, currencySymbol) => {
   return `${currencySymbol} ${price}`;
 };
 
+export const formatCoinPrice = (price, currencySymbol) => {
+  return `${currencySymbol}${numeral(price).format("0,0.0 ")}`;
+};
+
 export const formatPercentage = (percentage) => {
   return numeral(Math.abs(percentage)).format("0.0") + "%";
 };

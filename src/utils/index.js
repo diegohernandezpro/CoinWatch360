@@ -1,1 +1,6 @@
-export { formatPrice, formatPercentage, formatNum } from "./NumberFormat";
+export {
+  formatPrice,
+  formatPercentage,
+  formatNum,
+  formatCoinPrice,
+} from "./NumberFormat";

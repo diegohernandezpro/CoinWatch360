@@ -1,8 +1,6 @@
 import React from "react";
 import axios from "axios";
 
-export default class Portfolio extends React.Component {
-  render() {
-    return <h1>Portfolio</h1>;
-  }
-}
+export const Portfolio = () => {
+  return <h1>Portfolio</h1>;
+};

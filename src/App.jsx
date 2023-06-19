@@ -11,6 +11,7 @@ export const App = () => {
     currencySymbol: "$",
   });
   const [dark, setTheme] = useState(true);
+  const [coin, setCoin] = useState({ type: "bitcoin" });
 
   const handleCurrency = (type, currencySymbol) => {
     setCurrency({ type, currencySymbol });
@@ -18,6 +19,11 @@ export const App = () => {
 
   const toggleTheme = () => {
     setTheme(!dark);
+  };
+
+  const selectCoin = (coin) => {
+    // console.log("coin: ", coin);
+    setCoin({ type: coin.toLowerCase() });
   };
 
   return (
@@ -33,10 +39,20 @@ export const App = () => {
               <CoinList
                 currency={currency.type}
                 currencySymbol={currency.currencySymbol}
+                selectCoin={selectCoin}
               />
             }
           />
-          <Route path="/coin/:id" element={<CoinPage />} />
+          <Route
+            path="/coin/:id"
+            element={
+              <CoinPage
+                coin={coin}
+                currency={currency.type}
+                currencySymbol={currency.currencySymbol}
+              />
+            }
+          />
           <Route exact="true" path="/portfolio" element={<Portfolio />} />
           <Route path="*" element={<h1>NOT FOUND</h1>} />
         </Routes>
@@ -44,51 +60,6 @@ export const App = () => {
     </ThemeProvider>
   );
 };
-
-// export default class App extends React.Component {
-//   state = {
-//     themeType: true,
-//     currency: "USD",
-//     currencySymbol: "$",
-//   };
-
-//   handleCurrency = (currency, currencySymbol) => {
-//     this.setState({ currency, currencySymbol });
-//   };
-
-//   toggleTheme = () => {
-//     this.setState({ themeType: !this.state.themeType });
-//   };
-
-//   render() {
-//     return (
-//       <ThemeProvider theme={this.state.themeType ? theme.dark : theme.light}>
-//         <GlobalStyle />
-//         <StyledDiv>
-//           <Header
-//             handleCurrency={this.handleCurrency}
-//             toggleTheme={this.toggleTheme}
-//           />
-//           <Routes>
-//             <Route
-//               exact="true"
-//               path="/"
-//               element={
-//                 <CoinList
-//                   currency={this.state.currency}
-//                   currencySymbol={this.state.currencySymbol}
-//                 />
-//               }
-//             />
-//             <Route path="/coin/:id" element={<CoinPage />} />
-//             <Route exact="true" path="/portfolio" element={<Portfolio />} />
-//             <Route path="*" element={<h1>NOT FOUND</h1>} />
-//           </Routes>
-//         </StyledDiv>
-//       </ThemeProvider>
-//     );
-//   }
-// }
 
 const StyledDiv = styled.div`
   height: 100vh;
