@@ -48,8 +48,6 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-//for loading wheel
-
 const rotation = keyframes`
   0% {
     transform: rotate(0deg);

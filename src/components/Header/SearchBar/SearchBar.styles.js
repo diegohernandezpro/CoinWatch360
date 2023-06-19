@@ -5,8 +5,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Form = styled.form`
-  width: 31.8rem;
-  height: 3.93rem;
+  width: 20rem;
+  height: 2.8rem;
   background: ${({ theme }) => theme.nested.active};
   color: ${({ theme }) => theme.color};
   border-radius: 0.8rem;

@@ -11,7 +11,6 @@ export const SearchResult = ({
   isLoading,
   handleLinkChange,
 }) => {
-  //add the loading section so when div focused loading green circle appears
   return (
     <>
       {isVisible && (
@@ -28,5 +27,3 @@ export const SearchResult = ({
     </>
   );
 };
-
-// <StyledLink to={`/coin/${coin.id}`}>

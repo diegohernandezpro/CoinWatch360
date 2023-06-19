@@ -1,6 +1,6 @@
 export { Header } from "./Header";
 
-export { Table } from "./MainTable";
+export { Table, Slider } from "./MainTable";
 
 export { Charts } from "./MainCharts";
 

@@ -1,1 +1,1 @@
-export { CoinSummary } from "./CoinSummary";
+export { CoinSummary } from "./CoinSummary/CoinSummary";

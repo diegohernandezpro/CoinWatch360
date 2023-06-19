@@ -4,7 +4,7 @@ import { Wrapper, Icon } from "./ThemeSelector.styles";
 export const ThemeSelector = ({ toggleTheme }) => {
   return (
     <Wrapper>
-      <Icon src="icons/themeSelector.svg" onClick={() => toggleTheme()} />
+      <Icon src="icons/themeSelector.svg" onClick={toggleTheme} />
     </Wrapper>
   );
 };

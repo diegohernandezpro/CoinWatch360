@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import styled, { ThemeProvider } from "styled-components";
 import { Routes, Route } from "react-router-dom";
 import { CoinList, CoinPage, Portfolio } from "@/pages";
@@ -22,7 +23,6 @@ export const App = () => {
   };
 
   const selectCoin = (coin) => {
-    // console.log("coin: ", coin);
     setCoin({ type: coin.toLowerCase() });
   };
 

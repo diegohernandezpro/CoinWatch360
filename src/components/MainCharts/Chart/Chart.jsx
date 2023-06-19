@@ -13,6 +13,7 @@ import {
 import { Line, Bar } from "react-chartjs-2";
 import { barChart, lineChart } from "../ChartOptions";
 import { Wrapper, StyledDiv } from "./Chart.styles";
+import { useTheme } from "styled-components";
 
 ChartJS.register(
   CategoryScale,
@@ -27,6 +28,8 @@ ChartJS.register(
 );
 
 export const Chart = ({ label, data, type, ...rest }) => {
+  const theme = useTheme();
+
   const dataPoints = {
     labels: label,
     datasets: [
@@ -35,20 +38,19 @@ export const Chart = ({ label, data, type, ...rest }) => {
         data: data,
         borderColor: () => {
           if (type === "line") {
-            return "#0CF864";
+            return theme.chart.lineColor;
           }
-          return "rgb(33,114,229)";
+          return theme.chart.barColor;
         },
-        //here is the function for the gradient fill
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 0, 0, 350);
           if (type === "line") {
-            gradient.addColorStop(0, "rgba(0, 255, 95, 0.5)");
-            gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+            gradient.addColorStop(0, theme.chart.gradientLineFrom);
+            gradient.addColorStop(1, theme.chart.gradientLineTo);
           } else {
-            gradient.addColorStop(0, "rgb(33,114,229, 1)");
-            gradient.addColorStop(1, "rgb(33,114,400, 0.5)");
+            gradient.addColorStop(0, theme.chart.gradientBarFrom);
+            gradient.addColorStop(1, theme.chart.gradientBarTo);
           }
           return gradient;
         },

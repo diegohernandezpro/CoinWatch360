@@ -35,7 +35,6 @@ export const CurrencySelector = (props) => {
     }
   };
 
-  //componentDidUpdate
   useEffect(() => {
     props.handleCurrency(currency, currencySymbol);
   }, [currency]);

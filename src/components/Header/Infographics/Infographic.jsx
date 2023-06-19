@@ -66,12 +66,13 @@ export const Infographic = () => {
       <CoinWrapper>Coins {numCoins}</CoinWrapper>
       <CoinWrapper>Exchange {numExchange}</CoinWrapper>
       <MarketCap>
-        <NeutralDot color="#2172e5" />
+        <NeutralDot color={({ theme }) => theme.infographic.base} />
+
         <span>${marketCap}T</span>
         <UpArrowGreen />
       </MarketCap>
       <TextNSlider text={`$${volume}B`} percentage={volumeVsMarketCap}>
-        <NeutralDot color="#fff" />
+        <NeutralDot color={({ theme }) => theme.infographic.filler} />
       </TextNSlider>
       <TextNSlider text={`${bitCap}%`} percentage={bitCap} icon="bitcoin">
         <Icon src={getIcon("bitcoin")} />

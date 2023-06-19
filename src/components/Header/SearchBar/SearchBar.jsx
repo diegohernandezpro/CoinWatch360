@@ -59,16 +59,8 @@ export const SearchBar = () => {
 
   const debouncedGetCoins = debounce(getCoins, 1000);
 
-  //ComponentDidMount
   useEffect(() => {
-    if (searchTerm !== prevSearchTerm) {
-      setResults([]);
-    }
-  }, []);
-
-  //ComponentDidUpdate
-  useEffect(() => {
-    prevSearchTermRef.current = searchTerm; //update prevSearchTerm to the new current SearchTerm each time a new SearchTime is inputted
+    prevSearchTermRef.current = searchTerm;
   }, [searchTerm]);
 
   return (

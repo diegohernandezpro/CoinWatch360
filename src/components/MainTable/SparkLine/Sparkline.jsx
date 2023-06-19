@@ -48,7 +48,7 @@ export const Sparkline = ({ pricePoints }) => {
   };
 
   const options = {
-    responsive: true, // Make the chart responsive to the container size
+    responsive: true,
     plugins: {
       legend: {
         display: false,

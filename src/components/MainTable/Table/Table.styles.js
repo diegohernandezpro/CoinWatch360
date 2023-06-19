@@ -17,10 +17,8 @@ export const TableContainer = styled.div`
   border-radius: 0.5rem;
   overflow: auto;
   position: relative;
-  // border: 2px dashed orange;
 `;
 
 export const TableWrapper = styled.div`
-  // border: 1px dashed pink;
   overflow: auto;
 `;

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "./Theme";
 
 export const UpArrowGreen = styled.div`
   width: 0;

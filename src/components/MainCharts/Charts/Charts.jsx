@@ -59,12 +59,6 @@ export const Charts = ({ currency, currencySymbol, ...rest }) => {
     }
   };
 
-  //componentDidMount
-  useEffect(() => {
-    getData(currency, currencySymbol);
-  }, []);
-
-  //componentDidUpdate
   useEffect(() => {
     getData(currency, currencySymbol);
   }, [currency]);

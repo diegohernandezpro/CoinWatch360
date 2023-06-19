@@ -5,8 +5,6 @@ export const Container = styled.div`
   height: 5rem;
   display: flex;
   flex-direction: column;
-  margin: 0;
-  margin-left: 0.7rem;
 
   div {
     font-weight: 300;

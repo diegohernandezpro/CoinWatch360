@@ -9,11 +9,14 @@ export const formatPrice = (price, currencySymbol) => {
 };
 
 export const formatCoinPrice = (price, currencySymbol) => {
+  if (currencySymbol && currencySymbol.toString().length > 1) {
+    return `${numeral(price).format("0,0.0 ")} ${currencySymbol.toUpperCase()}`;
+  }
   return `${currencySymbol}${numeral(price).format("0,0.0 ")}`;
 };
 
 export const formatPercentage = (percentage) => {
-  return numeral(Math.abs(percentage)).format("0.0") + "%";
+  return numeral(Math.abs(percentage)).format("0.00") + "%";
 };
 
 export const formatNum = (price, currencySymbol) => {

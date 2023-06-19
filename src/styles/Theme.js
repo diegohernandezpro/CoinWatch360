@@ -6,10 +6,18 @@ export const theme = {
       background: "#191b1f",
       active: "#2c2f36",
     },
+    infographic: {
+      base: "#2172e5",
+      filler: "#ffffff",
+    },
     chart: {
       color: "#707070",
       lineColor: "#0CF864",
       barColor: "#2172e5",
+      gradientLineFrom: "rgba(0, 255, 95, 0.5)",
+      gradientLineTo: "rgba(0, 0, 0, 0.0)",
+      gradientBarFrom: "rgb(33,114,229, 1)",
+      gradientBarTo: "rgb(33,114,400, 0.5)",
     },
     icon: "invert(100%)",
     money: {
@@ -19,24 +27,28 @@ export const theme = {
     },
   },
   light: {
-    // ADBBC2
-    background: "#E0E0E0",
+    background: "#fff",
     color: "#191b1f",
     nested: {
-      background: "#ADBBC2",
-      active: "#DAE3E5",
+      background: "#F3F3F3",
+      active: "#FCFCFC",
     },
-
+    infographic: {
+      base: "#2172e5",
+      filler: "#191b1f",
+    },
     chart: {
       color: "#2c2f36",
-      lineColor: "#2550ea",
+      lineColor: "#2172e5",
       barColor: "#167837",
+      gradientBarFrom: "rgba(22, 120, 55, 1)",
+      gradientBarTo: "rgba(22, 120, 55, 0.3)",
+      gradientLineFrom: "rgb(33,114,229, 1)",
+      gradientLineTo: "rgb(33,114,400, 0.1)",
     },
     icon: "invert(0%)",
     money: {
-      // // green: "#1BA27A",
-      green: "#05714F",
-      // green: "#00ff5f",
+      green: "#00ff5f",
 
       red: "#F04E42",
       background: "#ADBBC2",

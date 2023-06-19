@@ -40,19 +40,3 @@ export function NavBar(props) {
     </Wrapper>
   );
 }
-
-{
-  /* <nav>
-          <ul>
-            <li>
-              <Link to="/">CoinList</Link>
-            </li>
-            <li>
-              <Link to="/coinPage">CoinPage</Link>
-            </li>
-            <li>
-              <Link to="/portfolio">Portfolio</Link>
-            </li>
-          </ul>
-        </nav> */
-}
