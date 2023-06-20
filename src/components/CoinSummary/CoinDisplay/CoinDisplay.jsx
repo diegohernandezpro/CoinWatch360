@@ -7,6 +7,8 @@ import {
   Icon,
   StyledLink,
 } from "./CoinDisplay.styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
 
 export const CoinDisplay = ({ coinData }) => {
   return (
@@ -18,7 +20,7 @@ export const CoinDisplay = ({ coinData }) => {
         <CoinName>{coinData.name}</CoinName>
       </CoinDiv>
       <CoinLinkDiv>
-        <Icon src="../icons/link.svg" width="1rem" invert={true} />
+        <FontAwesomeIcon icon={faLink} />
         <StyledLink to={coinData.link}>{coinData.link}</StyledLink>
       </CoinLinkDiv>
     </CoinDisplayWrapper>

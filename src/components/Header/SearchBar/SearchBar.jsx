@@ -2,8 +2,13 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { debounce } from "lodash";
 import searchBitcoin from "./searchBitcoin.json";
-import { Wrapper, Form, Icon, Input } from "./SearchBar.styles";
+import { Wrapper, Form, IconWrapper, Input } from "./SearchBar.styles";
 import { SearchResult } from "./SearchResult/SearchResult";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+{
+  /* <FontAwesomeIcon icon={faMagnifyingGlass} /> */
+}
 
 export const SearchBar = () => {
   const [searchTerm, setSearch] = useState("");
@@ -66,7 +71,9 @@ export const SearchBar = () => {
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>
-        <Icon src="icons/search.svg" onClick={handleSubmit} />
+        <IconWrapper>
+          <FontAwesomeIcon icon={faMagnifyingGlass} onClick={handleSubmit} />
+        </IconWrapper>
 
         <Input
           type="text"

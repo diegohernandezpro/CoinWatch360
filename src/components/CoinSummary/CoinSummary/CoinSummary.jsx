@@ -2,8 +2,9 @@ import { CoinFacts } from "../CoinFacts/CoinFacts";
 import { CoinPrice } from "../CoinPrice/CoinPrice";
 import { CoinDisplay } from "../CoinDisplay/CoinDisplay";
 import { CoinDescription } from "../CoinDescription/CoinDescription";
-import { formatCoinPrice, formatPercentage } from "@/utils";
+import { CoinFooter } from "../CoinFooter/CoinFooter";
 import { Container, Wrapper, StyledP } from "./CoinSummary.styles";
+import { formatCoinPrice, formatPercentage } from "@/utils";
 
 export const CoinSummary = ({ coin, currency, currencySymbol }) => {
   currency = currency?.toLowerCase();
@@ -66,6 +67,11 @@ export const CoinSummary = ({ coin, currency, currencySymbol }) => {
       ? formatCoinPrice(coin?.market_data?.max_supply, symbol)
       : "∞",
   };
+  const links = {
+    blockChain: coin?.links?.blockchain_site[0],
+    repos: coin?.links?.repos_url?.github[0],
+    forum: coin?.links?.official_forum_url[0],
+  };
 
   return (
     <>
@@ -84,6 +90,7 @@ export const CoinSummary = ({ coin, currency, currencySymbol }) => {
         )}
       </Container>
       <CoinDescription description={description} />
+      <CoinFooter links={links} />
     </>
   );
 };

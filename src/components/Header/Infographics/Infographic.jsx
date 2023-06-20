@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, CoinWrapper, MarketCap, Icon } from "./Infographic.styles";
 import { TextNSlider } from "./TextNSlider";
 import {
   UpArrowGreen,
   DownArrowGreen,
   NeutralDot,
 } from "../../../styles/Arrows";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { Container, CoinWrapper, MarketCap, Icon } from "./Infographic.styles";
 
 export const Infographic = () => {
   const [isLoading, setLoading] = useState(false);

@@ -9,6 +9,7 @@ export const StyledLink = styled(Link)`
   &:hover {
     opacity: 0.5;
   }
+  overflow: auto;
 `;
 
 export const CoinDisplayWrapper = styled.div`
