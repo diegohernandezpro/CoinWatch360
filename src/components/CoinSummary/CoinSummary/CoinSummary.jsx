@@ -1,6 +1,7 @@
 import { CoinFacts } from "../CoinFacts/CoinFacts";
 import { CoinPrice } from "../CoinPrice/CoinPrice";
 import { CoinDisplay } from "../CoinDisplay/CoinDisplay";
+import { CoinDescription } from "../CoinDescription/CoinDescription";
 import { formatCoinPrice, formatPercentage } from "@/utils";
 import { Container, Wrapper, StyledP } from "./CoinSummary.styles";
 
@@ -29,6 +30,12 @@ export const CoinSummary = ({ coin, currency, currencySymbol }) => {
     atl_percentage: coin?.market_data?.atl_change_percentage?.[currency],
     atl_date: coin?.market_data?.atl_date?.[currency].slice(0, 10),
   };
+
+  const description = coin?.description?.en;
+  console.log(
+    "🚀 ~ file: CoinSummary.jsx:35 ~ CoinSummary ~ description:",
+    description
+  );
 
   const coinFacts1 = {
     "Market Cap": formatCoinPrice(
@@ -65,19 +72,22 @@ export const CoinSummary = ({ coin, currency, currencySymbol }) => {
   console.log(coin);
 
   return (
-    <Container>
-      <StyledP>Your Summary:</StyledP>
-      {coin && (
-        <Wrapper>
-          <CoinDisplay coinData={coinData} />
-          <CoinPrice priceData={priceData} />
-          <CoinFacts
-            coinFacts1={coinFacts1}
-            coinFacts2={coinFacts2}
-            currencySymbol={currencySymbol}
-          />
-        </Wrapper>
-      )}
-    </Container>
+    <>
+      <Container>
+        <StyledP>Your Summary:</StyledP>
+        {coin && (
+          <Wrapper>
+            <CoinDisplay coinData={coinData} />
+            <CoinPrice priceData={priceData} />
+            <CoinFacts
+              coinFacts1={coinFacts1}
+              coinFacts2={coinFacts2}
+              currencySymbol={currencySymbol}
+            />
+          </Wrapper>
+        )}
+      </Container>
+      <CoinDescription description={description} />
+    </>
   );
 };

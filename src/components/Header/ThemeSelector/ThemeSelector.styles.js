@@ -8,14 +8,6 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-export const Icon = styled.img`
-  height: 1.5rem;
-  width: 1.5rem;
-  filter: ${(props) => props.theme.icon};
-
-  &:hover {
-    cursor: pointer;
-  }
+  font-size: 1.5rem;
+  cursor: pointer;
 `;
