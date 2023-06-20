@@ -22,7 +22,9 @@ export const formatPercentage = (percentage) => {
 };
 
 export const formatNum = (price, currencySymbol) => {
-  if (currencySymbol) {
+  if (price === "∞") {
+    return "∞";
+  } else if (currencySymbol) {
     return `${currencySymbol} ${numeral(price)
       .format("0[.]00 a")
       .toUpperCase()}`;

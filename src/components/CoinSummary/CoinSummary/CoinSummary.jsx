@@ -32,10 +32,6 @@ export const CoinSummary = ({ coin, currency, currencySymbol }) => {
   };
 
   const description = coin?.description?.en;
-  console.log(
-    "🚀 ~ file: CoinSummary.jsx:35 ~ CoinSummary ~ description:",
-    description
-  );
 
   const coinFacts1 = {
     "Market Cap": formatCoinPrice(
@@ -66,10 +62,10 @@ export const CoinSummary = ({ coin, currency, currencySymbol }) => {
       coin?.market_data?.circulating_supply,
       symbol
     ),
-    "Max Supply": formatCoinPrice(coin?.market_data?.max_supply, symbol),
+    "Max Supply": coin?.market_data?.max_supply
+      ? formatCoinPrice(coin?.market_data?.max_supply, symbol)
+      : "∞",
   };
-
-  console.log(coin);
 
   return (
     <>

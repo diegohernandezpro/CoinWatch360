@@ -4,13 +4,26 @@ import {
   Wrapper,
   StyledDiv,
   StyledLink,
+  StyledButton,
 } from "./CoinDescription.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLayerGroup } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 
 export const CoinDescription = ({ description }) => {
   const splitText = description?.split(/(<a.*?<\/a>)/);
+  const first30words = splitText
+    ? `${splitText[0].split(" ").slice(0, 30).join(" ")}...`
+    : "";
+
+  const [showFullText, setShowFullText] = useState(false);
+  const [buttonText, setButtonText] = useState("Read More...");
+
+  const toggleTextVisibility = () => {
+    buttonText === "Read More..."
+      ? setButtonText("Read Less...")
+      : setButtonText("Read More...");
+    setShowFullText(!showFullText);
+  };
 
   return (
     <Container>
@@ -18,22 +31,27 @@ export const CoinDescription = ({ description }) => {
       <Wrapper>
         <FontAwesomeIcon icon={faLayerGroup} />
         <StyledDiv>
-          {splitText?.map((item, index) => {
-            if (item.startsWith("<a")) {
-              // Render <a> tags as Link components
-              const link = item.match(/href="(.*?)"/)[1]; // Extract the URL from href attribute
+          {showFullText ? (
+            <>
+              {splitText?.map((item, index) => {
+                if (item.startsWith("<a")) {
+                  const link = item.match(/href="(.*?)"/)[1];
 
-              return (
-                <StyledLink key={index} to={link}>
-                  {item.replace(/<.*?>/g, "")}
-                </StyledLink>
-              );
-            } else {
-              // Render text as plain text
-              return <React.Fragment key={index}>{item}</React.Fragment>;
-            }
-          })}
+                  return (
+                    <StyledLink key={index} to={link}>
+                      {item.replace(/<.*?>/g, "")}
+                    </StyledLink>
+                  );
+                } else {
+                  return <React.Fragment key={index}>{item}</React.Fragment>;
+                }
+              })}
+            </>
+          ) : (
+            <>{first30words}</>
+          )}
         </StyledDiv>
+        <StyledButton onClick={toggleTextVisibility}>{buttonText}</StyledButton>
       </Wrapper>
     </Container>
   );

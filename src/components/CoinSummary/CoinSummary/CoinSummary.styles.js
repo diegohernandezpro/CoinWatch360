@@ -6,8 +6,8 @@ export const Container = styled.div`
   height: 23.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-start;
+  gap: 2.5rem;
 `;
 
 export const Wrapper = styled.div`

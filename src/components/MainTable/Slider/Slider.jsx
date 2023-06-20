@@ -18,7 +18,7 @@ export const Slider = ({ base, fill, rank, currencySymbol }) => {
     formatNum(fill, currencySymbol)
   );
 
-  const percentage = (fill / base) * 100;
+  const percentage = baseSlider === "∞" ? 0 : (fill / base) * 100;
 
   const getColor = (rank) => {
     const colorNum = rank % 9;
