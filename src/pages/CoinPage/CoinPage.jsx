@@ -20,20 +20,18 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
 
   useEffect(() => {
     getCoin(coin.type);
-  }, []);
-
-  useEffect(() => {
-    getCoin(coin.type);
   }, [coin]);
 
   return (
     <Container>
       <Wrapper>
-        <CoinSummary
-          coin={coinData}
-          currency={currency}
-          currencySymbol={currencySymbol}
-        />
+        {coinData && (
+          <CoinSummary
+            coin={coinData}
+            currency={currency}
+            currencySymbol={currencySymbol}
+          />
+        )}
       </Wrapper>
     </Container>
   );

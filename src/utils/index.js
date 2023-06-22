@@ -3,4 +3,6 @@ export {
   formatPercentage,
   formatNum,
   formatCoinPrice,
+  formatConverterNumber,
+  formatCrypto,
 } from "./NumberFormat";
