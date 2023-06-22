@@ -18,6 +18,8 @@ export const theme = {
       gradientLineTo: "rgba(0, 0, 0, 0.0)",
       gradientBarFrom: "rgb(33,114,229, 1)",
       gradientBarTo: "rgb(33,114,400, 0.5)",
+      gradientBackgroundLineFrom: "rgba(44, 47, 54, 1)",
+      gradientBackgroundLineTo: "rgba(44, 47, 54, 0.6)",
     },
     icon: "invert(100%)",
     money: {
@@ -45,6 +47,8 @@ export const theme = {
       gradientBarTo: "rgba(26, 215, 97, 0.6)",
       gradientLineFrom: "rgb(33,114,229, 0.2)",
       gradientLineTo: "rgb(33,114,400, 0.0)",
+      gradientBackgroundLineFrom: "rgba(210, 210, 210, 1)",
+      gradientBackgroundLineTo: "rgba(241, 241, 241, 0.7)",
     },
     icon: "invert(0%)",
     money: {

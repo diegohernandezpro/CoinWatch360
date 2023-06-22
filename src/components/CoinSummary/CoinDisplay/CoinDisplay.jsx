@@ -17,10 +17,14 @@ export const CoinDisplay = ({ coinData }) => {
         <IconWrapper>
           <Icon src={coinData.image} width="4rem" />
         </IconWrapper>
+
         <CoinName>{coinData.name}</CoinName>
       </CoinDiv>
       <CoinLinkDiv>
-        <FontAwesomeIcon icon={faLink} />
+        <StyledLink>
+          <FontAwesomeIcon icon={faLink} />
+        </StyledLink>
+
         <StyledLink to={coinData.link}>{coinData.link}</StyledLink>
       </CoinLinkDiv>
     </CoinDisplayWrapper>

@@ -5,6 +5,7 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
   margin-left: 1rem;
+  cursor: pointer;
 
   &:hover {
     opacity: 0.5;

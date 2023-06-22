@@ -1,117 +1,55 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Container,
-  LinkWrapper,
-  StyledLink,
-  IconWrapper,
-  ConverterContainer,
-  ConverterWrapper,
-  ConvertIcon,
-  CurrencyHolder,
+  Wrapper,
   StyledInput,
-  StyledDiv,
+  StyledLabel,
+  GraphWrapper,
 } from "./CoinFooter.styles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLink,
-  faCoins,
-  faArrowsLeftRight,
-} from "@fortawesome/free-solid-svg-icons";
-import { formatConverterNumber, formatCrypto } from "@/utils";
+import { Chart } from "@/components";
 
-export const CoinFooter = ({
-  links,
-  currency,
-  cryptoLetters,
-  currencySymbol,
-  price,
-}) => {
-  const [searchCurrency, setSearchCurrency] = useState(0);
-  const [quantityToConvert, setQuantityToConvert] = useState(0);
-  const [fiatSymbol, setFiatSymbol] = useState(currency);
-  const [cryptoSymbol, setCryptoSymbol] = useState(cryptoLetters);
-  const [inverted, setInverted] = useState(false);
-
-  const getConverted = (quantityToConvert, fiatToCrypto) => {
-    let value = 0;
-    if (fiatToCrypto) {
-      value = quantityToConvert * price;
-      return formatCrypto(value, fiatToCrypto, cryptoSymbol, currencySymbol);
-    } else {
-      value = quantityToConvert / price;
-      return formatCrypto(value, fiatToCrypto, cryptoSymbol, fiatSymbol);
-    }
-  };
-
-  const conversionType = fiatSymbol === currency ? false : true;
-  let convertedValue = getConverted(quantityToConvert, conversionType);
+export const CoinFooter = ({ handleDuration, coinLabels, coinPricePoints }) => {
+  const [selectedOption, setSelectedOption] = useState("1d");
 
   const handleChange = (e) => {
-    const inputValue = e.target.value;
-    const numericValue = inputValue.replace(/[^\d.]/g, "");
-    setQuantityToConvert(numericValue);
-    let formatted = "";
-    if (inverted) {
-      formatted = formatConverterNumber(numericValue, cryptoLetters);
-    } else {
-      formatted = formatConverterNumber(numericValue, currencySymbol);
-    }
-    setSearchCurrency(formatted);
+    setSelectedOption(e.target.value);
+    handleDuration(e.target.value);
   };
 
-  const handleClick = () => {
-    setInverted(!inverted);
+  const options = {
+    "1d": 0,
+    "7d": 0,
+    "30d": 0,
+    "90d": 0,
+    "1y": 0,
+    Max: 0,
   };
-
-  useEffect(() => {
-    if (inverted) {
-      setFiatSymbol(cryptoLetters);
-      setCryptoSymbol(currency);
-    } else {
-      setFiatSymbol(currency);
-      setCryptoSymbol(cryptoLetters);
-    }
-  }, [inverted]);
-
-  useEffect(() => {
-    setFiatSymbol(currency);
-    setCryptoSymbol(cryptoLetters);
-  }, [currency]);
 
   return (
     <Container>
-      <ConverterContainer>
-        {Object.values(links).map((element, i) => {
+      <Wrapper>
+        {Object.keys(options).map((element, i) => {
           return (
-            <LinkWrapper key={i}>
-              <IconWrapper>
-                <FontAwesomeIcon icon={faLink} />
-              </IconWrapper>
-              <StyledLink to={element}>{element}</StyledLink>
-              <IconWrapper>
-                <FontAwesomeIcon icon={faCoins} />
-              </IconWrapper>
-            </LinkWrapper>
+            <React.Fragment key={i}>
+              <StyledInput
+                type="radio"
+                id={element}
+                value={element}
+                checked={selectedOption === element}
+                onChange={handleChange}
+              />
+              <StyledLabel htmlFor={element}>{element}</StyledLabel>
+            </React.Fragment>
           );
         })}
-      </ConverterContainer>
-      <ConverterContainer>
-        <ConverterWrapper>
-          <CurrencyHolder>{fiatSymbol}</CurrencyHolder>
-          <StyledInput
-            type="text"
-            value={searchCurrency}
-            onChange={handleChange}
-          />
-        </ConverterWrapper>
-        <ConvertIcon>
-          <FontAwesomeIcon icon={faArrowsLeftRight} onClick={handleClick} />
-        </ConvertIcon>
-        <ConverterWrapper>
-          <CurrencyHolder>{cryptoSymbol}</CurrencyHolder>
-          <StyledDiv>{convertedValue}</StyledDiv>
-        </ConverterWrapper>
-      </ConverterContainer>
+      </Wrapper>
+      <GraphWrapper>
+        <Chart
+          label={coinLabels}
+          data={coinPricePoints}
+          type="backgroundLine"
+        />
+      </GraphWrapper>
     </Container>
   );
 };

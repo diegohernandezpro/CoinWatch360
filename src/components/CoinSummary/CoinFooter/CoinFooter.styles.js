@@ -1,112 +1,49 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const Container = styled.div`
-  width: 100%;
+  width: (100% - 1rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  margin-top: 2rem;
+  border: 2px solid blue;
+  border 0.5rem solid ${({ theme }) => theme.nested.background};
+  border-top: none;
 `;
 
-export const LinkWrapper = styled.span`
-  width: Calc(100% / 3);
-  height: 3.2rem;
-  background: ${({ theme }) => theme.nested.background};
-  border-radius: 0.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const IconWrapper = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0rem 1rem;
-`;
-
-export const ConvertIcon = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0rem 1rem;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.5;
-  }
-`;
-
-export const StyledLink = styled(Link)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  overflow: auto;
-  color: inherit;
-  text-decoration: none;
-
-  &:hover {
-    opacity: 0.5;
-  }
-`;
-
-export const ConverterContainer = styled.div`
-  width: 100%;
+export const Wrapper = styled.div`
+  height: 3rem;
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
-`;
-
-export const ConverterWrapper = styled.div`
-  width: Calc(100% / 4);
-  height: 3.2rem;
-  background: ${({ theme }) => theme.nested.background};
-  border-radius: 0.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const CurrencyHolder = styled.div`
-  width: 5rem;
-  height: 100%;
-  background: ${({ theme }) => theme.money.green};
-  border-radius: 0.6rem 0 0rem 0.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  color: black;
+  color: ${({ theme }) => theme.color};
 `;
 
 export const StyledInput = styled.input`
-  width: Calc(100% - 5rem);
-  height: 100%;
-  background: none;
-  border-radius: 0 0.6rem 0.6rem 0;
-  border: none;
-  color: inherit;
-  padding: 0 0 0 1rem;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 0.1rem solid ${({ theme }) => theme.money.green};
+  appearance: none;
+  transition: background 0.2s, box-shadow 0.2s;
+
+  &:checked {
+    background: ${({ theme }) => theme.money.green};
+    box-shadow: inset 0px 0px 0px 0.2rem ${({ theme }) => theme.background};
+  }
 `;
 
-export const StyledDiv = styled.div`
-  width: Calc(100% - 5rem);
-  height: 100%;
-  border-radius: 0 0.6rem 0.6rem 0;
-  color: inherit;
-  padding: 0 0 0 1rem;
+export const StyledLabel = styled.label``;
+
+export const GraphWrapper = styled.div`
+  width: 100%;
+  height: 15rem;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  overflow: auto;
-  font-size: 0.85rem;
-  font-weight: 100;
+  align-items: flex-start;
 `;

@@ -47,3 +47,35 @@ export const barChart = {
     },
   },
 };
+
+export const backgroundChartOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+  maintainAspectRatio: false,
+  elements: {
+    point: {
+      radius: 0,
+    },
+  },
+  scales: {
+    y: {
+      display: false,
+      grid: {
+        display: false,
+        drawBorder: false,
+      },
+    },
+    x: {
+      display: false,
+      grid: {
+        display: false,
+        drawBorder: false,
+      },
+    },
+  },
+  tension: 0.5,
+};

@@ -2,6 +2,7 @@ import { CoinFacts } from "../CoinFacts/CoinFacts";
 import { CoinPrice } from "../CoinPrice/CoinPrice";
 import { CoinDisplay } from "../CoinDisplay/CoinDisplay";
 import { CoinDescription } from "../CoinDescription/CoinDescription";
+import { CoinConverter } from "../CoinConverter/CoinConverter";
 import { CoinFooter } from "../CoinFooter/CoinFooter";
 import { Container, Wrapper, StyledP } from "./CoinSummary.styles";
 import { formatCoinPrice, formatPercentage } from "@/utils";
@@ -86,7 +87,7 @@ export const CoinSummary = ({ coin, currency, currencySymbol }) => {
         )}
       </Container>
       <CoinDescription description={description} />
-      <CoinFooter
+      <CoinConverter
         links={links}
         currency={currency.toUpperCase()}
         cryptoLetters={symbol.toUpperCase()}

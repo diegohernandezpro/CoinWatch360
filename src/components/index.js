@@ -2,6 +2,6 @@ export { Header } from "./Header";
 
 export { Table, Slider } from "./MainTable";
 
-export { Charts } from "./MainCharts";
+export { Charts, Chart } from "./MainCharts";
 
-export { CoinSummary } from "./CoinSummary";
+export { CoinSummary, CoinFooter } from "./CoinSummary";

@@ -11,7 +11,7 @@ import {
   Filler,
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
-import { barChart, lineChart } from "../ChartOptions";
+import { barChart, lineChart, backgroundChartOptions } from "../ChartOptions";
 import { Wrapper, StyledDiv } from "./Chart.styles";
 import { useTheme } from "styled-components";
 
@@ -39,8 +39,11 @@ export const Chart = ({ label, data, type, ...rest }) => {
         borderColor: () => {
           if (type === "line") {
             return theme.chart.lineColor;
+          } else if (type === "bar") {
+            return theme.chart.barColor;
+          } else if (type === "backgroundLine") {
+            return theme.nested.active; //change
           }
-          return theme.chart.barColor;
         },
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
@@ -48,9 +51,12 @@ export const Chart = ({ label, data, type, ...rest }) => {
           if (type === "line") {
             gradient.addColorStop(0, theme.chart.gradientLineFrom);
             gradient.addColorStop(1, theme.chart.gradientLineTo);
-          } else {
+          } else if (type === "bar") {
             gradient.addColorStop(0, theme.chart.gradientBarFrom);
             gradient.addColorStop(1, theme.chart.gradientBarTo);
+          } else if (type === "backgroundLine") {
+            gradient.addColorStop(0, theme.chart.gradientBackgroundLineFrom);
+            gradient.addColorStop(1, theme.chart.gradientBackgroundLineTo);
           }
           return gradient;
         },
@@ -65,19 +71,28 @@ export const Chart = ({ label, data, type, ...rest }) => {
     <>
       <StyledDiv>{rest.children}</StyledDiv>
       <Wrapper>
-        {type === "line" ? (
+        {type === "line" && (
           <Line
             data={dataPoints}
             options={lineChart}
             width={"415"}
             height={"250"}
           />
-        ) : (
+        )}
+        {type === "bar" && (
           <Bar
             data={dataPoints}
             options={barChart}
             width={"415"}
             height={"250"}
+          />
+        )}
+        {type === "backgroundLine" && (
+          <Line
+            data={dataPoints}
+            options={backgroundChartOptions}
+            width={"415"}
+            height={"150"}
           />
         )}
       </Wrapper>
