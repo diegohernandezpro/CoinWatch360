@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import jsonData from "./jsonData.json";
+import { ErrorAPICallPage } from "../ErrorPage";
 import { CoinSummary, CoinFooter } from "@/components";
-import { Container, Wrapper } from "./CoinPage.styles";
+import { LoadingCircle } from "@/utils";
+import { Container, Wrapper, PageContainer } from "./CoinPage.styles";
 
 export const CoinPage = ({ coin, currency, currencySymbol }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingPrice, setIsLoadingPrice] = useState(false);
+  const [hasCoinError, setCoinError] = useState(false);
+  const [hasPriceError, setPriceError] = useState(false);
   const [coinData, setData] = useState(null);
   const [duration, setDuration] = useState(1);
   const [coinPricePoints, setPricePoints] = useState(null);
@@ -30,9 +34,8 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
       );
       setIsLoading(false);
       setData(data);
-      // setData(jsonData);
     } catch (err) {
-      console.error();
+      setCoinError(true);
     }
   };
 
@@ -45,7 +48,7 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
     };
 
     try {
-      setIsLoading(true);
+      setIsLoadingPrice(true);
       const {
         data: { prices },
       } = await axios(
@@ -53,17 +56,15 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
           duration
         )}`
       );
-      setIsLoading(false);
-      // console.log("inside getPice() prices:", { prices });
+      setIsLoadingPrice(false);
       const pricePoints = prices.map((el) => el[1]);
       const labels = prices.map((el) => {
         return new Date(el[0]).getDate();
       });
-      // console.log({ pricePoints, labels });
       setPricePoints(pricePoints);
       setCoinLabels(labels);
     } catch (err) {
-      console.error();
+      setPriceError(true);
     }
   };
 
@@ -78,22 +79,48 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
 
   return (
     <>
-      <Container>
-        <Wrapper>
-          {coinData && (
-            <CoinSummary
-              coin={coinData}
-              currency={currency}
-              currencySymbol={currencySymbol}
-            />
+      {!hasCoinError ? (
+        <>
+          {isLoading ? (
+            <Container>
+              <LoadingCircle width="4rem" />
+            </Container>
+          ) : (
+            <PageContainer>
+              <Container>
+                <Wrapper>
+                  {coinData && (
+                    <CoinSummary
+                      coin={coinData}
+                      currency={currency}
+                      currencySymbol={currencySymbol}
+                    />
+                  )}
+                </Wrapper>
+              </Container>
+              {!hasPriceError ? (
+                <>
+                  {!isLoadingPrice ? (
+                    <CoinFooter
+                      handleDuration={handleDuration}
+                      coinPricePoints={coinPricePoints}
+                      coinLabels={coinLabels}
+                    />
+                  ) : (
+                    <Container>
+                      <LoadingCircle width="2rem" />
+                    </Container>
+                  )}
+                </>
+              ) : (
+                <Container></Container>
+              )}
+            </PageContainer>
           )}
-        </Wrapper>
-      </Container>
-      <CoinFooter
-        handleDuration={handleDuration}
-        coinPricePoints={coinPricePoints}
-        coinLabels={coinLabels}
-      />
+        </>
+      ) : (
+        <ErrorAPICallPage />
+      )}
     </>
   );
 };

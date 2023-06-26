@@ -8,6 +8,7 @@ export const Container = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: row;
   padding: 1rem 2rem;
   color: ${({ theme }) => theme.color};
@@ -16,3 +17,5 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   width: 100%;
 `;
+
+export const PageContainer = styled.div``;

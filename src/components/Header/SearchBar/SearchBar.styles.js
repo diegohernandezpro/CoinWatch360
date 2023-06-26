@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
 
 export const Form = styled.form`
   width: 20rem;
-  height: 2.8rem;
+  height: 3rem;
   background: ${({ theme }) => theme.nested.active};
   color: ${({ theme }) => theme.color};
   border-radius: 0.8rem;

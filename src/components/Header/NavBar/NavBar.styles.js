@@ -12,7 +12,7 @@ export const Wrapper = styled.header`
 `;
 
 export const Navigation = styled.div`
-  height: 4.8rem;
+  height: 5rem;
   width: 100%;
   background: ${({ theme }) => theme.nested.background};
   display: flex;
@@ -36,7 +36,7 @@ export const LeftNav = styled.div`
 
 export const StyledNavLink = styled(NavLink)`
   border-radius: 10px;
-  height: 2.8rem;
+  height: 3rem;
   width: 7rem;
 
   display: flex;

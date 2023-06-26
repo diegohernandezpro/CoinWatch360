@@ -6,3 +6,5 @@ export {
   formatConverterNumber,
   formatCrypto,
 } from "./NumberFormat";
+
+export { LoadingCircle } from "./LoadingCircle";
