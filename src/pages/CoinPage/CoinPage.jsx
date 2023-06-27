@@ -12,10 +12,12 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
   const [hasPriceError, setPriceError] = useState(false);
   const [coinData, setData] = useState(null);
   const [duration, setDuration] = useState(1);
+  const [option, setOption] = useState("1d");
   const [coinPricePoints, setPricePoints] = useState(null);
   const [coinLabels, setCoinLabels] = useState(null);
 
-  const handleDuration = (value) => {
+  const getDuration = (value) => {
+    setOption(value);
     if (value === "Max") {
       setDuration(value.toLowerCase());
     } else if (value === "1y") {
@@ -57,6 +59,7 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
         )}`
       );
       setIsLoadingPrice(false);
+
       const pricePoints = prices.map((el) => el[1]);
       const labels = prices.map((el) => {
         return new Date(el[0]).getDate();
@@ -102,7 +105,8 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
                 <>
                   {!isLoadingPrice ? (
                     <CoinFooter
-                      handleDuration={handleDuration}
+                      getDuration={getDuration}
+                      option={option}
                       coinPricePoints={coinPricePoints}
                       coinLabels={coinLabels}
                     />

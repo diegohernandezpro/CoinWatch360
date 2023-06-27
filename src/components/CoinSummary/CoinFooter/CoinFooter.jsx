@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Wrapper,
@@ -8,27 +8,27 @@ import {
 } from "./CoinFooter.styles";
 import { Chart } from "@/components";
 
-export const CoinFooter = ({ handleDuration, coinLabels, coinPricePoints }) => {
+export const CoinFooter = ({
+  getDuration,
+  option,
+  coinLabels,
+  coinPricePoints,
+}) => {
   const [selectedOption, setSelectedOption] = useState("1d");
+  const options = ["1d", "7d", "30d", "90d", "1y", "Max"];
 
   const handleChange = (e) => {
-    setSelectedOption(e.target.value);
-    handleDuration(e.target.value);
+    getDuration(e.target.value);
   };
 
-  const options = {
-    "1d": 0,
-    "7d": 0,
-    "30d": 0,
-    "90d": 0,
-    "1y": 0,
-    Max: 0,
-  };
+  useEffect(() => {
+    setSelectedOption(option);
+  }, []);
 
   return (
     <Container>
       <Wrapper>
-        {Object.keys(options).map((element, i) => {
+        {options.map((element, i) => {
           return (
             <React.Fragment key={i}>
               <StyledInput
