@@ -50,3 +50,9 @@ export const Slider = styled.div`
   background: ${({ theme }) => theme.infographic.filler};
   border-radius: 0.8rem;
 `;
+
+export const Flex = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

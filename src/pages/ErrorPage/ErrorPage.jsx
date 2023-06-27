@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container } from "./ErrorPage.styles";
-
-export const ErrorPage = () => {
-  return (
-    <div>
-      "You've exceeded the Rate Limit. Please visit
-      https://www.coingecko.com/en/api/pricing to subscribe to our API plans for
-      higher rate limits."
-    </div>
-  );
-};
 
 export const ErrorAPICallPage = () => {
   const [redirect, setRedirect] = useState(false);

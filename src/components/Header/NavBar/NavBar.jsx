@@ -35,7 +35,7 @@ export function NavBar(props) {
         </RightNav>
       </Navigation>
       <StyledDiv>
-        <Infographic />
+        <Infographic currency={props.currency} />
       </StyledDiv>
     </Wrapper>
   );

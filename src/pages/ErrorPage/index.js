@@ -1,1 +1,2 @@
-export { ErrorPage, ErrorAPICallPage } from "./ErrorPage";
+export { ErrorAPICallPage } from "./ErrorPage";
+export { ErrorP } from "./ErrorPage.styles";

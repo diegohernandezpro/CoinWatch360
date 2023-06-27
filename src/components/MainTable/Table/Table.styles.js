@@ -22,3 +22,11 @@ export const TableContainer = styled.div`
 export const TableWrapper = styled.div`
   overflow: auto;
 `;
+
+export const Flex = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

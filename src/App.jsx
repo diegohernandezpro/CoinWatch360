@@ -30,7 +30,11 @@ export const App = () => {
     <ThemeProvider theme={dark ? theme.dark : theme.light}>
       <GlobalStyle />
       <StyledDiv>
-        <Header handleCurrency={handleCurrency} toggleTheme={toggleTheme} />
+        <Header
+          handleCurrency={handleCurrency}
+          currency={currency}
+          toggleTheme={toggleTheme}
+        />
         <Routes>
           <Route
             exact="true"

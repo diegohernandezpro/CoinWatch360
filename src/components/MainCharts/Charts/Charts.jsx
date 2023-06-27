@@ -1,24 +1,24 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import chartTest from "../chartTest.json";
 import { Chart, ChartSummary } from "@/components/MainCharts";
-import { formatNum } from "@/utils";
-import { ChartWrapper, ChartsContainer } from "./Charts.styles";
+import { formatNum, LoadingCircle } from "@/utils";
+import { ErrorP } from "@/pages";
+import { ChartWrapper, ChartsContainer, Flex } from "./Charts.styles";
 
-export const Charts = ({ currency, currencySymbol, ...rest }) => {
-  const [isLoading, setLoading] = useState(false);
+export const Charts = ({ currency, currencySymbol }) => {
+  const [isLoading, setLoading] = useState(true);
   const [hasError, setError] = useState(false);
   const [chartData, setChartData] = useState([]);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const getData = async (currency, currencySymbol) => {
     try {
       setLoading(true);
 
-      // const { data } = await axios(
-      //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=30&interval=daily`
-      // );
-
-      const data = chartTest; //change to api call later.
+      const { data } = await axios(
+        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=30&interval=daily`
+      );
+      setLoading(false);
 
       const marketLine = data.prices.map((el) => el[1]);
       const labelLine = data.prices.map((el) => {
@@ -39,7 +39,6 @@ export const Charts = ({ currency, currencySymbol, ...rest }) => {
       const options = { day: "numeric", month: "long", year: "numeric" };
       const today = new Date().toLocaleDateString(undefined, options);
 
-      setLoading(false);
       setChartData((prevState) => {
         return {
           ...prevState,
@@ -55,7 +54,10 @@ export const Charts = ({ currency, currencySymbol, ...rest }) => {
     } catch (err) {
       setLoading(false);
       setError(true);
-      console.log("Error in getData ", err);
+      setErrorMsg("Error Retrieving Chart Data. Please Try Again Later.");
+      setTimeout(() => {
+        setErrorMsg("");
+      }, 9000);
     }
   };
 
@@ -64,35 +66,58 @@ export const Charts = ({ currency, currencySymbol, ...rest }) => {
   }, [currency]);
 
   return (
-    <ChartsContainer>
-      <ChartWrapper>
-        <Chart
-          label={chartData.chartLabelLine}
-          data={chartData.chartMarketLine}
-          type="line"
-        >
-          <ChartSummary
-            heading="Bitcoin"
-            price={chartData.avgLine}
-            currency={currencySymbol}
-            date={chartData.today}
-          />
-        </Chart>
-      </ChartWrapper>
-      <ChartWrapper>
-        <Chart
-          label={chartData.chartLabelBar}
-          data={chartData.chartMarketBar}
-          type="bar"
-        >
-          <ChartSummary
-            heading="Volume 24h"
-            price={chartData.avgBar}
-            currency={currencySymbol}
-            date={chartData.today}
-          />
-        </Chart>
-      </ChartWrapper>
-    </ChartsContainer>
+    <>
+      {!hasError ? (
+        <>
+          {!isLoading ? (
+            <ChartsContainer>
+              <ChartWrapper>
+                <Chart
+                  label={chartData.chartLabelLine}
+                  data={chartData.chartMarketLine}
+                  type="line"
+                >
+                  <ChartSummary
+                    heading="Bitcoin"
+                    price={chartData.avgLine}
+                    currency={currencySymbol}
+                    date={chartData.today}
+                  />
+                </Chart>
+              </ChartWrapper>
+              <ChartWrapper>
+                <Chart
+                  label={chartData.chartLabelBar}
+                  data={chartData.chartMarketBar}
+                  type="bar"
+                >
+                  <ChartSummary
+                    heading="Volume 24h"
+                    price={chartData.avgBar}
+                    currency={currencySymbol}
+                    date={chartData.today}
+                  />
+                </Chart>
+              </ChartWrapper>
+            </ChartsContainer>
+          ) : (
+            <ChartsContainer>
+              <ChartWrapper>
+                <Flex>
+                  <LoadingCircle width="3rem" />
+                </Flex>
+              </ChartWrapper>
+              <ChartWrapper>
+                <Flex>
+                  <LoadingCircle width="3rem" />
+                </Flex>
+              </ChartWrapper>
+            </ChartsContainer>
+          )}
+        </>
+      ) : (
+        <ErrorP msg={errorMsg}>{errorMsg}</ErrorP>
+      )}
+    </>
   );
 };

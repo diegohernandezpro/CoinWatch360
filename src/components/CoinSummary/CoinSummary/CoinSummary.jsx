@@ -3,7 +3,6 @@ import { CoinPrice } from "../CoinPrice/CoinPrice";
 import { CoinDisplay } from "../CoinDisplay/CoinDisplay";
 import { CoinDescription } from "../CoinDescription/CoinDescription";
 import { CoinConverter } from "../CoinConverter/CoinConverter";
-import { CoinFooter } from "../CoinFooter/CoinFooter";
 import { Container, Wrapper, StyledP } from "./CoinSummary.styles";
 import { formatCoinPrice, formatPercentage } from "@/utils";
 

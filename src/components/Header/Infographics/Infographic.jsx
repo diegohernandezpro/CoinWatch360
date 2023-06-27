@@ -1,87 +1,132 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { TextNSlider } from "./TextNSlider";
+import { UpArrowGreen, DownArrowGreen, NeutralDot } from "@/styles";
+import { formatNum, LoadingCircle } from "@/utils";
 import {
-  UpArrowGreen,
-  DownArrowGreen,
-  NeutralDot,
-} from "../../../styles/Arrows";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import { Container, CoinWrapper, MarketCap, Icon } from "./Infographic.styles";
+  Container,
+  CoinWrapper,
+  MarketCap,
+  Icon,
+  Flex,
+} from "./Infographic.styles";
 
-export const Infographic = () => {
-  const [isLoading, setLoading] = useState(false);
+export const Infographic = ({ currency: { type, currencySymbol } }) => {
+  const [isLoading, setLoading] = useState(true);
   const [hasError, setError] = useState(false);
+  const [ErrorMsg, setErrorMsg] = useState("");
   const [coinsData, setCoinsData] = useState([]);
+  const [icons, setIcons] = useState({ bitIcon: "", ethIcon: "" });
 
   const getCoinInfo = async () => {
     try {
       setLoading(true);
-
       const {
         data: { data },
       } = await axios.get("https://api.coingecko.com/api/v3/global");
 
-      setLoading(false);
+      const {
+        active_cryptocurrencies: activeCrypto,
+        markets,
+        total_market_cap: totalMarketCap,
+        total_volume: totalVolume,
+        market_cap_percentage: marketCapPercent,
+      } = data;
+
       setCoinsData((prevState) => {
         return {
           ...prevState,
-          numCoins: data.active_cryptocurrencies,
-          numExchange: data.markets,
-          marketCap: data.total_market_cap.usd, //change from usd to currentCoin
-          marketCapChange: data.market_cap_change_percentage_24h_usd,
-          volume: data.total_volume.usd, //change from usd to currentCoin
-          bitCap: data.market_cap_percentage.btc,
-          ethCap: data.market_cap_percentage.eth,
+          numCoins: activeCrypto,
+          numExchange: markets,
+          marketCap: totalMarketCap[type.toLowerCase()],
+          volume: totalVolume[type.toLowerCase()],
+          bitCap: marketCapPercent.btc,
+          ethCap: marketCapPercent.eth,
         };
       });
+
+      setLoading(false);
     } catch (err) {
       setLoading(false);
       setError(true);
+      setErrorMsg(
+        "Error Retrieving the Infographic's Data. Please Try Again Later"
+      );
+      setTimeout(() => {
+        setErrorMsg("");
+      }, 5000);
     }
   };
-
-  useEffect(() => {
-    getCoinInfo();
-  }, []);
-
-  const marketCap = (coinsData.marketCap / 1.0e12).toFixed(2);
-  const volume = (coinsData.volume / 1.0e9).toFixed(2);
-  const bitCap = Math.round(coinsData.bitCap);
-  const ethCap = Math.round(coinsData.ethCap);
-  const volumeVsMarketCap = (
-    (coinsData.volume / coinsData.marketCap) *
-    100
-  ).toFixed(2);
-  const { numCoins, numExchange } = coinsData;
 
   const getIcon = (icon) => {
     if (icon === "bitcoin") {
-      return "icons/bitcoin.svg";
+      return "/icons/bitcoin.svg";
     }
-    return "icons/ethereum.svg";
+    return "/icons/ethereum.svg";
   };
 
-  return (
-    <Container>
-      <CoinWrapper>Coins {numCoins}</CoinWrapper>
-      <CoinWrapper>Exchange {numExchange}</CoinWrapper>
-      <MarketCap>
-        <NeutralDot color={({ theme }) => theme.infographic.base} />
+  const { numCoins, numExchange, volume, marketCap, bitCap, ethCap } =
+    coinsData;
+  const coinMarketCap = formatNum(marketCap, currencySymbol);
+  const coinVolume = formatNum(volume, currencySymbol);
+  const coinBitCap = Math.round(bitCap);
+  const coinEthCap = Math.round(ethCap);
+  const volumeVsMarketCap = ((volume / marketCap) * 100).toFixed(2);
 
-        <span>${marketCap}T</span>
-        <UpArrowGreen />
-      </MarketCap>
-      <TextNSlider text={`$${volume}B`} percentage={volumeVsMarketCap}>
-        <NeutralDot color={({ theme }) => theme.infographic.filler} />
-      </TextNSlider>
-      <TextNSlider text={`${bitCap}%`} percentage={bitCap} icon="bitcoin">
-        <Icon src={getIcon("bitcoin")} />
-      </TextNSlider>
-      <TextNSlider text={`${ethCap}%`} percentage={ethCap} icon="ethereum">
-        <Icon src={getIcon("etherum")} />
-      </TextNSlider>
-    </Container>
+  useEffect(() => {
+    getCoinInfo();
+  }, [type]);
+
+  return (
+    <>
+      {!hasError ? (
+        <>
+          {!isLoading ? (
+            <>
+              {
+                <Container>
+                  <CoinWrapper>Coins {numCoins}</CoinWrapper>
+                  <CoinWrapper>Exchange {numExchange}</CoinWrapper>
+                  <MarketCap>
+                    <NeutralDot color={({ theme }) => theme.infographic.base} />
+                    <span>{coinMarketCap}</span>
+                    <UpArrowGreen />
+                  </MarketCap>
+                  <TextNSlider text={coinVolume} percentage={volumeVsMarketCap}>
+                    <NeutralDot
+                      color={({ theme }) => theme.infographic.filler}
+                    />
+                  </TextNSlider>
+                  <TextNSlider
+                    text={`${coinBitCap}%`}
+                    percentage={coinBitCap}
+                    icon="bitcoin"
+                  >
+                    <Icon src={getIcon("bitcoin")} />
+                  </TextNSlider>
+                  <TextNSlider
+                    text={`${coinEthCap}%`}
+                    percentage={coinEthCap}
+                    icon="ethereum"
+                  >
+                    <Icon src={getIcon("etherum")} />
+                  </TextNSlider>
+                </Container>
+              }
+            </>
+          ) : (
+            <Container>
+              <Flex>
+                <LoadingCircle width="1rem" />
+              </Flex>
+            </Container>
+          )}
+        </>
+      ) : (
+        <>
+          <p>{ErrorMsg}</p>
+        </>
+      )}
+    </>
   );
 };
