@@ -17,10 +17,16 @@ export const TableContainer = styled.div`
   border-radius: 0.5rem;
   overflow: auto;
   position: relative;
-  // border: 2px dashed orange;
 `;
 
 export const TableWrapper = styled.div`
-  // border: 1px dashed pink;
   overflow: auto;
+`;
+
+export const Flex = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

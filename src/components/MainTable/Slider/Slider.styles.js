@@ -4,7 +4,6 @@ export const TableVolume = styled.div`
   display: flex;
   flex-direction: column;
   width: 14rem;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,9 +29,7 @@ export const StyledText = styled.span.attrs((props) => ({
   style: {
     color: props.color,
   },
-}))`
-  /* Add your styles here */
-`;
+}))``;
 
 export const ValuesSpan = styled.span`
   width: 12.5rem;
@@ -40,7 +37,6 @@ export const ValuesSpan = styled.span`
   margin-bottom: 0.3rem;
   display: flex;
   justify-content: space-between;
-  // border: 2px dashed yellow;
 `;
 
 export const Values = styled.div`
@@ -50,5 +46,4 @@ export const Values = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.4rem;
-  // border: 2px solid lightgreen;
 `;

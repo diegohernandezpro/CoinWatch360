@@ -6,7 +6,6 @@ export const ChartsContainer = styled.div`
   justify-content: center;
   height: 23rem;
   margin-top: 2rem;
-  // border: 2px dashed pink;
 `;
 
 export const ChartWrapper = styled.div`
@@ -19,7 +18,29 @@ export const ChartWrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
 
-  padding: 0.5rem;
-  // border: 1px dashed lightblue;
+  padding: 2rem;
   overflow: hidden;
+`;
+
+export const Flex = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
+export const ErrorP = styled.p`
+  background-color: #ffcccc;
+  display: flex;
+  justify-content: center;
+  color: #ff0000;
+  padding: ${({ msg }) => {
+    if (msg !== "") {
+      return "10px";
+    }
+    return "0px";
+  }};
+  border-radius: 4px;
+  overflow: scroll;
 `;

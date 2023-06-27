@@ -3,17 +3,16 @@ import { Link } from "react-router-dom";
 import { theme } from "@/styles";
 
 export const TableRow = styled.div`
-  // border: 3px ridge orange;
   flex-shrink: 0;
   display: flex;
   justify-content: space-evenly;
   height: 3.2rem;
   width; 100%;
   margin-bottom: 0.5rem;
+
 `;
 
 export const TableNum = styled.div`
-  // border: 1px dashed red;
   width: 2rem;
   height: 100%;
   display: flex;
@@ -23,12 +22,11 @@ export const TableNum = styled.div`
 `;
 
 export const TableName = styled.div`
-  width: 19rem;
+  width: Calc(19rem - 1.5rem);
   height: 100%;
   display: flex;
   align-items: center;
   padding-left: 0.5rem;
-  // border: 1px dashed red;
   border-radius: 1rem;
   cursor: pointer;
 
@@ -39,7 +37,6 @@ export const TableName = styled.div`
 `;
 
 export const TablePrice = styled.div`
-  // border: 1px dashed red;
   width: 8.3rem;
   height: 100%;
   display: flex;
@@ -48,7 +45,6 @@ export const TablePrice = styled.div`
 `;
 
 export const TableTimeChange = styled.div`
-  // border: 1px dashed red;
   width: 5rem;
   height: 100%;
   display: flex;

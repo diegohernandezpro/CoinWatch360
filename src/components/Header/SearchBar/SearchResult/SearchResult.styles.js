@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const DropDownUl = styled.ul`
@@ -21,7 +21,6 @@ export const ResultRowLi = styled.li`
   justify-content: flex-start;
   align-items: center;
   margin: 0.5rem;
-  //   border: 2px solid red;
 
   &:hover {
     background: ${({ theme }) => theme.nested.background};
@@ -38,7 +37,6 @@ export const Icon = styled.img`
 `;
 
 export const StyledLink = styled(Link)`
-  //   border: 2px solid yellow;
   width: 100%;
   color: inherit;
   display: flex;
@@ -48,22 +46,10 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-//for loading wheel
-
-const rotation = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
-
-export const LoadingWheel = styled.div`
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  animation: ${rotation} 1s linear infinite;
-`;
+export const Flex = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+s`;

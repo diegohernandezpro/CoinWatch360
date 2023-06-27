@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 
 import {
   Wrapper,
@@ -35,7 +37,6 @@ export const CurrencySelector = (props) => {
     }
   };
 
-  //componentDidUpdate
   useEffect(() => {
     props.handleCurrency(currency, currencySymbol);
   }, [currency]);

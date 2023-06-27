@@ -1,17 +1,17 @@
-import styled, { css, keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   position: relative;
 `;
 
 export const Form = styled.form`
-  width: 31.8rem;
-  height: 3.93rem;
+  width: 20rem;
+  height: 3rem;
   background: ${({ theme }) => theme.nested.active};
   color: ${({ theme }) => theme.color};
   border-radius: 0.8rem;
   display: flex;
-  gap: 1.25rem;
+  gap: 1rem;
   align-items: center;
 
   :hover {
@@ -19,12 +19,9 @@ export const Form = styled.form`
   }
 `;
 
-export const Icon = styled.img`
-  margin-left: 1.25rem;
-  height: 1.5rem;
-  width: 1.5rem;
-  filter: ${(props) => props.theme.icon};
-
+export const IconWrapper = styled.div`
+  margin-left: 1rem;
+  font-size: 1.3rem;
   :hover {
     cursor: pointer;
   }

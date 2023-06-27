@@ -35,24 +35,8 @@ export function NavBar(props) {
         </RightNav>
       </Navigation>
       <StyledDiv>
-        <Infographic />
+        <Infographic currency={props.currency} />
       </StyledDiv>
     </Wrapper>
   );
-}
-
-{
-  /* <nav>
-          <ul>
-            <li>
-              <Link to="/">CoinList</Link>
-            </li>
-            <li>
-              <Link to="/coinPage">CoinPage</Link>
-            </li>
-            <li>
-              <Link to="/portfolio">Portfolio</Link>
-            </li>
-          </ul>
-        </nav> */
 }

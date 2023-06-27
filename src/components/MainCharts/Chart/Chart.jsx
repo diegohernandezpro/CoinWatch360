@@ -11,8 +11,9 @@ import {
   Filler,
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
-import { barChart, lineChart } from "../ChartOptions";
+import { barChart, lineChart, backgroundChartOptions } from "../ChartOptions";
 import { Wrapper, StyledDiv } from "./Chart.styles";
+import { useTheme } from "styled-components";
 
 ChartJS.register(
   CategoryScale,
@@ -27,6 +28,8 @@ ChartJS.register(
 );
 
 export const Chart = ({ label, data, type, ...rest }) => {
+  const theme = useTheme();
+
   const dataPoints = {
     labels: label,
     datasets: [
@@ -35,20 +38,25 @@ export const Chart = ({ label, data, type, ...rest }) => {
         data: data,
         borderColor: () => {
           if (type === "line") {
-            return "#0CF864";
+            return theme.chart.lineColor;
+          } else if (type === "bar") {
+            return theme.chart.barColor;
+          } else if (type === "backgroundLine") {
+            return theme.nested.active; //change
           }
-          return "rgb(33,114,229)";
         },
-        //here is the function for the gradient fill
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 0, 0, 350);
           if (type === "line") {
-            gradient.addColorStop(0, "rgba(0, 255, 95, 0.5)");
-            gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
-          } else {
-            gradient.addColorStop(0, "rgb(33,114,229, 1)");
-            gradient.addColorStop(1, "rgb(33,114,400, 0.5)");
+            gradient.addColorStop(0, theme.chart.gradientLineFrom);
+            gradient.addColorStop(1, theme.chart.gradientLineTo);
+          } else if (type === "bar") {
+            gradient.addColorStop(0, theme.chart.gradientBarFrom);
+            gradient.addColorStop(1, theme.chart.gradientBarTo);
+          } else if (type === "backgroundLine") {
+            gradient.addColorStop(0, theme.chart.gradientBackgroundLineFrom);
+            gradient.addColorStop(1, theme.chart.gradientBackgroundLineTo);
           }
           return gradient;
         },
@@ -63,19 +71,28 @@ export const Chart = ({ label, data, type, ...rest }) => {
     <>
       <StyledDiv>{rest.children}</StyledDiv>
       <Wrapper>
-        {type === "line" ? (
+        {type === "line" && (
           <Line
             data={dataPoints}
             options={lineChart}
             width={"415"}
             height={"250"}
           />
-        ) : (
+        )}
+        {type === "bar" && (
           <Bar
             data={dataPoints}
             options={barChart}
             width={"415"}
             height={"250"}
+          />
+        )}
+        {type === "backgroundLine" && (
+          <Line
+            data={dataPoints}
+            options={backgroundChartOptions}
+            width={"415"}
+            height={"150"}
           />
         )}
       </Wrapper>
