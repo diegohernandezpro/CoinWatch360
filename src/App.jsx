@@ -23,10 +23,6 @@ export const App = () => {
   };
 
   const selectCoin = (coin) => {
-<<<<<<< HEAD
-    // console.log("coin: ", coin);
-=======
->>>>>>> Coin-Page
     setCoin({ type: coin.toLowerCase() });
   };
 
@@ -34,15 +30,11 @@ export const App = () => {
     <ThemeProvider theme={dark ? theme.dark : theme.light}>
       <GlobalStyle />
       <StyledDiv>
-<<<<<<< HEAD
-        <Header handleCurrency={handleCurrency} toggleTheme={toggleTheme} />
-=======
         <Header
           handleCurrency={handleCurrency}
           currency={currency}
           toggleTheme={toggleTheme}
         />
->>>>>>> Coin-Page
         <Routes>
           <Route
             exact="true"

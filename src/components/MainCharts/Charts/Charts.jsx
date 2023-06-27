@@ -18,12 +18,7 @@ export const Charts = ({ currency, currencySymbol }) => {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=30&interval=daily`
       );
-<<<<<<< HEAD
-
-      // const data = chartTest; //change to api call later.
-=======
       setLoading(false);
->>>>>>> Coin-Page
 
       const marketLine = data.prices.map((el) => el[1]);
       const labelLine = data.prices.map((el) => {

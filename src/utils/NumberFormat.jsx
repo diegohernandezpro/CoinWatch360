@@ -11,11 +11,6 @@ export const formatPrice = (price, currencySymbol) => {
 };
 
 export const formatCoinPrice = (price, currencySymbol) => {
-<<<<<<< HEAD
-  return `${currencySymbol}${numeral(price).format("0,0.0 ")}`;
-};
-
-=======
   if (currencySymbol && currencySymbol.toString().length > 1) {
     return `${numeral(price).format("0,0.0 ")} ${currencySymbol.toUpperCase()}`;
   }
@@ -36,7 +31,6 @@ export const formatConverterNumber = (price, currencySymbol) => {
   return `${currencySymbol.toUpperCase()} ${numeral(price).format("0,0")}`;
 };
 
->>>>>>> Coin-Page
 export const formatPercentage = (percentage) => {
   return numeral(Math.abs(percentage)).format("0.00") + "%";
 };

@@ -19,11 +19,6 @@ export const Table = ({ currency, currencySymbol, selectCoin }) => {
       const { data } = await axios.get(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       );
-<<<<<<< HEAD
-      // const data = jsonData;
-=======
-
->>>>>>> Coin-Page
       setLoading(false);
       setCoinList(data);
     } catch (error) {
@@ -48,25 +43,6 @@ export const Table = ({ currency, currencySymbol, selectCoin }) => {
 
   return (
     <>
-<<<<<<< HEAD
-      <StyledP>Your Overview</StyledP>
-      <TableContainer>
-        <Heading />
-        <TableWrapper>
-          {hasError && <ErrorPage />}
-          {coinList.map((coin) => {
-            return (
-              <NewRow
-                key={coin.id}
-                coin={coin}
-                currencySymbol={currencySymbol}
-                selectCoin={selectCoin}
-              />
-            );
-          })}
-        </TableWrapper>
-      </TableContainer>
-=======
       {!hasError ? (
         <>
           {!isLoading ? (
@@ -101,7 +77,6 @@ export const Table = ({ currency, currencySymbol, selectCoin }) => {
           <ErrorP msg={errorMsg}>{errorMsg}</ErrorP>
         </>
       )}
->>>>>>> Coin-Page
     </>
   );
 };
