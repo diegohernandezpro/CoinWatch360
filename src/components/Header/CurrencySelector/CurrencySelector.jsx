@@ -49,9 +49,7 @@ export const CurrencySelector = (props) => {
       setSymbol(value);
     });
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 900);
+    setLoading(false);
     props.handleCurrency(type, symbol);
   }, []);
 
