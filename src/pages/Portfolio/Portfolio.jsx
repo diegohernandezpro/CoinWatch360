@@ -1,6 +1,5 @@
-import React from "react";
-import axios from "axios";
+import { Container, Wrapper } from "./Portfolio.styles";
 
 export const Portfolio = () => {
-  return <h1>Portfolio</h1>;
+  return <Container></Container>;
 };

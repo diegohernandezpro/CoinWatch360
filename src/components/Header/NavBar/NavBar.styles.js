@@ -4,7 +4,6 @@ import styled from "styled-components";
 export const Wrapper = styled.header`
   color: ${({ theme }) => theme.color};
   width: 100%;
-  height: 9.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
