@@ -1,30 +1,41 @@
-import React, { useState } from "react";
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import styled, { ThemeProvider } from "styled-components";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import localForage from "localforage";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import { CoinList, CoinPage, Portfolio } from "@/pages";
 import { Header } from "@/components";
 import { theme, GlobalStyle } from "@/styles";
 
 export const App = () => {
   const [currency, setCurrency] = useState({
-    type: "USD",
-    currencySymbol: "$",
+    type: "",
+    currencySymbol: "",
   });
-  const [dark, setTheme] = useState(true);
+  const [dark, setDark] = useState(true);
   const [coin, setCoin] = useState({ type: "bitcoin" });
 
   const handleCurrency = (type, currencySymbol) => {
     setCurrency({ type, currencySymbol });
+    localForage.setItem("currencyType", type);
+    localForage.setItem("currencySymbol", currencySymbol);
   };
 
   const toggleTheme = () => {
-    setTheme(!dark);
+    const isDark = !dark;
+    setDark(isDark);
+    localForage.setItem("darkTheme", isDark);
   };
 
   const selectCoin = (coin) => {
     setCoin({ type: coin.toLowerCase() });
   };
+
+  useEffect(() => {
+    localForage.getItem("darkTheme").then((bool) => {
+      setDark(bool);
+    });
+  }, []);
 
   return (
     <ThemeProvider theme={dark ? theme.dark : theme.light}>

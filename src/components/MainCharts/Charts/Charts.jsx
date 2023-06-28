@@ -4,6 +4,7 @@ import { Chart, ChartSummary } from "@/components/MainCharts";
 import { formatNum, LoadingCircle } from "@/utils";
 import { ErrorP } from "@/pages";
 import { ChartWrapper, ChartsContainer, Flex } from "./Charts.styles";
+import dataJson from "../chartTest.json";
 
 export const Charts = ({ currency, currencySymbol }) => {
   const [isLoading, setLoading] = useState(true);
@@ -18,6 +19,7 @@ export const Charts = ({ currency, currencySymbol }) => {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=30&interval=daily`
       );
+      // const data = dataJson;
       setLoading(false);
 
       const marketLine = data.prices.map((el) => el[1]);

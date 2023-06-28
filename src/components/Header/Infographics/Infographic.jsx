@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { TextNSlider } from "./TextNSlider";
-import { UpArrowGreen, DownArrowGreen, NeutralDot } from "@/styles";
+import { UpArrowGreen, NeutralDot } from "@/styles";
 import { formatNum, LoadingCircle } from "@/utils";
 import {
   Container,
@@ -38,8 +38,8 @@ export const Infographic = ({ currency: { type, currencySymbol } }) => {
           ...prevState,
           numCoins: activeCrypto,
           numExchange: markets,
-          marketCap: totalMarketCap[type.toLowerCase()],
-          volume: totalVolume[type.toLowerCase()],
+          marketCap: totalMarketCap[type?.toLowerCase()],
+          volume: totalVolume[type?.toLowerCase()],
           bitCap: marketCapPercent.btc,
           ethCap: marketCapPercent.eth,
         };
