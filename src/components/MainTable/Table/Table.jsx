@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { GlobalContext } from "@/contexts";
 import { LoadingCircle } from "@/utils";
 import { ErrorP } from "@/pages";
 import { Heading } from "../Heading/Heading";
@@ -7,19 +8,23 @@ import { NewRow } from "../NewRow/NewRow";
 import { TableContainer, StyledP, TableWrapper, Flex } from "./Table.styles";
 import jsonData from "../testData.json";
 
-export const Table = ({ currency, currencySymbol, selectCoin }) => {
+export const Table = () => {
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [coinList, setCoinList] = useState([]);
+  const {
+    currency: { type, currencySymbol },
+    selectCoin,
+  } = useContext(GlobalContext);
 
-  const getCoinList = async (currency) => {
+  const getCoinList = async (type) => {
     try {
       setLoading(true);
-      const { data } = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
-      );
-      // const data = jsonData;
+      // const { data } = await axios.get(
+      //   `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${type}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+      // );
+      const data = jsonData;
       setLoading(false);
       setCoinList(data);
     } catch (error) {
@@ -35,12 +40,12 @@ export const Table = ({ currency, currencySymbol, selectCoin }) => {
   };
 
   useEffect(() => {
-    getCoinList(currency);
+    getCoinList(type);
   }, []);
 
   useEffect(() => {
-    getCoinList(currency);
-  }, [currency]);
+    getCoinList(type);
+  }, [type]);
 
   return (
     <>

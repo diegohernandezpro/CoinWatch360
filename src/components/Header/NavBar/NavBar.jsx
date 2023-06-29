@@ -14,7 +14,7 @@ import {
   StyledDiv,
 } from "./NavBar.styles";
 
-export function NavBar(props) {
+export function NavBar() {
   return (
     <Wrapper>
       <Navigation>
@@ -22,20 +22,18 @@ export function NavBar(props) {
           <StyledNavLink exact="true" to="/">
             Coins
           </StyledNavLink>
-
           <StyledNavLink exact="true" to="/portfolio">
             Portfolio
           </StyledNavLink>
         </LeftNav>
-
         <RightNav>
           <SearchBar />
-          <CurrencySelector handleCurrency={props.handleCurrency} />
-          <ThemeSelector toggleTheme={props.toggleTheme} />
+          <CurrencySelector />
+          <ThemeSelector />
         </RightNav>
       </Navigation>
       <StyledDiv>
-        <Infographic currency={props.currency} />
+        <Infographic />
       </StyledDiv>
     </Wrapper>
   );

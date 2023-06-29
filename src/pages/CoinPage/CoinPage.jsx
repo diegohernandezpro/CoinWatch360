@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { GlobalContext } from "@/contexts";
 import { ErrorAPICallPage } from "../ErrorPage";
 import { CoinSummary, CoinFooter } from "@/components";
 import { LoadingCircle } from "@/utils";
 import { Container, Wrapper, PageContainer } from "./CoinPage.styles";
 
-export const CoinPage = ({ coin, currency, currencySymbol }) => {
+export const CoinPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingPrice, setIsLoadingPrice] = useState(false);
   const [hasCoinError, setCoinError] = useState(false);
@@ -15,6 +16,10 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
   const [option, setOption] = useState("1d");
   const [coinPricePoints, setPricePoints] = useState(null);
   const [coinLabels, setCoinLabels] = useState(null);
+  const {
+    coin,
+    currency: { type, currencySymbol },
+  } = useContext(GlobalContext);
 
   const getDuration = (value) => {
     setOption(value);
@@ -73,11 +78,11 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
 
   useEffect(() => {
     getCoin(coin.type);
-    getPrice(coin.type, currency, duration);
+    getPrice(coin.type, type, duration);
   }, [coin]);
 
   useEffect(() => {
-    getPrice(coin.type, currency, duration);
+    getPrice(coin.type, type, duration);
   }, [duration]);
 
   return (
@@ -95,7 +100,7 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
                   {coinData && (
                     <CoinSummary
                       coin={coinData}
-                      currency={currency}
+                      currency={type}
                       currencySymbol={currencySymbol}
                     />
                   )}

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import localForage from "localforage";
+import { GlobalContext } from "@/contexts";
 import { LoadingCircle } from "@/utils";
 
 import {
@@ -10,10 +11,11 @@ import {
   Flex,
 } from "./CurrencySelector.styles";
 
-export const CurrencySelector = (props) => {
+export const CurrencySelector = () => {
   const [type, setType] = useState("USD");
   const [symbol, setSymbol] = useState("$");
   const [isLoading, setLoading] = useState(true);
+  const { handleCurrency } = useContext(GlobalContext);
 
   const handleSelectChange = (e) => {
     const selectedValue = e.target.value;
@@ -50,11 +52,11 @@ export const CurrencySelector = (props) => {
     });
 
     setLoading(false);
-    props.handleCurrency(type, symbol);
+    handleCurrency(type, symbol);
   }, []);
 
   useEffect(() => {
-    props.handleCurrency(type, symbol);
+    handleCurrency(type, symbol);
   }, [type]);
 
   return (

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { GlobalContext } from "@/contexts";
 import { TextNSlider } from "./TextNSlider";
 import { UpArrowGreen, NeutralDot } from "@/styles";
 import { formatNum, LoadingCircle } from "@/utils";
@@ -11,12 +12,14 @@ import {
   Flex,
 } from "./Infographic.styles";
 
-export const Infographic = ({ currency: { type, currencySymbol } }) => {
+export const Infographic = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [hasError, setError] = useState(false);
   const [ErrorMsg, setErrorMsg] = useState("");
   const [coinsData, setCoinsData] = useState([]);
-  const [icons, setIcons] = useState({ bitIcon: "", ethIcon: "" });
+  const {
+    currency: { type, currencySymbol },
+  } = useContext(GlobalContext);
 
   const getCoinInfo = async () => {
     try {

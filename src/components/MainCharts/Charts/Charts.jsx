@@ -1,25 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { GlobalContext } from "@/contexts";
 import { Chart, ChartSummary } from "@/components/MainCharts";
 import { formatNum, LoadingCircle } from "@/utils";
 import { ErrorP } from "@/pages";
 import { ChartWrapper, ChartsContainer, Flex } from "./Charts.styles";
 import dataJson from "../chartTest.json";
 
-export const Charts = ({ currency, currencySymbol }) => {
+export const Charts = () => {
   const [isLoading, setLoading] = useState(true);
   const [hasError, setError] = useState(false);
   const [chartData, setChartData] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
+  const {
+    currency: { type, currencySymbol },
+  } = useContext(GlobalContext);
 
-  const getData = async (currency, currencySymbol) => {
+  const getData = async (type, currencySymbol) => {
     try {
       setLoading(true);
 
-      const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=30&interval=daily`
-      );
-      // const data = dataJson;
+      // const { data } = await axios(
+      //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${type}&days=30&interval=daily`
+      // );
+      const data = dataJson;
       setLoading(false);
 
       const marketLine = data.prices.map((el) => el[1]);
@@ -64,8 +68,8 @@ export const Charts = ({ currency, currencySymbol }) => {
   };
 
   useEffect(() => {
-    getData(currency, currencySymbol);
-  }, [currency]);
+    getData(type, currencySymbol);
+  }, [type]);
 
   return (
     <>
@@ -82,7 +86,7 @@ export const Charts = ({ currency, currencySymbol }) => {
                   <ChartSummary
                     heading="Bitcoin"
                     price={chartData.avgLine}
-                    currency={currencySymbol}
+                    symbol={currencySymbol}
                     date={chartData.today}
                   />
                 </Chart>
@@ -96,7 +100,7 @@ export const Charts = ({ currency, currencySymbol }) => {
                   <ChartSummary
                     heading="Volume 24h"
                     price={chartData.avgBar}
-                    currency={currencySymbol}
+                    symbol={currencySymbol}
                     date={chartData.today}
                   />
                 </Chart>
