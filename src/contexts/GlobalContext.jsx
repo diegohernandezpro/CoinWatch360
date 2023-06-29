@@ -7,15 +7,14 @@ export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
   const [currency, setCurrency] = useState({
-    type: "",
+    currencyType: "",
     currencySymbol: "",
   });
   const [dark, setDark] = useState(true);
-  const [coin, setCoin] = useState({ type: "bitcoin" });
 
-  const handleCurrency = (type, currencySymbol) => {
-    setCurrency({ type, currencySymbol });
-    localForage.setItem("currencyType", type);
+  const handleCurrency = (currencyType, currencySymbol) => {
+    setCurrency({ currencyType, currencySymbol });
+    localForage.setItem("currencyType", currencyType);
     localForage.setItem("currencySymbol", currencySymbol);
   };
 
@@ -25,10 +24,6 @@ export const GlobalProvider = ({ children }) => {
     localForage.setItem("darkTheme", isDark);
   };
 
-  const selectCoin = (coin) => {
-    setCoin({ type: coin.toLowerCase() });
-  };
-
   useEffect(() => {
     localForage.getItem("darkTheme").then((isDark) => {
       setDark(isDark);
@@ -36,9 +31,7 @@ export const GlobalProvider = ({ children }) => {
   }, []);
 
   return (
-    <GlobalContext.Provider
-      value={{ currency, coin, handleCurrency, toggleTheme, selectCoin }}
-    >
+    <GlobalContext.Provider value={{ currency, handleCurrency, toggleTheme }}>
       <ThemeProvider theme={dark ? theme.dark : theme.light}>
         {children}
       </ThemeProvider>

@@ -1,4 +1,6 @@
-import { formatPrice, formatCoinPrice, formatPercentage } from "@/utils";
+import { useContext } from "react";
+import { GlobalContext } from "@/contexts";
+import { formatCoinPrice, formatPercentage } from "@/utils";
 import {
   Container,
   Wrapper,
@@ -18,27 +20,37 @@ import {
 } from "./CoinSummary.styles";
 import { UpArrowGreen, DownArrowRed } from "@/styles";
 
-export const CoinSummary = ({ coin, currency, currencySymbol }) => {
-  currency = currency?.toLowerCase();
+export const CoinSummary = ({ coin }) => {
+  const {
+    currency: { currencyType, currencySymbol },
+  } = useContext(GlobalContext);
+
+  currencyType = currencyType?.toLowerCase();
+
   const link = coin?.links?.homepage?.[0];
   const price = formatCoinPrice(
-    coin?.market_data?.current_price?.[currency],
+    coin?.market_data?.current_price?.[currencyType],
     currencySymbol
   );
   const ath = formatCoinPrice(
-    coin?.market_data.ath?.[currency],
+    coin?.market_data.ath?.[currencyType],
     currencySymbol
   );
-  const ath_percentage = coin?.market_data?.ath_change_percentage?.[currency];
-  const ath_date = coin?.market_data?.ath_date?.[currency].slice(0, 10);
+  const ath_percentage =
+    coin?.market_data?.ath_change_percentage?.[currencyType];
+  const ath_date = coin?.market_data?.ath_date?.[currencyType].slice(0, 10);
   const atl = formatCoinPrice(
-    coin?.market_data.atl?.[currency],
+    coin?.market_data.atl?.[currencyType],
     currencySymbol
   );
-  const atl_percentage = coin?.market_data?.atl_change_percentage?.[currency];
-  const atl_date = coin?.market_data?.atl_date?.[currency].slice(0, 10);
+  const atl_percentage =
+    coin?.market_data?.atl_change_percentage?.[currencyType];
+  const atl_date = coin?.market_data?.atl_date?.[currencyType].slice(0, 10);
   const coin_percentage =
-    coin?.market_data?.market_cap_change_percentage_24h_in_currency?.[currency];
+    coin?.market_data?.market_cap_change_percentage_24h_in_currency?.[
+      currencyType
+    ];
+
   const getPercentage = (percentage) => {
     if (percentage > 0) {
       return (

@@ -13,15 +13,15 @@ export const Charts = () => {
   const [chartData, setChartData] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const {
-    currency: { type, currencySymbol },
+    currency: { currencyType, currencySymbol },
   } = useContext(GlobalContext);
 
-  const getData = async (type, currencySymbol) => {
+  const getData = async (currencyType, currencySymbol) => {
     try {
       setLoading(true);
 
       // const { data } = await axios(
-      //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${type}&days=30&interval=daily`
+      //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currencyType}&days=30&interval=daily`
       // );
       const data = dataJson;
       setLoading(false);
@@ -68,8 +68,8 @@ export const Charts = () => {
   };
 
   useEffect(() => {
-    getData(type, currencySymbol);
-  }, [type]);
+    getData(currencyType, currencySymbol);
+  }, [currencyType]);
 
   return (
     <>

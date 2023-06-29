@@ -12,31 +12,31 @@ import {
 } from "./CurrencySelector.styles";
 
 export const CurrencySelector = () => {
-  const [type, setType] = useState("USD");
-  const [symbol, setSymbol] = useState("$");
+  const [currencyType, setCurrencyType] = useState("USD");
+  const [currencySymbol, setCurrencySymbol] = useState("$");
   const [isLoading, setLoading] = useState(true);
   const { handleCurrency } = useContext(GlobalContext);
 
   const handleSelectChange = (e) => {
     const selectedValue = e.target.value;
 
-    setType(selectedValue);
+    setCurrencyType(selectedValue);
 
     switch (selectedValue) {
       case "USD":
-        setSymbol("$");
+        setCurrencySymbol("$");
         break;
       case "GBP":
-        setSymbol("£");
+        setCurrencySymbol("£");
         break;
       case "EUR":
-        setSymbol("€");
+        setCurrencySymbol("€");
         break;
       case "BTC":
-        setSymbol("₿");
+        setCurrencySymbol("₿");
         break;
       case "ETH":
-        setSymbol("Ξ");
+        setCurrencySymbol("Ξ");
         break;
     }
   };
@@ -44,28 +44,30 @@ export const CurrencySelector = () => {
   useEffect(() => {
     setLoading(true);
     localForage.getItem("currencyType").then((value) => {
-      setType(value);
+      setCurrencyType(value);
     });
 
     localForage.getItem("currencySymbol").then((value) => {
-      setSymbol(value);
+      setCurrencySymbol(value);
     });
 
-    setLoading(false);
-    handleCurrency(type, symbol);
+    setTimeout(() => {
+      setLoading(false);
+    }, 800);
+    handleCurrency(currencyType, currencySymbol);
   }, []);
 
   useEffect(() => {
-    handleCurrency(type, symbol);
-  }, [type]);
+    handleCurrency(currencyType, currencySymbol);
+  }, [currencyType]);
 
   return (
     <Container>
       {!isLoading ? (
         <>
-          <Icon>{symbol}</Icon>
+          <Icon>{currencySymbol}</Icon>
           <Wrapper>
-            <StyledSelect value={type} onChange={handleSelectChange}>
+            <StyledSelect value={currencyType} onChange={handleSelectChange}>
               <option value="USD">USD</option>
               <option value="GBP">GBP</option>
               <option value="EUR">EUR</option>

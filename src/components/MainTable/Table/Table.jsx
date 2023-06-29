@@ -14,15 +14,14 @@ export const Table = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [coinList, setCoinList] = useState([]);
   const {
-    currency: { type, currencySymbol },
-    selectCoin,
+    currency: { currencyType, currencySymbol },
   } = useContext(GlobalContext);
 
-  const getCoinList = async (type) => {
+  const getCoinList = async (currencyType) => {
     try {
       setLoading(true);
       // const { data } = await axios.get(
-      //   `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${type}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+      //   `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currencyType}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       // );
       const data = jsonData;
       setLoading(false);
@@ -40,12 +39,12 @@ export const Table = () => {
   };
 
   useEffect(() => {
-    getCoinList(type);
+    getCoinList(currencyType);
   }, []);
 
   useEffect(() => {
-    getCoinList(type);
-  }, [type]);
+    getCoinList(currencyType);
+  }, [currencyType]);
 
   return (
     <>
@@ -63,7 +62,6 @@ export const Table = () => {
                         key={coin.id}
                         coin={coin}
                         currencySymbol={currencySymbol}
-                        selectCoin={selectCoin}
                       />
                     );
                   })}

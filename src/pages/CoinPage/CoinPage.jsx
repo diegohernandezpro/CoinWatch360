@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { GlobalContext } from "@/contexts";
 import { ErrorAPICallPage } from "../ErrorPage";
@@ -17,9 +18,9 @@ export const CoinPage = () => {
   const [coinPricePoints, setPricePoints] = useState(null);
   const [coinLabels, setCoinLabels] = useState(null);
   const {
-    coin,
-    currency: { type, currencySymbol },
+    currency: { currencyType },
   } = useContext(GlobalContext);
+  const { id } = useParams();
 
   const getDuration = (value) => {
     setOption(value);
@@ -46,7 +47,7 @@ export const CoinPage = () => {
     }
   };
 
-  const getPrice = async (coinName, currency, duration) => {
+  const getPrice = async (coinName, currencyType, duration) => {
     let getInterval = (duration) => {
       if (duration == 1 || duration == 7) {
         return "hourly";
@@ -59,7 +60,7 @@ export const CoinPage = () => {
       const {
         data: { prices },
       } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=${currency}&days=${duration}&interval=${getInterval(
+        `https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=${currencyType}&days=${duration}&interval=${getInterval(
           duration
         )}`
       );
@@ -77,12 +78,12 @@ export const CoinPage = () => {
   };
 
   useEffect(() => {
-    getCoin(coin.type);
-    getPrice(coin.type, type, duration);
-  }, [coin]);
+    getCoin(id);
+    getPrice(id, currencyType, duration);
+  }, [id]);
 
   useEffect(() => {
-    getPrice(coin.type, type, duration);
+    getPrice(id, currencyType, duration);
   }, [duration]);
 
   return (
@@ -96,15 +97,7 @@ export const CoinPage = () => {
           ) : (
             <PageContainer>
               <Container>
-                <Wrapper>
-                  {coinData && (
-                    <CoinSummary
-                      coin={coinData}
-                      currency={type}
-                      currencySymbol={currencySymbol}
-                    />
-                  )}
-                </Wrapper>
+                <Wrapper>{coinData && <CoinSummary coin={coinData} />}</Wrapper>
               </Container>
               {!hasPriceError ? (
                 <>

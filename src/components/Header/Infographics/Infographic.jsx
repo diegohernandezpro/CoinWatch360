@@ -12,13 +12,13 @@ import {
   Flex,
 } from "./Infographic.styles";
 
-export const Infographic = (props) => {
+export const Infographic = () => {
   const [isLoading, setLoading] = useState(true);
   const [hasError, setError] = useState(false);
   const [ErrorMsg, setErrorMsg] = useState("");
   const [coinsData, setCoinsData] = useState([]);
   const {
-    currency: { type, currencySymbol },
+    currency: { currencyType, currencySymbol },
   } = useContext(GlobalContext);
 
   const getCoinInfo = async () => {
@@ -41,8 +41,8 @@ export const Infographic = (props) => {
           ...prevState,
           numCoins: activeCrypto,
           numExchange: markets,
-          marketCap: totalMarketCap[type?.toLowerCase()],
-          volume: totalVolume[type?.toLowerCase()],
+          marketCap: totalMarketCap[currencyType?.toLowerCase()],
+          volume: totalVolume[currencyType?.toLowerCase()],
           bitCap: marketCapPercent.btc,
           ethCap: marketCapPercent.eth,
         };
@@ -78,7 +78,7 @@ export const Infographic = (props) => {
 
   useEffect(() => {
     getCoinInfo();
-  }, [type]);
+  }, [currencyType]);
 
   return (
     <>
