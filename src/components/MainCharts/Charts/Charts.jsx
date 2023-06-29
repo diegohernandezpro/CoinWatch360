@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { GlobalContext } from "@/contexts";
+import { useGlobalContext } from "@/contexts";
 import { Chart, ChartSummary } from "@/components/MainCharts";
 import { formatNum, LoadingCircle } from "@/utils";
 import { ErrorP } from "@/pages";
@@ -14,7 +14,7 @@ export const Charts = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const {
     currency: { currencyType, currencySymbol },
-  } = useContext(GlobalContext);
+  } = useGlobalContext();
 
   const getData = async (currencyType, currencySymbol) => {
     try {

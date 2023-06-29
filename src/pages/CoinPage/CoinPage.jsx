@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { GlobalContext } from "@/contexts";
+import { useGlobalContext } from "@/contexts";
 import { ErrorAPICallPage } from "../ErrorPage";
 import { CoinSummary, CoinFooter } from "@/components";
 import { LoadingCircle } from "@/utils";
@@ -19,7 +19,7 @@ export const CoinPage = () => {
   const [coinLabels, setCoinLabels] = useState(null);
   const {
     currency: { currencyType },
-  } = useContext(GlobalContext);
+  } = useGlobalContext();
   const { id } = useParams();
 
   const getDuration = (value) => {

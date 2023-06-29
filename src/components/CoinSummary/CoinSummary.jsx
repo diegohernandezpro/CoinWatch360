@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { GlobalContext } from "@/contexts";
+import { useGlobalContext } from "@/contexts";
 import { formatCoinPrice, formatPercentage } from "@/utils";
 import {
   Container,
@@ -23,7 +22,7 @@ import { UpArrowGreen, DownArrowRed } from "@/styles";
 export const CoinSummary = ({ coin }) => {
   const {
     currency: { currencyType, currencySymbol },
-  } = useContext(GlobalContext);
+  } = useGlobalContext();
 
   currencyType = currencyType?.toLowerCase();
 

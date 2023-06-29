@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import localForage from "localforage";
-import { GlobalContext } from "@/contexts";
+import { useGlobalContext } from "@/contexts";
 import { LoadingCircle } from "@/utils";
 
 import {
@@ -15,7 +15,7 @@ export const CurrencySelector = () => {
   const [currencyType, setCurrencyType] = useState("USD");
   const [currencySymbol, setCurrencySymbol] = useState("$");
   const [isLoading, setLoading] = useState(true);
-  const { handleCurrency } = useContext(GlobalContext);
+  const { handleCurrency } = useGlobalContext();
 
   const handleSelectChange = (e) => {
     const selectedValue = e.target.value;

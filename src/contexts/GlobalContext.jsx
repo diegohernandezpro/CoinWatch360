@@ -1,9 +1,14 @@
+import { createContext, useState, useEffect, useContext } from "react";
 import localForage from "localforage";
 import { ThemeProvider } from "styled-components";
-import { createContext, useState, useEffect } from "react";
 import { theme } from "@/styles";
 
-export const GlobalContext = createContext();
+const GlobalContext = createContext();
+
+export const useGlobalContext = () => {
+  const context = useContext(GlobalContext);
+  return context;
+};
 
 export const GlobalProvider = ({ children }) => {
   const [currency, setCurrency] = useState({

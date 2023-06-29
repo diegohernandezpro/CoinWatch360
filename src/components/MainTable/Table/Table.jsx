@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { GlobalContext } from "@/contexts";
+import { useGlobalContext } from "@/contexts";
 import { LoadingCircle } from "@/utils";
 import { ErrorP } from "@/pages";
 import { Heading } from "../Heading/Heading";
@@ -15,7 +15,7 @@ export const Table = () => {
   const [coinList, setCoinList] = useState([]);
   const {
     currency: { currencyType, currencySymbol },
-  } = useContext(GlobalContext);
+  } = useGlobalContext();
 
   const getCoinList = async (currencyType) => {
     try {

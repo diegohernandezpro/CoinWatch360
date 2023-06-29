@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { GlobalContext } from "@/contexts";
+import { useGlobalContext } from "@/contexts";
 import { TextNSlider } from "./TextNSlider";
 import { UpArrowGreen, NeutralDot } from "@/styles";
 import { formatNum, LoadingCircle } from "@/utils";
@@ -19,7 +19,7 @@ export const Infographic = () => {
   const [coinsData, setCoinsData] = useState([]);
   const {
     currency: { currencyType, currencySymbol },
-  } = useContext(GlobalContext);
+  } = useGlobalContext();
 
   const getCoinInfo = async () => {
     try {

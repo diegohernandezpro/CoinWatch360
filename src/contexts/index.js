@@ -1,1 +1,1 @@
-export { GlobalContext, GlobalProvider } from "./GlobalContext";
+export { GlobalProvider, useGlobalContext } from "./GlobalContext";
