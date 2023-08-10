@@ -18,7 +18,7 @@ export const CoinPage = () => {
   const [coinPricePoints, setPricePoints] = useState(null);
   const [coinLabels, setCoinLabels] = useState(null);
   const {
-    currency: { currencyType },
+    currency: { currencyType, currencySymbol },
   } = useContext(GlobalContext);
   const { id } = useParams();
 
@@ -97,7 +97,15 @@ export const CoinPage = () => {
           ) : (
             <PageContainer>
               <Container>
-                <Wrapper>{coinData && <CoinSummary coin={coinData} />}</Wrapper>
+                <Wrapper>
+                  {coinData && (
+                    <CoinSummary
+                      coin={coinData}
+                      currency={currencyType}
+                      currencySymbol={currencySymbol}
+                    />
+                  )}
+                </Wrapper>
               </Container>
               {!hasPriceError ? (
                 <>
