@@ -14,7 +14,7 @@ import {
   StyledLink,
 } from "./NewRow.styles";
 
-export const NewRow = ({ coin, currencySymbol, selectCoin }) => {
+export const NewRow = ({ coin, currencySymbol }) => {
   const rank = coin.market_cap_rank;
   const name = coin.name;
   const symbol = coin.symbol.toUpperCase();
@@ -52,7 +52,7 @@ export const NewRow = ({ coin, currencySymbol, selectCoin }) => {
   return (
     <TableRow>
       <TableNum>{rank}</TableNum>
-      <StyledLink to={`/coin/${coin.id}`} onClick={() => selectCoin(name)}>
+      <StyledLink to={`/coin/${coin.id}`}>
         <TableName>
           <Icon src={icon} />
           {name} ({symbol})

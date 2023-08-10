@@ -49,3 +49,11 @@ export const StyledSelect = styled.select`
   font-size: 1rem;
   outline: none;
 `;
+
+export const Flex = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+`;

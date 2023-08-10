@@ -1,22 +1,26 @@
 import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import localForage from "localforage";
+import { useGlobalContext } from "@/contexts";
+import { LoadingCircle } from "@/utils";
 
 import {
   Wrapper,
   Icon,
   Container,
   StyledSelect,
+  Flex,
 } from "./CurrencySelector.styles";
 
-export const CurrencySelector = (props) => {
-  const [currency, setCurrency] = useState("USD");
+export const CurrencySelector = () => {
+  const [currencyType, setCurrencyType] = useState("USD");
   const [currencySymbol, setCurrencySymbol] = useState("$");
+  const [isLoading, setLoading] = useState(true);
+  const { handleCurrency } = useGlobalContext();
 
   const handleSelectChange = (e) => {
     const selectedValue = e.target.value;
 
-    setCurrency(selectedValue);
+    setCurrencyType(selectedValue);
 
     switch (selectedValue) {
       case "USD":
@@ -38,21 +42,45 @@ export const CurrencySelector = (props) => {
   };
 
   useEffect(() => {
-    props.handleCurrency(currency, currencySymbol);
-  }, [currency]);
+    setLoading(true);
+    localForage.getItem("currencyType").then((value) => {
+      setCurrencyType(value);
+    });
+
+    localForage.getItem("currencySymbol").then((value) => {
+      setCurrencySymbol(value);
+    });
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 800);
+    handleCurrency(currencyType, currencySymbol);
+  }, []);
+
+  useEffect(() => {
+    handleCurrency(currencyType, currencySymbol);
+  }, [currencyType]);
 
   return (
     <Container>
-      <Icon>{currencySymbol}</Icon>
-      <Wrapper>
-        <StyledSelect value={currency} onChange={handleSelectChange}>
-          <option value="USD">USD</option>
-          <option value="GBP">GBP</option>
-          <option value="EUR">EUR</option>
-          <option value="BTC">BTC</option>
-          <option value="ETH">ETH</option>
-        </StyledSelect>
-      </Wrapper>
+      {!isLoading ? (
+        <>
+          <Icon>{currencySymbol}</Icon>
+          <Wrapper>
+            <StyledSelect value={currencyType} onChange={handleSelectChange}>
+              <option value="USD">USD</option>
+              <option value="GBP">GBP</option>
+              <option value="EUR">EUR</option>
+              <option value="BTC">BTC</option>
+              <option value="ETH">ETH</option>
+            </StyledSelect>
+          </Wrapper>
+        </>
+      ) : (
+        <Flex>
+          <LoadingCircle width="1rem" />
+        </Flex>
+      )}
     </Container>
   );
 };

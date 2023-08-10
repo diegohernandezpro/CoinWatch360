@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useGlobalContext } from "@/contexts";
 import { LoadingCircle } from "@/utils";
 import { ErrorP } from "@/pages";
 import { Heading } from "../Heading/Heading";
@@ -7,13 +8,16 @@ import { NewRow } from "../NewRow/NewRow";
 import { TableContainer, StyledP, TableWrapper, Flex } from "./Table.styles";
 import jsonData from "../testData.json";
 
-export const Table = ({ currency, currencySymbol, selectCoin }) => {
+export const Table = () => {
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [coinList, setCoinList] = useState([]);
+  const {
+    currency: { currencyType, currencySymbol },
+  } = useGlobalContext();
 
-  const getCoinList = async (currency) => {
+  const getCoinList = async (currencyType) => {
     try {
       setLoading(true);
       const { data } = await axios.get(
@@ -35,12 +39,12 @@ export const Table = ({ currency, currencySymbol, selectCoin }) => {
   };
 
   useEffect(() => {
-    getCoinList(currency);
+    getCoinList(currencyType);
   }, []);
 
   useEffect(() => {
-    getCoinList(currency);
-  }, [currency]);
+    getCoinList(currencyType);
+  }, [currencyType]);
 
   return (
     <>
@@ -58,7 +62,6 @@ export const Table = ({ currency, currencySymbol, selectCoin }) => {
                         key={coin.id}
                         coin={coin}
                         currencySymbol={currencySymbol}
-                        selectCoin={selectCoin}
                       />
                     );
                   })}

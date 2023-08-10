@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useGlobalContext } from "@/contexts";
 import { TextNSlider } from "./TextNSlider";
-import { UpArrowGreen, DownArrowGreen, NeutralDot } from "@/styles";
+import { UpArrowGreen, NeutralDot } from "@/styles";
 import { formatNum, LoadingCircle } from "@/utils";
 import {
   Container,
@@ -11,12 +12,14 @@ import {
   Flex,
 } from "./Infographic.styles";
 
-export const Infographic = ({ currency: { type, currencySymbol } }) => {
+export const Infographic = () => {
   const [isLoading, setLoading] = useState(true);
   const [hasError, setError] = useState(false);
   const [ErrorMsg, setErrorMsg] = useState("");
   const [coinsData, setCoinsData] = useState([]);
-  const [icons, setIcons] = useState({ bitIcon: "", ethIcon: "" });
+  const {
+    currency: { currencyType, currencySymbol },
+  } = useGlobalContext();
 
   const getCoinInfo = async () => {
     try {
@@ -38,8 +41,8 @@ export const Infographic = ({ currency: { type, currencySymbol } }) => {
           ...prevState,
           numCoins: activeCrypto,
           numExchange: markets,
-          marketCap: totalMarketCap[type.toLowerCase()],
-          volume: totalVolume[type.toLowerCase()],
+          marketCap: totalMarketCap[currencyType?.toLowerCase()],
+          volume: totalVolume[currencyType?.toLowerCase()],
           bitCap: marketCapPercent.btc,
           ethCap: marketCapPercent.eth,
         };
@@ -75,7 +78,7 @@ export const Infographic = ({ currency: { type, currencySymbol } }) => {
 
   useEffect(() => {
     getCoinInfo();
-  }, [type]);
+  }, [currencyType]);
 
   return (
     <>

@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useGlobalContext } from "@/contexts";
 import { ErrorAPICallPage } from "../ErrorPage";
 import { CoinSummary, CoinFooter } from "@/components";
 import { LoadingCircle } from "@/utils";
 import { Container, Wrapper, PageContainer } from "./CoinPage.styles";
 
-export const CoinPage = ({ coin, currency, currencySymbol }) => {
+export const CoinPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingPrice, setIsLoadingPrice] = useState(false);
   const [hasCoinError, setCoinError] = useState(false);
@@ -15,6 +17,10 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
   const [option, setOption] = useState("1d");
   const [coinPricePoints, setPricePoints] = useState(null);
   const [coinLabels, setCoinLabels] = useState(null);
+  const {
+    currency: { currencyType, currencySymbol },
+  } = useGlobalContext();
+  const { id } = useParams();
 
   const getDuration = (value) => {
     setOption(value);
@@ -41,7 +47,7 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
     }
   };
 
-  const getPrice = async (coinName, currency, duration) => {
+  const getPrice = async (coinName, currencyType, duration) => {
     let getInterval = (duration) => {
       if (duration == 1 || duration == 7) {
         return "hourly";
@@ -54,7 +60,7 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
       const {
         data: { prices },
       } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=${currency}&days=${duration}&interval=${getInterval(
+        `https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=${currencyType}&days=${duration}&interval=${getInterval(
           duration
         )}`
       );
@@ -72,12 +78,12 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
   };
 
   useEffect(() => {
-    getCoin(coin.type);
-    getPrice(coin.type, currency, duration);
-  }, [coin]);
+    getCoin(id);
+    getPrice(id, currencyType, duration);
+  }, [id]);
 
   useEffect(() => {
-    getPrice(coin.type, currency, duration);
+    getPrice(id, currencyType, duration);
   }, [duration]);
 
   return (
@@ -95,7 +101,7 @@ export const CoinPage = ({ coin, currency, currencySymbol }) => {
                   {coinData && (
                     <CoinSummary
                       coin={coinData}
-                      currency={currency}
+                      currency={currencyType}
                       currencySymbol={currencySymbol}
                     />
                   )}
