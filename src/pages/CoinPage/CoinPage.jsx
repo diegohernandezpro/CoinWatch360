@@ -19,7 +19,7 @@ export const CoinPage = () => {
   const [coinLabels, setCoinLabels] = useState(null);
   const {
     currency: { currencyType, currencySymbol },
-  } = useContext(GlobalContext);
+  } = useGlobalContext();
   const { id } = useParams();
 
   const getDuration = (value) => {
