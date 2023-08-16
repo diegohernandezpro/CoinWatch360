@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import { api } from "@/utils";
 import { debounce } from "lodash";
 import { Wrapper, Form, IconWrapper, Input } from "./SearchBar.styles";
 import { SearchResult } from "./SearchResult/SearchResult";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import dataJson from "./searchBitcoin.json";
 
 export const SearchBar = () => {
   const [searchTerm, setSearch] = useState("");
@@ -46,23 +45,21 @@ export const SearchBar = () => {
   const getCoins = async (coinName) => {
     try {
       setLoading(true);
-      const { data } = await axios(
-        `https://api.coingecko.com/api/v3/search?query=${coinName}`
-      );
-      // const data = dataJson;
+
+      const { data } = await api("/search", `query=${coinName}`);
+
+      console.log("🚀 ~ file: SearchBar.jsx:51 ~ getCoins ~ data:", data);
 
       setLoading(false);
       setResults(data.coins);
       setIsVisible(true);
     } catch (err) {
-      console.log("erorr in getCoins()");
-      console.error();
       setError(true);
       setLoading(false);
     }
   };
 
-  const debouncedGetCoins = debounce(getCoins, 1000);
+  const debouncedGetCoins = debounce(getCoins, 500);
 
   useEffect(() => {
     prevSearchTermRef.current = searchTerm;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { api } from "@/utils";
 import { useGlobalContext } from "@/contexts";
 import { ErrorAPICallPage } from "../ErrorPage";
 import { CoinSummary, CoinFooter } from "@/components";
@@ -13,8 +13,8 @@ export const CoinPage = () => {
   const [hasCoinError, setCoinError] = useState(false);
   const [hasPriceError, setPriceError] = useState(false);
   const [coinData, setData] = useState(null);
-  const [duration, setDuration] = useState(1);
-  const [option, setOption] = useState("1d");
+  const [duration, setDuration] = useState(30);
+  const [option, setOption] = useState("30d");
   const [coinPricePoints, setPricePoints] = useState(null);
   const [coinLabels, setCoinLabels] = useState(null);
   const {
@@ -28,7 +28,7 @@ export const CoinPage = () => {
       setDuration(value.toLowerCase());
     } else if (value === "1y") {
       setDuration(365);
-    } else if (value.toString().length > 1) {
+    } else {
       value = value.slice(0, -1);
       setDuration(value);
     }
@@ -37,9 +37,9 @@ export const CoinPage = () => {
   const getCoin = async (coinName) => {
     try {
       setIsLoading(true);
-      const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${coinName}?localization=false`
-      );
+
+      const { data } = await api(`/coins/${coinName}`, `?localization=false`);
+
       setIsLoading(false);
       setData(data);
     } catch (err) {
@@ -48,22 +48,16 @@ export const CoinPage = () => {
   };
 
   const getPrice = async (coinName, currencyType, duration) => {
-    let getInterval = (duration) => {
-      if (duration == 1 || duration == 7) {
-        return "hourly";
-      }
-      return "daily";
-    };
-
     try {
       setIsLoadingPrice(true);
+
       const {
         data: { prices },
-      } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=${currencyType}&days=${duration}&interval=${getInterval(
-          duration
-        )}`
+      } = await api(
+        `/coins/${coinName}/market_chart`,
+        `?vs_currency=${currencyType}&days=${duration}&interval=daily`
       );
+
       setIsLoadingPrice(false);
 
       const pricePoints = prices.map((el) => el[1]);

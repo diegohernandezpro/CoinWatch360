@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { api } from "@/utils";
 import { useGlobalContext } from "@/contexts";
 import { TextNSlider } from "./TextNSlider";
 import { UpArrowGreen, NeutralDot } from "@/styles";
@@ -24,9 +24,8 @@ export const Infographic = () => {
   const getCoinInfo = async () => {
     try {
       setLoading(true);
-      const {
-        data: { data },
-      } = await axios.get("https://api.coingecko.com/api/v3/global");
+
+      const { data } = await api("/global");
 
       const {
         active_cryptocurrencies: activeCrypto,

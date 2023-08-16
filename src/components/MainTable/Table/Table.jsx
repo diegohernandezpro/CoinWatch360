@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { api } from "@/utils";
 import { useGlobalContext } from "@/contexts";
 import { LoadingCircle } from "@/utils";
 import { ErrorP } from "@/pages";
 import { Heading } from "../Heading/Heading";
 import { NewRow } from "../NewRow/NewRow";
 import { TableContainer, StyledP, TableWrapper, Flex } from "./Table.styles";
-import jsonData from "../testData.json";
 
 export const Table = () => {
   const [isLoading, setLoading] = useState(false);
@@ -20,12 +19,13 @@ export const Table = () => {
   const getCoinList = async (currencyType) => {
     try {
       setLoading(true);
-      const { data } = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+
+      const apiCall = await api(
+        "/coins/markets",
+        `?vs_currency=${currencyType}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       );
-      // const data = jsonData; //change
       setLoading(false);
-      setCoinList(data);
+      setCoinList(apiCall.data);
     } catch (error) {
       setLoading(false);
       setError(true);

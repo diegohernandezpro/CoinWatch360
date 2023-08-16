@@ -1,5 +1,4 @@
 {
-    "data": {
         "active_cryptocurrencies": 9875,
         "upcoming_icos": 0,
         "ongoing_icos": 49,
@@ -145,5 +144,4 @@
         },
         "market_cap_change_percentage_24h_usd": -0.6414048536359398,
         "updated_at": 1688678871
-    }
 }

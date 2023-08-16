@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useGlobalContext } from "@/contexts";
 import { Chart, ChartSummary } from "@/components/MainCharts";
-import { formatNum, LoadingCircle } from "@/utils";
+import { formatNum, LoadingCircle, api } from "@/utils";
 import { ErrorP } from "@/pages";
 import { ChartWrapper, ChartsContainer, Flex } from "./Charts.styles";
-import dataJson from "../chartTest.json";
 
 export const Charts = () => {
   const [isLoading, setLoading] = useState(true);
@@ -20,11 +18,14 @@ export const Charts = () => {
     try {
       setLoading(true);
 
-      // const { data } = await axios(
-      //   `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currencyType}&days=30&interval=daily`
-      // );
-      const data = dataJson;
+      const apiCall = await api(
+        "/coins/bitcoin/market_chart",
+        `?vs_currency=${currencyType}&days=30&interval=daily`
+      );
+
       setLoading(false);
+
+      const data = apiCall.data;
 
       const marketLine = data.prices.map((el) => el[1]);
       const labelLine = data.prices.map((el) => {

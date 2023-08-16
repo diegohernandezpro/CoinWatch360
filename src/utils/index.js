@@ -8,3 +8,5 @@ export {
 } from "./NumberFormat";
 
 export { LoadingCircle } from "./LoadingCircle";
+
+export { api } from "./DataRetriever";
