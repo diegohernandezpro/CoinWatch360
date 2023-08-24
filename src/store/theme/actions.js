@@ -1,8 +1,8 @@
-import { TOOGLE_THEME } from "./index";
+import { TOOGLE_THEME, getThemeSelector } from "./index";
 
 export const toogleTheme = () => (dispatch, getState) => {
   const state = getState();
-  const isDark = state.theme.isDark;
+  const isDark = getThemeSelector(state).isDark;
   const toogleDark = !isDark;
 
   dispatch({

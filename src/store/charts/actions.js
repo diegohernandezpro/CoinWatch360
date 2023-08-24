@@ -5,14 +5,19 @@ import {
   GET_CHART_DATA_ERROR,
 } from "./index";
 
+import { getCurrencySelector } from "../currency";
+
 export const getChartData = () => async (dispatch, getState) => {
+  const state = getState();
+  const currency = getCurrencySelector(state);
+
   try {
     dispatch({ type: GET_CHART_DATA_PENDING });
 
     const apiCall = await api(
       "/coins/bitcoin/market_chart",
-      `?vs_currency=usd&days=30&interval=daily`
-    ); //change to currencySelector
+      `?vs_currency=${currency.type}&days=30&interval=daily`
+    ); //change number of days dynamically in api call
     const data = apiCall.data;
 
     const marketLine = data.prices.map((el) => el[1]);
