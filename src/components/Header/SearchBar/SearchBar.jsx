@@ -5,7 +5,6 @@ import { Wrapper, Form, IconWrapper, Input } from "./SearchBar.styles";
 import { SearchResult } from "./SearchResult/SearchResult";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
 
 export const SearchBar = () => {
   const [searchTerm, setSearch] = useState("");
@@ -14,16 +13,10 @@ export const SearchBar = () => {
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(false);
   const prevSearchTermRef = useRef();
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const searchQuery = e.target.value;
     setSearch(searchQuery);
-    debouncedGetCoins(searchQuery);
-  };
-
-  const handleBlur = () => {
-    setIsVisible(false);
   };
 
   const handleFocus = () => {
@@ -35,11 +28,9 @@ export const SearchBar = () => {
     getCoins(searchTerm);
   };
 
-  const handleLinkChange = (coinId) => {
-    console.log("handleLinkChange called with coinId:", coinId);
+  const handleLinkClick = () => {
     setSearch("");
     setIsVisible(false);
-    navigate(`/coin/${coinId}`);
   };
 
   const getCoins = async (coinName) => {
@@ -47,8 +38,6 @@ export const SearchBar = () => {
       setLoading(true);
 
       const { data } = await api("/search", `query=${coinName}`);
-
-      console.log("🚀 ~ file: SearchBar.jsx:51 ~ getCoins ~ data:", data);
 
       setLoading(false);
       setResults(data.coins);
@@ -59,7 +48,7 @@ export const SearchBar = () => {
     }
   };
 
-  const debouncedGetCoins = debounce(getCoins, 500);
+  // const debouncedGetCoins = debounce(getCoins, 1000);
 
   useEffect(() => {
     prevSearchTermRef.current = searchTerm;
@@ -76,18 +65,18 @@ export const SearchBar = () => {
           type="text"
           placeholder="Search..."
           value={searchTerm}
-          onBlur={handleBlur}
           onChange={handleChange}
           onFocus={handleFocus}
         />
       </Form>
-      <SearchResult
-        results={results}
-        isVisible={isVisible}
-        isLoading={isLoading}
-        hasError={hasError}
-        handleLinkChange={handleLinkChange}
-      />
+      {isVisible && (
+        <SearchResult
+          results={results}
+          isLoading={isLoading}
+          hasError={hasError}
+          handleLinkClick={handleLinkClick}
+        />
+      )}
     </Wrapper>
   );
 };

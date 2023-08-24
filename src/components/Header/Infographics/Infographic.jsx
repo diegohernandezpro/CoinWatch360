@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
-import { api } from "@/utils";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useGlobalContext } from "@/contexts";
+import { formatNum, LoadingCircle } from "@/utils";
+import { getCoinInfo } from "@/store/infographic/actions";
+import { getInfographicSelector } from "@/store/infographic";
 import { TextNSlider } from "./TextNSlider";
 import { UpArrowGreen, NeutralDot } from "@/styles";
-import { formatNum, LoadingCircle } from "@/utils";
 import {
   Container,
   CoinWrapper,
@@ -13,52 +15,9 @@ import {
 } from "./Infographic.styles";
 
 export const Infographic = () => {
-  const [isLoading, setLoading] = useState(true);
-  const [hasError, setError] = useState(false);
-  const [ErrorMsg, setErrorMsg] = useState("");
-  const [coinsData, setCoinsData] = useState([]);
-  const {
-    currency: { currencyType, currencySymbol },
-  } = useGlobalContext();
-
-  const getCoinInfo = async () => {
-    try {
-      setLoading(true);
-
-      const { data } = await api("/global");
-
-      const {
-        active_cryptocurrencies: activeCrypto,
-        markets,
-        total_market_cap: totalMarketCap,
-        total_volume: totalVolume,
-        market_cap_percentage: marketCapPercent,
-      } = data;
-
-      setCoinsData((prevState) => {
-        return {
-          ...prevState,
-          numCoins: activeCrypto,
-          numExchange: markets,
-          marketCap: totalMarketCap[currencyType?.toLowerCase()],
-          volume: totalVolume[currencyType?.toLowerCase()],
-          bitCap: marketCapPercent.btc,
-          ethCap: marketCapPercent.eth,
-        };
-      });
-
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      setError(true);
-      setErrorMsg(
-        "Error Retrieving the Infographic's Data. Please Try Again Later"
-      );
-      setTimeout(() => {
-        setErrorMsg("");
-      }, 5000);
-    }
-  };
+  const dispatch = useDispatch();
+  const infographic = useSelector((state) => getInfographicSelector(state));
+  const { currency } = useGlobalContext();
 
   const getIcon = (icon) => {
     if (icon === "bitcoin") {
@@ -68,22 +27,22 @@ export const Infographic = () => {
   };
 
   const { numCoins, numExchange, volume, marketCap, bitCap, ethCap } =
-    coinsData;
-  const coinMarketCap = formatNum(marketCap, currencySymbol);
-  const coinVolume = formatNum(volume, currencySymbol);
+    infographic.coinsData;
+  const coinMarketCap = formatNum(marketCap, currency.symbol);
+  const coinVolume = formatNum(volume, currency.symbol);
   const coinBitCap = Math.round(bitCap);
   const coinEthCap = Math.round(ethCap);
   const volumeVsMarketCap = ((volume / marketCap) * 100).toFixed(2);
 
   useEffect(() => {
-    getCoinInfo();
-  }, [currencyType]);
+    dispatch(getCoinInfo());
+  }, [currency.type]);
 
   return (
     <>
-      {!hasError ? (
+      {!infographic.hasError ? (
         <>
-          {!isLoading ? (
+          {!infographic.isLoading ? (
             <>
               {
                 <Container>
@@ -126,7 +85,7 @@ export const Infographic = () => {
         </>
       ) : (
         <>
-          <p>{ErrorMsg}</p>
+          <p>{infographic.errorMsg}</p>
         </>
       )}
     </>

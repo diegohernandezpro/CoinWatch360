@@ -7,11 +7,12 @@ import charts from "./charts";
 import table from "./table";
 import currency from "./currency";
 import theme from "./theme";
+import infographic from "./infographic";
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["charts", "table", "currency"],
+  blacklist: ["charts", "table", "currency", "infographic"],
 };
 
 const currencyPersistConfig = {
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   table,
   currency: persistReducer(currencyPersistConfig, currency),
   theme,
+  infographic,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

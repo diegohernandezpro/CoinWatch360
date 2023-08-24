@@ -8,44 +8,30 @@ import { LoadingCircle } from "@/utils";
 
 export const SearchResult = ({
   results,
-  isVisible,
   isLoading,
-  handleLinkChange,
+  handleLinkClick,
   hasError,
 }) => {
-  const handleClick = (e) => {
-    console.log("CLICKED LINK");
-  };
-
   return (
     <>
       {!hasError ? (
         <>
-          {!isVisible ? (
-            <></>
+          {!isLoading ? (
+            <DropDownUl>
+              {results.map(({ name, symbol, id }) => (
+                <ResultRowLi key={id}>
+                  <StyledLink to={`/coin/${id}`} onClick={handleLinkClick}>
+                    {name} ({symbol})
+                  </StyledLink>
+                </ResultRowLi>
+              ))}
+            </DropDownUl>
           ) : (
-            <>
-              {!isLoading ? (
-                <DropDownUl>
-                  {results.map(({ name, symbol, id }) => (
-                    <ResultRowLi key={id}>
-                      <StyledLink
-                        to={`/coin/${id}`}
-                        onClick={() => handleLinkChange(id)}
-                      >
-                        {name} ({symbol})
-                      </StyledLink>
-                    </ResultRowLi>
-                  ))}
-                </DropDownUl>
-              ) : (
-                <DropDownUl>
-                  <Flex>
-                    <LoadingCircle width="1.5rem" />
-                  </Flex>
-                </DropDownUl>
-              )}
-            </>
+            <DropDownUl>
+              <Flex>
+                <LoadingCircle width="1.5rem" />
+              </Flex>
+            </DropDownUl>
           )}
         </>
       ) : (

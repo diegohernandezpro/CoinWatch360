@@ -10,11 +10,6 @@ const intitialState = {
 };
 
 const tableReducer = (state = intitialState, action) => {
-  // console.log(
-  //   "🚀 ~ file: index.js:13 ~ tableReducer ~ action.type:",
-  //   action.type
-  // );
-
   switch (action.type) {
     case GET_TABLE_DATA_PENDING:
       return {
