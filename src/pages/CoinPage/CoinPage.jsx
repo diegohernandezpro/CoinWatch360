@@ -17,9 +17,7 @@ export const CoinPage = () => {
   const [option, setOption] = useState("30d");
   const [coinPricePoints, setPricePoints] = useState(null);
   const [coinLabels, setCoinLabels] = useState(null);
-  const {
-    currency: { currencyType, currencySymbol },
-  } = useGlobalContext();
+  const { currency } = useGlobalContext();
   const { id } = useParams();
 
   const getDuration = (value) => {
@@ -73,11 +71,11 @@ export const CoinPage = () => {
 
   useEffect(() => {
     getCoin(id);
-    getPrice(id, currencyType, duration);
+    getPrice(id, currency.type, duration);
   }, [id]);
 
   useEffect(() => {
-    getPrice(id, currencyType, duration);
+    getPrice(id, currency.type, duration);
   }, [duration]);
 
   return (
@@ -95,8 +93,8 @@ export const CoinPage = () => {
                   {coinData && (
                     <CoinSummary
                       coin={coinData}
-                      currency={currencyType}
-                      currencySymbol={currencySymbol}
+                      currency={currency.type}
+                      currencySymbol={currency.symbol}
                     />
                   )}
                 </Wrapper>

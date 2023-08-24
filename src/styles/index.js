@@ -6,3 +6,5 @@ export {
   DownArrowGreen,
   NeutralDot,
 } from "./Arrows";
+
+export { StyledDiv } from "./StyledDiv";

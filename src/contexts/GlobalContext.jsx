@@ -1,7 +1,9 @@
 import { createContext, useState, useEffect, useContext } from "react";
+import { useSelector } from "react-redux";
 import localForage from "localforage";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@/styles";
+import { getCurrencySelector } from "@/store/currency";
 
 const GlobalContext = createContext();
 
@@ -11,17 +13,8 @@ export const useGlobalContext = () => {
 };
 
 export const GlobalProvider = ({ children }) => {
-  const [currency, setCurrency] = useState({
-    currencyType: "",
-    currencySymbol: "",
-  });
+  const currency = useSelector((state) => getCurrencySelector(state));
   const [dark, setDark] = useState(true);
-
-  const handleCurrency = (currencyType, currencySymbol) => {
-    setCurrency({ currencyType, currencySymbol });
-    localForage.setItem("currencyType", currencyType);
-    localForage.setItem("currencySymbol", currencySymbol);
-  };
 
   const toggleTheme = () => {
     const isDark = !dark;
@@ -36,7 +29,7 @@ export const GlobalProvider = ({ children }) => {
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ currency, handleCurrency, toggleTheme }}>
+    <GlobalContext.Provider value={{ currency, toggleTheme }}>
       <ThemeProvider theme={dark ? theme.dark : theme.light}>
         {children}
       </ThemeProvider>

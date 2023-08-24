@@ -1,76 +1,12 @@
-import { useState, useEffect } from "react";
 import { useGlobalContext } from "@/contexts";
 import { Chart, ChartSummary } from "@/components/MainCharts";
-import { formatNum, LoadingCircle, api } from "@/utils";
+import { LoadingCircle } from "@/utils";
 import { ErrorP } from "@/pages";
 import { ChartWrapper, ChartsContainer, Flex } from "./Charts.styles";
 
-export const Charts = () => {
-  const [isLoading, setLoading] = useState(true);
-  const [hasError, setError] = useState(false);
-  const [chartData, setChartData] = useState([]);
-  const [errorMsg, setErrorMsg] = useState("");
-  const {
-    currency: { currencyType, currencySymbol },
-  } = useGlobalContext();
-
-  const getData = async (currencyType, currencySymbol) => {
-    try {
-      setLoading(true);
-
-      const apiCall = await api(
-        "/coins/bitcoin/market_chart",
-        `?vs_currency=${currencyType}&days=30&interval=daily`
-      );
-
-      setLoading(false);
-
-      const data = apiCall.data;
-
-      const marketLine = data.prices.map((el) => el[1]);
-      const labelLine = data.prices.map((el) => {
-        return new Date(el[0]).getDate();
-      });
-      const marketAvgLine = formatNum(
-        marketLine.reduce((a, b) => a + b, 0) / marketLine.length
-      );
-
-      const marketBar = data.total_volumes.map((el) => el[1]);
-      const labelBar = data.total_volumes.map((el) => {
-        return new Date(el[0]).getDate();
-      });
-      const marketAvgBar = formatNum(
-        marketBar.reduce((a, b) => a + b, 0) / marketBar.length
-      );
-
-      const options = { day: "numeric", month: "long", year: "numeric" };
-      const today = new Date().toLocaleDateString(undefined, options);
-
-      setChartData((prevState) => {
-        return {
-          ...prevState,
-          chartMarketLine: marketLine,
-          chartLabelLine: labelLine,
-          chartMarketBar: marketBar,
-          chartLabelBar: labelBar,
-          avgLine: marketAvgLine,
-          avgBar: marketAvgBar,
-          today,
-        };
-      });
-    } catch (err) {
-      setLoading(false);
-      setError(true);
-      setErrorMsg("Error Retrieving Chart Data. Please Try Again Later.");
-      setTimeout(() => {
-        setErrorMsg("");
-      }, 9000);
-    }
-  };
-
-  useEffect(() => {
-    getData(currencyType, currencySymbol);
-  }, [currencyType]);
+export const Charts = ({ charts }) => {
+  const { isLoading, hasError, chartData, errorMsg } = charts;
+  const { currency } = useGlobalContext();
 
   return (
     <>
@@ -87,7 +23,7 @@ export const Charts = () => {
                   <ChartSummary
                     heading="Bitcoin"
                     price={chartData.avgLine}
-                    symbol={currencySymbol}
+                    symbol={currency.symbol}
                     date={chartData.today}
                   />
                 </Chart>
@@ -101,7 +37,7 @@ export const Charts = () => {
                   <ChartSummary
                     heading="Volume 24h"
                     price={chartData.avgBar}
-                    symbol={currencySymbol}
+                    symbol={currency.symbol}
                     date={chartData.today}
                   />
                 </Chart>

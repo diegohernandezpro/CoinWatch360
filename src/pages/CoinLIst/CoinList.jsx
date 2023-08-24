@@ -3,12 +3,12 @@ import { Charts } from "@/components";
 
 import { Container, Wrapper } from "./CoinList.styles";
 
-export const CoinList = () => {
+export const CoinList = ({ charts, table }) => {
   return (
     <Container>
       <Wrapper>
-        <Charts />
-        <Table />
+        <Charts charts={charts} />
+        <Table table={table} />
       </Wrapper>
     </Container>
   );
