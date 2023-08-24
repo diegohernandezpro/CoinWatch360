@@ -6,6 +6,7 @@ import storage from "redux-persist/lib/storage";
 import charts from "./charts";
 import table from "./table";
 import currency from "./currency";
+import theme from "./theme";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   charts,
   table,
   currency: persistReducer(currencyPersistConfig, currency),
+  theme,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
