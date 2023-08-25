@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {
   Container,
   Wrapper,
@@ -7,24 +8,16 @@ import {
   GraphWrapper,
 } from "./CoinFooter.styles";
 import { Chart } from "@/components";
+import { getPrice } from "@/store/coinPage/action";
 
-export const CoinFooter = ({
-  getDuration,
-  option,
-  coinLabels,
-  coinPricePoints,
-}) => {
-  console.log({ option, coinLabels, coinPricePoints });
-  const [selectedOption, setSelectedOption] = useState();
+export const CoinFooter = ({ coinName, currency, coinState }) => {
+  const dispatch = useDispatch();
   const options = ["1d", "7d", "30d", "90d", "1y", "Max"];
 
   const handleChange = (e) => {
-    getDuration(e.target.value);
+    const newOption = e.target.value;
+    dispatch(getPrice(coinName, currency, newOption));
   };
-
-  useEffect(() => {
-    setSelectedOption(option);
-  }, []);
 
   return (
     <Container>
@@ -36,7 +29,7 @@ export const CoinFooter = ({
                 type="radio"
                 id={element}
                 value={element}
-                checked={selectedOption === element}
+                checked={coinState.option === element}
                 onChange={handleChange}
               />
               <StyledLabel htmlFor={element}>{element}</StyledLabel>
@@ -46,8 +39,8 @@ export const CoinFooter = ({
       </Wrapper>
       <GraphWrapper>
         <Chart
-          label={coinLabels}
-          data={coinPricePoints}
+          label={coinState.coinLabels}
+          data={coinState.coinPricePoints}
           type="backgroundLine"
         />
       </GraphWrapper>

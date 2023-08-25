@@ -12,25 +12,14 @@ import { getCoin, getPrice } from "@/store/coinPage/action";
 export const CoinPage = () => {
   const dispatch = useDispatch();
   const coinState = useSelector((state) => getCoinPageSelector(state));
-  const { currency } = useGlobalContext();
-  const { id } = useParams();
 
-  const getDuration = (value) => {
-    setOption(value);
-    if (value === "Max") {
-      setDuration(value.toLowerCase());
-    } else if (value === "1y") {
-      setDuration(365);
-    } else {
-      value = value.slice(0, -1);
-      setDuration(value);
-    }
-  };
+  const { currency } = useGlobalContext();
+  const { id: coinName } = useParams();
 
   useEffect(() => {
-    dispatch(getCoin(id));
-    dispatch(getPrice(id, currency.type, coinState.duration));
-  }, [id]);
+    dispatch(getCoin(coinName));
+    dispatch(getPrice(coinName, currency.type, coinState.option));
+  }, [coinName]);
 
   return (
     <>
@@ -57,10 +46,9 @@ export const CoinPage = () => {
                 <>
                   {!coinState.isLoadingPrice ? (
                     <CoinFooter
-                      getDuration={getDuration}
-                      option={coinState.option}
-                      coinPricePoints={coinState.coinPricePoints}
-                      coinLabels={coinState.coinLabels}
+                      coinName={coinName}
+                      currency={currency.type}
+                      coinState={coinState}
                     />
                   ) : (
                     <Container>
