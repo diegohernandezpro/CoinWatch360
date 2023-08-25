@@ -51,7 +51,7 @@ export const Icon = styled.img`
 
 export const CoinName = styled.div`
   height: 2rem;
-  width: 9.2rem;
+  max-width: 15rem;
   border-radius: 0.6rem;
   background: ${({ theme }) => theme.background};
   display: flex;
@@ -59,6 +59,7 @@ export const CoinName = styled.div`
   align-items: center;
   font-size: 1.2rem;
   overflow: auto;
+  padding: 0 0.5rem;
 `;
 
 export const CoinLinkDiv = styled.div`

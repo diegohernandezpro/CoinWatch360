@@ -1,22 +1,17 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { api } from "@/utils";
+import { useDispatch, useSelector } from "react-redux";
 import { useGlobalContext } from "@/contexts";
 import { ErrorAPICallPage } from "../ErrorPage";
 import { CoinSummary, CoinFooter } from "@/components";
 import { LoadingCircle } from "@/utils";
 import { Container, Wrapper, PageContainer } from "./CoinPage.styles";
+import { getCoinPageSelector } from "@/store/coinPage";
+import { getCoin, getPrice } from "@/store/coinPage/action";
 
 export const CoinPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingPrice, setIsLoadingPrice] = useState(false);
-  const [hasCoinError, setCoinError] = useState(false);
-  const [hasPriceError, setPriceError] = useState(false);
-  const [coinData, setData] = useState(null);
-  const [duration, setDuration] = useState(30);
-  const [option, setOption] = useState("30d");
-  const [coinPricePoints, setPricePoints] = useState(null);
-  const [coinLabels, setCoinLabels] = useState(null);
+  const dispatch = useDispatch();
+  const coinState = useSelector((state) => getCoinPageSelector(state));
   const { currency } = useGlobalContext();
   const { id } = useParams();
 
@@ -32,57 +27,16 @@ export const CoinPage = () => {
     }
   };
 
-  const getCoin = async (coinName) => {
-    try {
-      setIsLoading(true);
-
-      const { data } = await api(`/coins/${coinName}`, `?localization=false`);
-
-      setIsLoading(false);
-      setData(data);
-    } catch (err) {
-      setCoinError(true);
-    }
-  };
-
-  const getPrice = async (coinName, currencyType, duration) => {
-    try {
-      setIsLoadingPrice(true);
-
-      const {
-        data: { prices },
-      } = await api(
-        `/coins/${coinName}/market_chart`,
-        `?vs_currency=${currencyType}&days=${duration}&interval=daily`
-      );
-
-      setIsLoadingPrice(false);
-
-      const pricePoints = prices.map((el) => el[1]);
-      const labels = prices.map((el) => {
-        return new Date(el[0]).getDate();
-      });
-      setPricePoints(pricePoints);
-      setCoinLabels(labels);
-    } catch (err) {
-      setPriceError(true);
-    }
-  };
-
   useEffect(() => {
-    getCoin(id);
-    getPrice(id, currency.type, duration);
+    dispatch(getCoin(id));
+    dispatch(getPrice(id, currency.type, coinState.duration));
   }, [id]);
-
-  useEffect(() => {
-    getPrice(id, currency.type, duration);
-  }, [duration]);
 
   return (
     <>
-      {!hasCoinError ? (
+      {!coinState.hasCoinError ? (
         <>
-          {isLoading ? (
+          {coinState.isLoading ? (
             <Container>
               <LoadingCircle width="4rem" />
             </Container>
@@ -90,23 +44,23 @@ export const CoinPage = () => {
             <PageContainer>
               <Container>
                 <Wrapper>
-                  {coinData && (
+                  {coinState.coinData && (
                     <CoinSummary
-                      coin={coinData}
+                      coin={coinState.coinData}
                       currency={currency.type}
                       currencySymbol={currency.symbol}
                     />
                   )}
                 </Wrapper>
               </Container>
-              {!hasPriceError ? (
+              {!coinState.hasPriceError ? (
                 <>
-                  {!isLoadingPrice ? (
+                  {!coinState.isLoadingPrice ? (
                     <CoinFooter
                       getDuration={getDuration}
-                      option={option}
-                      coinPricePoints={coinPricePoints}
-                      coinLabels={coinLabels}
+                      option={coinState.option}
+                      coinPricePoints={coinState.coinPricePoints}
+                      coinLabels={coinState.coinLabels}
                     />
                   ) : (
                     <Container>

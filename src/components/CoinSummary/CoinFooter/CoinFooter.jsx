@@ -14,6 +14,7 @@ export const CoinFooter = ({
   coinLabels,
   coinPricePoints,
 }) => {
+  console.log({ option, coinLabels, coinPricePoints });
   const [selectedOption, setSelectedOption] = useState();
   const options = ["1d", "7d", "30d", "90d", "1y", "Max"];
 

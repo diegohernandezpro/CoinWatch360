@@ -37,7 +37,7 @@ export const SearchBar = () => {
     try {
       setLoading(true);
 
-      const { data } = await api("/search", `query=${coinName}`);
+      const { data } = await api("/search", `?query=${coinName}`);
 
       setLoading(false);
       setResults(data.coins);
