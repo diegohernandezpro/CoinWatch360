@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { api } from "@/utils";
-import { debounce } from "lodash";
 import { Wrapper, Form, IconWrapper, Input } from "./SearchBar.styles";
 import { SearchResult } from "./SearchResult/SearchResult";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -47,8 +46,6 @@ export const SearchBar = () => {
       setLoading(false);
     }
   };
-
-  // const debouncedGetCoins = debounce(getCoins, 1000);
 
   useEffect(() => {
     prevSearchTermRef.current = searchTerm;

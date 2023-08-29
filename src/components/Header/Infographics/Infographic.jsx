@@ -4,8 +4,8 @@ import { useGlobalContext } from "@/contexts";
 import { formatNum, LoadingCircle } from "@/utils";
 import { getCoinInfo } from "@/store/infographic/actions";
 import { getInfographicSelector } from "@/store/infographic";
-import { TextNSlider } from "./TextNSlider";
 import { UpArrowGreen, NeutralDot } from "@/styles";
+import { TextNSlider } from "./TextNSlider";
 import {
   Container,
   CoinWrapper,
@@ -16,7 +16,7 @@ import {
 
 export const Infographic = () => {
   const dispatch = useDispatch();
-  const infographic = useSelector((state) => getInfographicSelector(state));
+  const infographic = useSelector(getInfographicSelector);
   const { currency } = useGlobalContext();
 
   const getIcon = (icon) => {

@@ -4,7 +4,6 @@ export const GET_COIN_DATA_ERROR = "GET_COIN_DATA_ERROR";
 export const GET_PRICE_DATA_PENDING = "GET_PRICE_DATA_PENDING";
 export const GET_PRICE_DATA_SUCCESS = "GET_PRICE_DATA_SUCCESS";
 export const GET_PRICE_DATA_ERROR = "GET_PRICE_DATA_ERROR";
-export const GET_SELECTED_DURATION = "GET_SELECTED_DURATION";
 
 const initialState = {
   isLoading: false,

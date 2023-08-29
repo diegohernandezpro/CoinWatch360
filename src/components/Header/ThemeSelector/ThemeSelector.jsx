@@ -6,12 +6,14 @@ import { faCircleHalfStroke } from "@fortawesome/free-solid-svg-icons";
 
 export const ThemeSelector = () => {
   const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(toogleTheme());
+  };
+
   return (
     <Wrapper>
-      <FontAwesomeIcon
-        icon={faCircleHalfStroke}
-        onClick={() => dispatch(toogleTheme())}
-      />
+      <FontAwesomeIcon icon={faCircleHalfStroke} onClick={handleClick} />
     </Wrapper>
   );
 };

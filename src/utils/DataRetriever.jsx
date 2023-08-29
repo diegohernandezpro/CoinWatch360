@@ -13,6 +13,7 @@ export async function api(url, search) {
     }
   };
 
+  console.log("env:", import.meta.env.MODE);
   if (import.meta.env.MODE === "development") {
     try {
       const file = await import(`./mocks/${getfileName()}.json`);

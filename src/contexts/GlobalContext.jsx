@@ -13,8 +13,8 @@ export const useGlobalContext = () => {
 };
 
 export const GlobalProvider = ({ children }) => {
-  const currency = useSelector((state) => getCurrencySelector(state));
-  const globalTheme = useSelector((state) => getThemeSelector(state));
+  const currency = useSelector(getCurrencySelector);
+  const globalTheme = useSelector(getThemeSelector);
 
   return (
     <GlobalContext.Provider value={{ currency }}>

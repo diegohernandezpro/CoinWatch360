@@ -5,6 +5,7 @@ import {
   GET_TABLE_DATA_PENDING,
   GET_TABLE_DATA_SUCCESS,
   GET_TABLE_DATA_ERROR,
+  GET_TABLE_DATA_ERROR_DISAPPEAR,
 } from "./index";
 
 export const getCoinList = () => async (dispatch, getState) => {
@@ -25,9 +26,10 @@ export const getCoinList = () => async (dispatch, getState) => {
   } catch (err) {
     dispatch({ type: GET_TABLE_DATA_ERROR, payload: err });
 
-    // set timeout for error message to disappear after 9 seconds
-    // setTimeout(() => {
-    //   setErrorMsg("");
-    // }, 9000);
+    setTimeout(() => {
+      dispatch({
+        type: GET_TABLE_DATA_ERROR_DISAPPEAR,
+      });
+    }, 9000);
   }
 };

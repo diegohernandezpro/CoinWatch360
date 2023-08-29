@@ -2,16 +2,16 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useGlobalContext } from "@/contexts";
-import { ErrorAPICallPage } from "../ErrorPage";
 import { CoinSummary, CoinFooter } from "@/components";
 import { LoadingCircle } from "@/utils";
-import { Container, Wrapper, PageContainer } from "./CoinPage.styles";
 import { getCoinPageSelector } from "@/store/coinPage";
 import { getCoin, getPrice } from "@/store/coinPage/action";
+import { ErrorAPICallPage } from "../ErrorPage";
+import { Container, Wrapper, PageContainer } from "./CoinPage.styles";
 
 export const CoinPage = () => {
   const dispatch = useDispatch();
-  const coinState = useSelector((state) => getCoinPageSelector(state));
+  const coinState = useSelector(getCoinPageSelector);
 
   const { currency } = useGlobalContext();
   const { id: coinName } = useParams();

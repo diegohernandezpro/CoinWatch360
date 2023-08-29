@@ -12,7 +12,7 @@ import {
 
 export const CurrencySelector = () => {
   const dispatch = useDispatch();
-  const currency = useSelector((state) => getCurrencySelector(state));
+  const currency = useSelector(getCurrencySelector);
 
   const handleSelectChange = (e) => {
     const selectedValue = e.target.value;

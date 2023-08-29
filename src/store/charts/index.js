@@ -1,6 +1,7 @@
 export const GET_CHART_DATA_PENDING = "GET_CHART_DATA_PENDING";
 export const GET_CHART_DATA_SUCCESS = "GET_CHART_DATA_SUCCESS";
 export const GET_CHART_DATA_ERROR = "GET_CHART_DATA_ERROR";
+export const GET_CHART_DATA_ERROR_DISAPPEAR = "GET_CHART_DATA_ERROR_DISAPPEAR";
 
 const intitialState = {
   isLoading: true,
@@ -29,6 +30,13 @@ function chartsReducer(state = intitialState, action) {
         isLoading: false,
         hasError: true,
         errorMsg: "Error Retrieving Chart Data. Please Try Again Later.",
+      };
+    case GET_CHART_DATA_ERROR_DISAPPEAR:
+      return {
+        ...state,
+        isLoading: false,
+        hasError: true,
+        errorMsg: "",
       };
     default:
       return state;

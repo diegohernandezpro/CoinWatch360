@@ -6,7 +6,6 @@ import {
   GET_PRICE_DATA_PENDING,
   GET_PRICE_DATA_SUCCESS,
   GET_PRICE_DATA_ERROR,
-  GET_SELECTED_DURATION,
 } from "./index";
 
 export const getCoin = (coinName) => async (dispatch, getState) => {
@@ -43,10 +42,15 @@ export const getPrice =
         `?vs_currency=${currencyType}&days=${duration}&interval=daily`
       );
 
-      const pricePoints = prices.map((el) => el[1]);
-      const labels = prices.map((el) => {
-        return new Date(el[0]).getDate();
-      });
+      const getPricePoints = (arr) => {
+        return arr.map((el) => el[1]);
+      };
+      const getLabelPoints = (arr) => {
+        return arr.map((el) => new Date(el[0]).getDate());
+      };
+
+      const pricePoints = getPricePoints(prices);
+      const labels = getLabelPoints(prices);
 
       const data = { pricePoints, labels, duration, option };
 

@@ -3,6 +3,7 @@ import {
   GET_CHART_DATA_PENDING,
   GET_CHART_DATA_SUCCESS,
   GET_CHART_DATA_ERROR,
+  GET_CHART_DATA_ERROR_DISAPPEAR,
 } from "./index";
 
 import { getCurrencySelector } from "../currency";
@@ -56,6 +57,8 @@ export const getChartData = () => async (dispatch, getState) => {
   } catch (err) {
     dispatch({ type: GET_CHART_DATA_ERROR, payload: err });
 
-    //add the set timeout message
+    setTimeout(() => {
+      dispatch({ type: GET_CHART_DATA_ERROR_DISAPPEAR });
+    }, 9000);
   }
 };
