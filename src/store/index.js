@@ -9,11 +9,19 @@ import currency from "./currency";
 import theme from "./theme";
 import infographic from "./infographic";
 import coinPage from "./coinPage";
+import portfolio from "./Portfolio";
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["charts", "table", "currency", "infographic", "coinPage"],
+  blacklist: [
+    "charts",
+    "table",
+    "currency",
+    "infographic",
+    "coinPage",
+    "portfolio",
+  ],
 };
 
 const currencyPersistConfig = {
@@ -28,6 +36,7 @@ const rootReducer = combineReducers({
   theme,
   infographic,
   coinPage,
+  portfolio,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

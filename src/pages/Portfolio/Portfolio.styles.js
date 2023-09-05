@@ -6,14 +6,23 @@ export const Container = styled.div`
   background: ${({ theme }) => theme.background};
   display: flex;
   flex: 1;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
   align-items: center;
   padding: 1rem 2rem;
   color: ${({ theme }) => theme.color};
 `;
 
-export const Wrapper = styled.div`
-  border: 4px solid lightgreen;
-  width: 100%;
-  height: 100%;
+export const StyledButton = styled.button`
+  background: ${({ theme }) => theme.money.green};
+  color: ${({ theme }) => theme.background};
+  font-size: 1rem;
+  width: 40rem;
+  max-width: 23rem;
+  height: 3.4rem;
+  border-radius: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
