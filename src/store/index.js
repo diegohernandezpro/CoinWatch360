@@ -9,7 +9,7 @@ import currency from "./currency";
 import theme from "./theme";
 import infographic from "./infographic";
 import coinPage from "./coinPage";
-import portfolio from "./Portfolio";
+import portfolio from "./portfolio";
 
 const persistConfig = {
   key: "root",

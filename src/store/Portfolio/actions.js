@@ -18,6 +18,7 @@ import {
   SELECT_PORTFOLIO_COIN_AMOUNT,
   SELECT_PORTFOLIO_COIN_DATE,
   GET_PORTFOLIO_COIN_DATA,
+  REMOVE_ASSET,
 } from "./index";
 
 export const tooglePopUpOn = () => {
@@ -84,14 +85,24 @@ export const handlePurchasedAmount = (amount) => {
   };
 };
 
+export const handleRemoveAsset = (key) => (dispatch, getState) => {
+  const {
+    portfolio: { assets },
+  } = getState();
+
+  const filtedAssets = assets.filter((el) => el.key !== key);
+  dispatch({
+    type: REMOVE_ASSET,
+    payload: filtedAssets,
+  });
+};
+
 export const handleDate = (date) => {
   return {
     type: SELECT_PORTFOLIO_COIN_DATE,
     payload: date,
   };
 };
-
-/////////////////////////////////
 
 export const getSelectedCoin = (coinData) => async (dispatch, getState) => {
   const { portfolio, currency } = getState();
@@ -108,7 +119,6 @@ export const getSelectedCoin = (coinData) => async (dispatch, getState) => {
 const getData = async (assets, currency) => {
   const currencyType = currency.type.toLowerCase();
   const currencySymbol = currency.symbol;
-  //adds currentPrice to the individual asset's object
   const pricedCoinObject = await Promise.all(
     assets.map(async (key) => {
       const { data } = await api("/coins", `/${key.id.toLowerCase()}`);

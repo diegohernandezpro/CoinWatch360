@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPortfolioSelector } from "@/store/Portfolio";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
+import { getPortfolioSelector } from "@/store/portfolio";
+import { getCurrencySelector } from "@/store/currency";
 import { IconWrapper, Icon } from "@/components";
+import { handleRemoveAsset } from "@/store/portfolio/actions";
 import { MarketPriceRow, UserCoinPriceRow } from "../NewAssetRow/NewAssetRow";
 import {
   StatisticsDiv,
@@ -10,11 +15,16 @@ import {
   SytyledP,
   CoinDisplay,
   NameDiv,
+  ClosingButton,
 } from "./PortfolioTable.styles";
 
 export const PortfolioTable = () => {
   const dispatch = useDispatch();
   const { assets } = useSelector(getPortfolioSelector);
+
+  const handleClick = (key) => {
+    dispatch(handleRemoveAsset(key));
+  };
 
   return (
     <>
@@ -29,7 +39,11 @@ export const PortfolioTable = () => {
                 </IconWrapper>
                 <NameDiv>{coin.id}</NameDiv>
               </CoinDisplay>
+              <ClosingButton onClick={() => handleClick(coin.key)}>
+                <FontAwesomeIcon icon={faX} />
+              </ClosingButton>
             </CoinDisplayDiv>
+
             <CoinInfoDiv>
               <SytyledP>Market Price:</SytyledP>
               <MarketPriceRow coin={coin} />

@@ -22,10 +22,10 @@ export const CoinDisplayDiv = styled.div`
   padding: 0.6rem 1rem;
   background: ${({ theme }) => theme.nested.background};
   border-radius: 0.5rem;
+  position: relative;
 `;
 
 export const CoinInfoDiv = styled.div`
-  // border: 2px solid green;
   height: 100%;
   width: Calc(100% - 13rem);
   padding-left: 1rem;
@@ -46,6 +46,7 @@ export const CoinDisplay = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  position: relative;
 `;
 
 export const NameDiv = styled.div`
@@ -58,4 +59,20 @@ export const NameDiv = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+`;
+
+export const ClosingButton = styled.button`
+  position: absolute;
+  bottom: 0.5rem;
+  left: 5.5rem;
+  background: transparent;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: ${({ theme }) => theme.money.green};
+
+  &:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.money.red};
+  }
 `;

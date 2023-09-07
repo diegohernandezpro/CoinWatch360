@@ -10,6 +10,7 @@ export const SELECT_PORTFOLIO_COIN = "SELECT_PORTFOLIO_COIN";
 export const SELECT_PORTFOLIO_COIN_AMOUNT = "SELECT_PORTFOLIO_COIN_AMOUNT";
 export const SELECT_PORTFOLIO_COIN_DATE = "SELECT_PORTFOLIO_COIN_DATE";
 export const GET_PORTFOLIO_COIN_DATA = "GET_PORTFOLIO_COIN_DATA";
+export const REMOVE_ASSET = "REMOVE_ASSET";
 
 const intitialState = {
   popup: false,
@@ -23,29 +24,29 @@ const intitialState = {
   isVisible: false,
   assets: [
     // {
-    // amount: 1,
-    // amountValue: 25767,
-    // circulatingSupply: 19478225,
-    // circulatingVsTotalSupply: "92.75",
-    // currentPrice: 29146.63627084363,
-    // date: "2023-08-04",
-    // formattedAmountValue: "$ 25,767.00",
-    // formattedCirVsTotPer: "93%",
-    // formattedCurrentPrice: "$ 29,146.64",
-    // formattedMarVsVolPer: "4,907%",
-    // formattedPriceChange: "$ 0.00",
-    // formattedPriceChange24h: "$ 10.89",
-    // id: "Bitcoin",
-    // isBigger: false,
-    // key: 0.9574242912903861,
-    // marketCap: 502062330997,
-    // marketCapVsVolume: "4907.34",
-    // previousPrice: 25767,
-    // priceChange: NaN,
-    // priceChange24h: -10.8865298516,
-    // priceInSelectedDate: 29146.63627084363,
-    // totalSupply: 21000000,
-    // totalVolume: 10230834862,
+    //   amount: 1,
+    //   amountValue: 25767,
+    //   circulatingSupply: 19478225,
+    //   circulatingVsTotalSupply: "92.75",
+    //   currentPrice: 29146.63627084363,
+    //   date: "2023-08-04",
+    //   formattedAmountValue: "$ 25,767.00",
+    //   formattedCirVsTotPer: "93%",
+    //   formattedCurrentPrice: "$ 29,146.64",
+    //   formattedMarVsVolPer: "4,907%",
+    //   formattedPriceChange: "$ 0.00",
+    //   formattedPriceChange24h: "$ 10.89",
+    //   id: "Bitcoin",
+    //   isBigger: false,
+    //   key: 0.9574242912903861,
+    //   marketCap: 502062330997,
+    //   marketCapVsVolume: "4907.34",
+    //   previousPrice: 25767,
+    //   priceChange: NaN,
+    //   priceChange24h: -10.8865298516,
+    //   priceInSelectedDate: 29146.63627084363,
+    //   totalSupply: 21000000,
+    //   totalVolume: 10230834862,
     // },
   ],
 };
@@ -56,6 +57,9 @@ const portfolioReducer = (state = intitialState, actions) => {
       return {
         ...state,
         popup: true,
+        purchasedAmount: "",
+        date: "",
+        coin: "",
       };
     case TOOGLE_POPUP_OFF:
       return {
@@ -126,6 +130,14 @@ const portfolioReducer = (state = intitialState, actions) => {
         popup: false,
         assets: actions.payload,
         results: [],
+        purchasedAmount: "",
+        date: "",
+        coin: "",
+      };
+    case REMOVE_ASSET:
+      return {
+        ...state,
+        assets: actions.payload,
       };
     default:
       return state;
