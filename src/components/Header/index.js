@@ -2,7 +2,7 @@ export { NavBar as Header } from "./NavBar";
 
 export { CurrencySelector } from "./CurrencySelector";
 
-export { Infographic } from "./Infographics";
+export { Infographic, TextNSlider } from "./Infographics";
 
 export { SearchBar } from "./SearchBar";
 

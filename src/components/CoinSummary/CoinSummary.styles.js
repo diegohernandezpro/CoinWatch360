@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   width: 100%;
-  //   border: 2px solid goldenrod;
   height: 23.5rem;
   display: flex;
   flex-direction: column;
@@ -13,16 +12,13 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
   width: 100%;
-  //   border: 2px solid red;
   height: 19.5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
 
-export const StyledP = styled.p`
-  //   border: 2px solid yellow;
-`;
+export const StyledP = styled.p``;
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
@@ -47,7 +43,6 @@ export const CoinDiv = styled.div`
   background: ${({ theme }) => theme.nested.background};
   border-radius: 0.6rem;
   width: 100%;
-  // border: 2px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -168,7 +163,6 @@ export const StyledDiv = styled.div`
 `;
 
 export const CoinDescription = styled.div`
-  //   border: 2px solid green;
   background: ${({ theme }) => theme.nested.background};
   border-radius: 0.6rem;
   width: 33.8rem;

@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  IconWrapper,
-  Icon,
-} from "../../CoinSummary/CoinDisplay/CoinDisplay.styles";
+import { IconWrapper, Icon } from "@/components";
 import { CoinDisplay, NameDiv } from "./SelectedCoin.styles";
 
 export const SelectedCoin = ({ coinName, results }) => {

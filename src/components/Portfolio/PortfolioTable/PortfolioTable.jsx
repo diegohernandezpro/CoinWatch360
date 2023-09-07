@@ -1,46 +1,44 @@
-import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { api } from "@/utils";
 import { getPortfolioSelector } from "@/store/Portfolio";
-
+import { IconWrapper, Icon } from "@/components";
+import { MarketPriceRow, UserCoinPriceRow } from "../NewAssetRow/NewAssetRow";
 import {
   StatisticsDiv,
   NewCoinDiv,
   CoinDisplayDiv,
   CoinInfoDiv,
   SytyledP,
-  RowDiv,
-  RowItemDiv,
+  CoinDisplay,
+  NameDiv,
 } from "./PortfolioTable.styles";
 
-export const PortfolioTable = ({ asset }) => {
-  const [portfolio, setPortfolio] = useState([]);
-  const [isLoading, setLoading] = useState(false);
-  const [hasError, setError] = useState(false);
+export const PortfolioTable = () => {
+  const dispatch = useDispatch();
+  const { assets } = useSelector(getPortfolioSelector);
 
   return (
     <>
       <StatisticsDiv>
-        Your Statistics:
-        <NewCoinDiv>
-          <CoinDisplayDiv>Bitcoin</CoinDisplayDiv>
-          <CoinInfoDiv>
-            <SytyledP>Market Price:</SytyledP>
-            <RowDiv>
-              <RowItemDiv></RowItemDiv>
-              <RowItemDiv></RowItemDiv>
-              <RowItemDiv></RowItemDiv>
-              <RowItemDiv></RowItemDiv>
-            </RowDiv>
-            <SytyledP>Your Coin:</SytyledP>
-            <RowDiv>
-              <RowItemDiv></RowItemDiv>
-              <RowItemDiv></RowItemDiv>
-              <RowItemDiv></RowItemDiv>
-              <RowItemDiv></RowItemDiv>
-            </RowDiv>
-          </CoinInfoDiv>
-        </NewCoinDiv>
+        {assets.length > 0 && <p>Your Statistics:</p>}
+        {assets.map((coin) => (
+          <NewCoinDiv key={coin.key}>
+            <CoinDisplayDiv>
+              <CoinDisplay>
+                <IconWrapper>
+                  {coin.image && <Icon src={coin.image} width="4rem" />}
+                </IconWrapper>
+                <NameDiv>{coin.id}</NameDiv>
+              </CoinDisplay>
+            </CoinDisplayDiv>
+            <CoinInfoDiv>
+              <SytyledP>Market Price:</SytyledP>
+              <MarketPriceRow coin={coin} />
+
+              <SytyledP>Your Coin:</SytyledP>
+              <UserCoinPriceRow coin={coin} />
+            </CoinInfoDiv>
+          </NewCoinDiv>
+        ))}
       </StatisticsDiv>
     </>
   );

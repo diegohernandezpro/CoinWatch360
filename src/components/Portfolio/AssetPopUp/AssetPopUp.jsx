@@ -51,9 +51,11 @@ export const AssetPopUp = () => {
   const handleClick = () => {
     const coinData = {
       id: portfolio.coin,
+      key: Math.random(),
       date: portfolio.date,
       amount: portfolio.numericAmount,
     };
+
     dispatch(getSelectedCoin(coinData));
   };
 

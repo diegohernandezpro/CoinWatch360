@@ -1,4 +1,5 @@
 import numeral from "numeral";
+import { format } from "date-fns";
 
 export const formatPrice = (price, currencySymbol) => {
   if (price !== null && price.toString().length < 3) {
@@ -8,6 +9,10 @@ export const formatPrice = (price, currencySymbol) => {
   }
 
   return `${currencySymbol} ${price}`;
+};
+
+export const formatAssetPrice = (price, currencySymbol) => {
+  return `${currencySymbol} ${numeral(Math.abs(price)).format("0,0.00")}`;
 };
 
 export const formatCoinPrice = (price, currencySymbol) => {
@@ -31,7 +36,10 @@ export const formatConverterNumber = (price, currencySymbol) => {
   return `${currencySymbol.toUpperCase()} ${numeral(price).format("0,0")}`;
 };
 
-export const formatPercentage = (percentage) => {
+export const formatPercentage = (percentage, noDecimalPlaces) => {
+  if (noDecimalPlaces) {
+    return numeral(Math.abs(percentage)).format("0,0") + "%";
+  }
   return numeral(Math.abs(percentage)).format("0.00") + "%";
 };
 
@@ -44,4 +52,30 @@ export const formatNum = (price, currencySymbol) => {
       .toUpperCase()}`;
   }
   return `${numeral(price).format("0[.]00 a").toUpperCase()}`;
+};
+
+export const formatDateStandard = (inputDate) => {
+  const dateParts = inputDate.split("-");
+
+  if (dateParts.length === 3) {
+    const year = dateParts[0];
+    const month = dateParts[1];
+    const day = dateParts[2];
+
+    const formattedDate = new Date(year, month - 1, day);
+    const formattedMonth = String(formattedDate.getMonth() + 1).padStart(
+      2,
+      "0"
+    );
+    const formattedDay = String(formattedDate.getDate()).padStart(2, "0");
+    const formattedYear = formattedDate.getFullYear();
+    return `${formattedMonth}/${formattedDay}/${formattedYear}`;
+  } else {
+    return "Invalid Date Format";
+  }
+};
+
+export const formatDate = (dateString) => {
+  const timestamp = Date.parse(dateString);
+  return format(timestamp, "dd-MM-yyyy");
 };
