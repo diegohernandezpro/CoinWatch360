@@ -22,6 +22,7 @@ import {
   StyledForm,
   ClosingButton,
   InputContainer,
+  ButtonWrapper,
 } from "./AssetPopUp.styles";
 
 export const AssetPopUp = () => {
@@ -99,7 +100,10 @@ export const AssetPopUp = () => {
           />
         </SelectorsDiv>
       </CoinWrapper>
-      <StyledButton onClick={handleClick}>Save & Continue</StyledButton>
+      <ButtonWrapper>
+        <StyledButton onClick={handleCloseWindow}>Close</StyledButton>
+        <StyledButton onClick={handleClick}>Save & Continue</StyledButton>
+      </ButtonWrapper>
     </Container>
   );
 };

@@ -11,6 +11,7 @@ import { getCurrencySelector } from "../currency";
 export const getChartData = () => async (dispatch, getState) => {
   const state = getState();
   const currency = getCurrencySelector(state);
+  console.log("🚀 ~ file: actions.js:14 ~ getChartData ~ currency:", currency);
 
   try {
     dispatch({ type: GET_CHART_DATA_PENDING });

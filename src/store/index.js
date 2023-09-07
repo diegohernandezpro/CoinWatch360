@@ -14,14 +14,7 @@ import portfolio from "./portfolio";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: [
-    "charts",
-    "table",
-    "currency",
-    "infographic",
-    "coinPage",
-    "portfolio",
-  ],
+  blacklist: ["charts", "table", "currency", "infographic", "coinPage"],
 };
 
 const currencyPersistConfig = {

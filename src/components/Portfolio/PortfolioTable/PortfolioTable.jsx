@@ -1,11 +1,10 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { getPortfolioSelector } from "@/store/portfolio";
-import { getCurrencySelector } from "@/store/currency";
 import { IconWrapper, Icon } from "@/components";
 import { handleRemoveAsset } from "@/store/portfolio/actions";
+
 import { MarketPriceRow, UserCoinPriceRow } from "../NewAssetRow/NewAssetRow";
 import {
   StatisticsDiv,
@@ -29,8 +28,8 @@ export const PortfolioTable = () => {
   return (
     <>
       <StatisticsDiv>
-        {assets.length > 0 && <p>Your Statistics:</p>}
-        {assets.map((coin) => (
+        {assets?.length > 0 && <p>Your Statistics:</p>}
+        {assets?.map((coin) => (
           <NewCoinDiv key={coin.key}>
             <CoinDisplayDiv>
               <CoinDisplay>

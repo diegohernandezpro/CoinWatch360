@@ -12,16 +12,18 @@ import { getCoinList } from "./store/table/actions";
 
 import { getChartsDataSelector } from "./store/charts";
 import { getTableDataSelector } from "./store/table";
+import { getCurrencySelector } from "./store/currency";
 
 const App = () => {
   const dispatch = useDispatch();
-  const charts = useSelector((state) => getChartsDataSelector(state));
-  const table = useSelector((state) => getTableDataSelector(state));
+  const charts = useSelector(getChartsDataSelector);
+  const table = useSelector(getTableDataSelector);
+  const currency = useSelector(getCurrencySelector);
 
   useEffect(() => {
     dispatch(getChartData());
     dispatch(getCoinList());
-  }, []);
+  }, [currency]);
 
   return (
     <GlobalProvider>

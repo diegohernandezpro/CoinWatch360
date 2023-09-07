@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Container = styled.div`
   width: 50rem;
@@ -20,6 +19,7 @@ export const ClosingButton = styled.button`
   right: 1rem;
   background: transparent;
   outline: none;
+  border: none;
   border: none;
   font-size: 1.5rem;
   color: ${({ theme }) => theme.money.green};
@@ -79,24 +79,36 @@ export const StyledInput = styled.input`
   }
 `;
 
-export const StyledButton = styled.button`
-  color: ${({ theme }) => theme.background};
-  background: ${({ theme }) => theme.money.green};
-  width: Calc(100% / 3);
-  height: 3rem;
-  border-radius: 1rem;
-  font-size: 1rem;
-
-  &:hover {
-    cursor: pointer;
-    opacity: 0.8;
-  }
-`;
-
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.3rem;
   justify-content: center;
   align-items: center;
+`;
+
+export const StyledButton = styled.button`
+  color: ${({ theme }) => {
+    return theme.background;
+  }};
+  background: ${({ theme }) => {
+    return theme.money.green;
+  }};
+  width: Calc(100% / 3);
+  height: 3rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+`;
+export const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
 `;

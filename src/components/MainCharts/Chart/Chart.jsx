@@ -42,7 +42,7 @@ export const Chart = ({ label, data, type, ...rest }) => {
           } else if (type === "bar") {
             return theme.chart.barColor;
           } else if (type === "backgroundLine") {
-            return theme.nested.active; //change
+            return theme.nested.active;
           }
         },
         backgroundColor: (context) => {
