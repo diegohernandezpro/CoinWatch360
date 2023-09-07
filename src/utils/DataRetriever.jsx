@@ -23,7 +23,6 @@ export async function api(url, search) {
       return { data: [] };
     }
   } else {
-    // console.log("IN PRODUCTION ENV");
     const response = await axios(fullUrl);
     return response;
   }
