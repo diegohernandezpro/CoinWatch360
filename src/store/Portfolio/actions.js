@@ -121,7 +121,7 @@ const getData = async (assets, currency) => {
   const currencySymbol = currency.symbol;
   const pricedCoinObject = await Promise.all(
     assets.map(async (key) => {
-      const { data } = await api("/coins", `/${key.id.toLowerCase()}`);
+      const { data } = await api(`/coins/${key.id.toLowerCase()}`);
 
       key.previousPrice = data.market_data.current_price[currencyType];
       key.circulatingSupply = data.market_data.circulating_supply;
@@ -138,8 +138,8 @@ const getData = async (assets, currency) => {
       const formattedDate = formatDate(coin.date);
 
       const { data } = await api(
-        "/coins",
-        `/${coin.id.toLowerCase()}/history?date=${formattedDate}`
+        `/coins/${coin.id.toLowerCase()}/history`,
+        `?date=${formattedDate}`
       );
 
       const marketCapVsVolume = (

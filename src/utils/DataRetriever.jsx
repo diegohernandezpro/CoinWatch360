@@ -2,20 +2,19 @@ import axios from "axios";
 
 export async function api(url, search) {
   const base = "https://api.coingecko.com/api/v3";
-  const fullUrl = `${base}${url}${search}`;
-  const getfileName = () => {
-    const fullUrlName = url.split("/");
-    console.log(
-      "🚀 ~ file: DataRetriever.jsx:8 ~ getfileName ~ fullUrlName:",
-      fullUrlName
-    );
+  const fullUrl = `${base}${url}${search || ""}`;
 
-    if (fullUrlName[1] === "coins") {
-      return "bitcoin.history7-11-2022";
-    } else if (fullUrlName[2] === "bitcoin" && fullUrlName.length === 4) {
-      return "bitcoin.market_charts";
-    } else {
-      return fullUrlName[fullUrlName.length - 1];
+  const getfileName = () => {
+    const fullUrlName = url.split("/").slice(1);
+    const urlKey = fullUrlName[fullUrlName.length - 1];
+
+    switch (urlKey) {
+      case "market_chart":
+        return "bitcoin.market_charts";
+      case "history":
+        return "bitcoin.history";
+      default:
+        return fullUrlName[fullUrlName.length - 1];
     }
   };
 
