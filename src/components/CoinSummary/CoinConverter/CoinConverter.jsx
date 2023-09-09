@@ -71,8 +71,6 @@ export const CoinConverter = ({
     }
   };
 
-  const handleLinkClick = () => {};
-
   useEffect(() => {
     if (inverted) {
       setFiatSymbol(cryptoLetters);
@@ -103,7 +101,7 @@ export const CoinConverter = ({
               <IconWrapper>
                 <FontAwesomeIcon
                   icon={faCopy}
-                  onClick={(e) => handleCopyClick(element)}
+                  onClick={() => handleCopyClick(element)}
                 />
               </IconWrapper>
             </LinkWrapper>

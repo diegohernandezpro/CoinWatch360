@@ -36,7 +36,6 @@ export const FormatBullet = styled.div`
 `;
 
 export const FactWrapper = styled.div`
-  // border: 2px solid pink;
   display: flex;
   flex-direction: column;
   justify-content: center;

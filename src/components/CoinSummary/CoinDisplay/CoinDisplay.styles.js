@@ -11,6 +11,11 @@ export const StyledLink = styled(Link)`
     opacity: 0.5;
   }
   overflow: auto;
+  text-align: center;
+
+  &:nth-child(2) {
+    margin-right: 1rem;
+  }
 `;
 
 export const CoinDisplayWrapper = styled.div`
@@ -50,7 +55,7 @@ export const Icon = styled.img`
 `;
 
 export const CoinName = styled.div`
-  height: 2rem;
+  text-align: center;
   max-width: 15rem;
   border-radius: 0.6rem;
   background: ${({ theme }) => theme.background};
@@ -70,4 +75,5 @@ export const CoinLinkDiv = styled.div`
   justify-content: center;
   align-items: center;
   overflow: auto;
+  text-align: center;
 `;

@@ -19,6 +19,7 @@ export const LinkWrapper = styled.span`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  overflow: auto;
 `;
 
 export const IconWrapper = styled.div`
@@ -59,6 +60,7 @@ export const StyledLink = styled(Link)`
   &:hover {
     opacity: 0.5;
   }
+  text-align: center;
 `;
 
 export const ConverterContainer = styled.div`

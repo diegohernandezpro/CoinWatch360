@@ -104,7 +104,7 @@ export const CoinSummary = ({ coin }) => {
               </StyledDiv>
             </PriceFactsDiv>
           </CoinPrice>
-          <CoinDescription></CoinDescription>
+          <CoinDescription />
         </Wrapper>
       )}
     </Container>
