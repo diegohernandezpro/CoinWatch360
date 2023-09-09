@@ -4,6 +4,7 @@ import {
   formatAssetPrice,
   formatDateStandard,
   formatDate,
+  formatNum,
 } from "@/utils";
 
 import {
@@ -123,6 +124,7 @@ const getData = async (assets, currency) => {
     assets.map(async (key) => {
       const { data } = await api(`/coins/${key.id.toLowerCase()}`);
 
+      console.log("🚀 ~ file: actions.js:126 ~ assets.map ~ data:", data);
       key.previousPrice = data.market_data.current_price[currencyType];
       key.circulatingSupply = data.market_data.circulating_supply;
       key.totalSupply = data.market_data.total_supply;
@@ -143,9 +145,10 @@ const getData = async (assets, currency) => {
       );
 
       const marketCapVsVolume = (
-        (coin.marketCap / coin.totalVolume) *
-        100
+        Math.abs(coin.marketCap / coin.totalVolume) * 100
       ).toFixed(2);
+
+      const formattedMarketCap = formatNum(coin.marketCap, currencySymbol);
 
       const circulatingVsTotalSupply = (
         (coin.circulatingSupply / coin.totalSupply) *
@@ -153,6 +156,7 @@ const getData = async (assets, currency) => {
       ).toFixed(2);
 
       const formattedMarVsVolPer = formatPercentage(marketCapVsVolume, true);
+
       const formattedCirVsTotPer = formatPercentage(
         circulatingVsTotalSupply,
         true
@@ -187,6 +191,7 @@ const getData = async (assets, currency) => {
       return {
         ...coin,
         formattedDateStandard,
+        formattedMarketCap,
         currentPrice,
         formattedCurrentPrice,
         formattedPriceChange24h,

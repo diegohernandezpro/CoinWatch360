@@ -17,13 +17,9 @@ export const MarketPriceRow = ({ coin }) => {
       </RowItemDiv>
 
       <RowItemDiv>
-        Market Cap/Volume:
-        <Item value={coin.marketCapVsVolume}>
-          <TextNSlider
-            text={coin.formattedMarVsVolPer}
-            percentage={coin.marketCapVsVolume}
-          />
-        </Item>
+        Market Cap:
+        <Item value={coin.marketCap}>{coin.formattedMarketCap}</Item>
+        {coin.marketCap > 0 ? <UpArrowGreen /> : <DownArrowRed />}
       </RowItemDiv>
 
       <RowItemDiv value={coin.circulatingVsTotalSupply}>
