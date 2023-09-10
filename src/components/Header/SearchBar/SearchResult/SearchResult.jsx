@@ -45,5 +45,3 @@ export const SearchResult = ({
     </>
   );
 };
-
-// <StyledLink to={`/coin/${coin.id}`}>

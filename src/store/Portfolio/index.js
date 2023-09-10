@@ -39,6 +39,7 @@ const portfolioReducer = (state = intitialState, actions) => {
       return {
         ...state,
         popup: false,
+        isVisible: false,
       };
     case GET_PORTFOLIO_COIN_PENDING:
       return {
@@ -46,6 +47,7 @@ const portfolioReducer = (state = intitialState, actions) => {
         popup: true,
         isLoading: true,
         coin: actions.payload.coin,
+        hasError: false,
       };
 
     case GET_PORTFOLIO_COIN_SUCCESS:
@@ -56,6 +58,7 @@ const portfolioReducer = (state = intitialState, actions) => {
         isVisible: true,
         results: actions.payload.results,
         coin: actions.payload.coin,
+        hasError: false,
       };
     case GET_PORTFOLIO_COIN_ERROR:
       return {

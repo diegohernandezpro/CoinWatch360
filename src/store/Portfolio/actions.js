@@ -41,7 +41,7 @@ export const getCoins = (coinName) => async (dispatch, getState) => {
       },
     });
 
-    const { data } = await api("/search", `?query=${coinName}`); // this is just a search query - does not give specific coin info
+    const { data } = await api("/search", `?query=${coinName}`);
 
     dispatch({
       type: GET_PORTFOLIO_COIN_SUCCESS,
@@ -124,7 +124,6 @@ const getData = async (assets, currency) => {
     assets.map(async (key) => {
       const { data } = await api(`/coins/${key.id.toLowerCase()}`);
 
-      console.log("🚀 ~ file: actions.js:126 ~ assets.map ~ data:", data);
       key.previousPrice = data.market_data.current_price[currencyType];
       key.circulatingSupply = data.market_data.circulating_supply;
       key.totalSupply = data.market_data.total_supply;
