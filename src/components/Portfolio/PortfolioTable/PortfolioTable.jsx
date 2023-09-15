@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-import { getPortfolioSelector } from "@/store/portfolio";
 import { IconWrapper, Icon } from "@/components";
-import { handleRemoveAsset } from "@/store/portfolio/actions";
+import {
+  handleRemoveAsset,
+  getPortfolioSelector,
+} from "@/modernStore/features/portfolio/portfolioSlice";
 
 import { MarketPriceRow, UserCoinPriceRow } from "../NewAssetRow/NewAssetRow";
 import {

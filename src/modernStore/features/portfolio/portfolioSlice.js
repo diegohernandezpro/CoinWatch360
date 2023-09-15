@@ -1,3 +1,4 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   api,
   formatPercentage,
@@ -7,116 +8,41 @@ import {
   formatNum,
 } from "@/utils";
 
-import {
-  TOOGLE_POPUP_ON,
-  TOOGLE_POPUP_OFF,
-  GET_PORTFOLIO_COIN_PENDING,
-  GET_PORTFOLIO_COIN_SUCCESS,
-  GET_PORTFOLIO_COIN_ERROR,
-  GET_PORTFOLIO_COIN_ERROR_DISAPPEAR,
-  RENAME_PORTFOLIO_COIN,
-  SELECT_PORTFOLIO_COIN,
-  SELECT_PORTFOLIO_COIN_AMOUNT,
-  SELECT_PORTFOLIO_COIN_DATE,
-  GET_PORTFOLIO_COIN_DATA,
-  REMOVE_ASSET,
-} from "./index";
+import { FETCHING_STATE } from "../fetchingStates";
 
-export const tooglePopUpOn = () => {
-  return {
-    type: TOOGLE_POPUP_ON,
-  };
+const initialState = {
+  popup: false,
+  coin: "",
+  purchasedAmount: "",
+  numericAmount: "",
+  date: "",
+  status: FETCHING_STATE.IDLE,
+  errorMsg: "",
+  results: [],
+  isVisible: false,
+  assets: [],
 };
 
-export const tooglePopUpOff = () => ({
-  type: TOOGLE_POPUP_OFF,
-});
-
-export const getCoins = (coinName) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: GET_PORTFOLIO_COIN_PENDING,
-      payload: {
-        coin: coinName,
-      },
-    });
-
+// Async Thunk
+export const getCoins = createAsyncThunk(
+  "portfolio/getCoins",
+  async (coinName) => {
     const { data } = await api("/search", `?query=${coinName}`);
-
-    dispatch({
-      type: GET_PORTFOLIO_COIN_SUCCESS,
-      payload: {
-        results: data.coins,
-        coin: coinName,
-      },
-    });
-  } catch (err) {
-    dispatch({
-      type: GET_PORTFOLIO_COIN_ERROR,
-    });
-
-    setTimeout(() => {
-      dispatch({
-        type: GET_PORTFOLIO_COIN_ERROR_DISAPPEAR,
-      });
-    }, 5000);
+    return { results: data.coins, coin: coinName };
   }
-};
+);
 
-export const handlePortfolioCoin = (searchQuery) => ({
-  type: RENAME_PORTFOLIO_COIN,
-  payload: searchQuery,
-});
+export const getSelectedCoin = createAsyncThunk(
+  "portfolio/getSelectedCoin",
+  async (coinData, { getState }) => {
+    const { portfolio, currency } = getState();
+    const newArr = [...portfolio.assets, coinData];
 
-export const handleSelectPortfolioCoin = (coinName) => {
-  return {
-    type: SELECT_PORTFOLIO_COIN,
-    payload: coinName,
-  };
-};
+    return await getData(newArr, currency);
+  }
+);
 
-export const handlePurchasedAmount = (amount) => {
-  const numericAmount = parseFloat(amount);
-  return {
-    type: SELECT_PORTFOLIO_COIN_AMOUNT,
-    payload: {
-      amount: amount,
-      numericAmount,
-    },
-  };
-};
-
-export const handleRemoveAsset = (key) => (dispatch, getState) => {
-  const {
-    portfolio: { assets },
-  } = getState();
-
-  const filtedAssets = assets.filter((el) => el.key !== key);
-  dispatch({
-    type: REMOVE_ASSET,
-    payload: filtedAssets,
-  });
-};
-
-export const handleDate = (date) => {
-  return {
-    type: SELECT_PORTFOLIO_COIN_DATE,
-    payload: date,
-  };
-};
-
-export const getSelectedCoin = (coinData) => async (dispatch, getState) => {
-  const { portfolio, currency } = getState();
-  const newArr = [...portfolio.assets, coinData];
-
-  const newAssetsArray = await getData(newArr, currency);
-
-  dispatch({
-    type: GET_PORTFOLIO_COIN_DATA,
-    payload: newAssetsArray,
-  });
-};
-
+// Helper function
 const getData = async (assets, currency) => {
   const currencyType = currency.type.toLowerCase();
   const currencySymbol = currency.symbol;
@@ -212,3 +138,82 @@ const getData = async (assets, currency) => {
 
   return newAssetsArr;
 };
+
+const portfolioSlice = createSlice({
+  name: "portfolio",
+  initialState,
+  reducers: {
+    togglePopUpOn: (state) => {
+      state.popup = true;
+      state.purchasedAmount = "";
+      state.date = "";
+      state.coin = "";
+    },
+    togglePopUpOff: (state) => {
+      state.popup = false;
+      state.isVisible = false;
+    },
+    handlePortfolioCoin: (state, action) => {
+      state.coin = action.payload;
+    },
+    handleSelectPortfolioCoin: (state, action) => {
+      state.popup = true;
+      state.isVisible = false;
+      state.coin = action.payload;
+    },
+    handlePurchasedAmount: (state, action) => {
+      state.purchasedAmount = action.payload.amount;
+      state.numericAmount = action.payload.numericAmount;
+    },
+    handleRemoveAsset: (state, action) => {
+      state.assets = state.assets.filter((el) => el.key !== action.payload);
+    },
+    handleDate: (state, action) => {
+      state.date = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCoins.pending, (state, action) => {
+        state.popup = true;
+        state.status = FETCHING_STATE.PENDING;
+        state.coin = action.meta.arg;
+      })
+      .addCase(getCoins.fulfilled, (state, action) => {
+        state.popup = true;
+        state.status = FETCHING_STATE.SUCCESS;
+        state.isVisible = true;
+        state.results = action.payload.results;
+        state.coin = action.payload.coin;
+      })
+      .addCase(getCoins.rejected, (state) => {
+        state.popup = true;
+        state.status = FETCHING_STATE.ERROR;
+        state.isVisible = true;
+        state.coin = "";
+        state.errorMsg = "Error retrieving coins.";
+      })
+      .addCase(getSelectedCoin.fulfilled, (state, action) => {
+        state.popup = false;
+        state.assets = action.payload;
+        state.results = [];
+        state.purchasedAmount = "";
+        state.date = "";
+        state.coin = "";
+      });
+  },
+});
+
+export const {
+  togglePopUpOn,
+  togglePopUpOff,
+  handlePortfolioCoin,
+  handleSelectPortfolioCoin,
+  handlePurchasedAmount,
+  handleRemoveAsset,
+  handleDate,
+} = portfolioSlice.actions;
+
+export const getPortfolioSelector = (state) => state.portfolio;
+
+export default portfolioSlice.reducer;

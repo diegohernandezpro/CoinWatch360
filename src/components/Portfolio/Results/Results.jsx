@@ -1,6 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
-import { getPortfolioSelector } from "@/store/Portfolio";
-import { handleSelectPortfolioCoin } from "@/store/Portfolio/actions";
+import {
+  handleSelectPortfolioCoin,
+  getPortfolioSelector,
+} from "@/modernStore/features/portfolio/portfolioSlice";
+
 import { LoadingCircle } from "@/utils";
 import { DropDownUl, ResultRowLi, Flex } from "./Results.styles";
 

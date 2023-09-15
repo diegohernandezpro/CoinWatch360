@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrency } from "@/store/currency/actions";
-import { getCurrencySelector } from "@/store/currency";
+import {
+  setCurrency,
+  getCurrencySelector,
+} from "@/modernStore/features/currency/currencySlice";
 
 import {
   Wrapper,
@@ -14,10 +16,7 @@ export const CurrencySelector = () => {
   const dispatch = useDispatch();
   const currency = useSelector(getCurrencySelector);
 
-  const handleSelectChange = (e) => {
-    const selectedValue = e.target.value;
-    dispatch(getCurrency(selectedValue));
-  };
+  const handleSelectChange = (e) => dispatch(setCurrency(e.target.value));
 
   return (
     <Container>

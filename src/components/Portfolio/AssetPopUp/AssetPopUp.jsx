@@ -1,14 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
-import { getPortfolioSelector } from "@/store/Portfolio";
 import {
-  tooglePopUpOff,
+  togglePopUpOff,
   getCoins,
   handlePortfolioCoin,
   handlePurchasedAmount,
   handleDate,
   getSelectedCoin,
-} from "@/store/Portfolio/actions";
+  getPortfolioSelector,
+} from "@/modernStore/features/portfolio/portfolioSlice";
 import { Results, SelectedCoin } from "@/components/Portfolio";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";

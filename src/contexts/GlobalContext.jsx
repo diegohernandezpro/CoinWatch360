@@ -2,8 +2,8 @@ import { createContext, useContext } from "react";
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@/styles";
-import { getCurrencySelector } from "@/store/currency";
-import { getThemeSelector } from "@/store/theme";
+import { getCurrencySelector } from "@/modernStore/features/currency/currencySlice";
+import { getThemeSelector } from "@/modernStore/features/theme/themeSlice";
 
 const GlobalContext = createContext();
 
