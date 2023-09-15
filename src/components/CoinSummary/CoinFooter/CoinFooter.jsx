@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Container,
   Wrapper,
@@ -8,34 +8,37 @@ import {
   GraphWrapper,
 } from "./CoinFooter.styles";
 import { Chart } from "@/components";
-import { getPrice } from "@/store/coinPage/action";
+import { getPrice } from "@/modernStore/features/coinPage/coinPageSlice";
 
 export const CoinFooter = ({ coinName, currency, coinState }) => {
   const dispatch = useDispatch();
-  const options = ["1d", "7d", "30d", "90d", "1y", "Max"];
+  const RADIO_OPTIONS = ["1d", "7d", "30d", "90d", "1y", "Max"];
 
   const handleChange = (e) => {
-    const newOption = e.target.value;
-    dispatch(getPrice(coinName, currency, newOption));
+    dispatch(
+      getPrice({
+        coinName,
+        currencyType: currency.type,
+        option: e.target.value,
+      })
+    );
   };
 
   return (
     <Container>
       <Wrapper>
-        {options.map((element, i) => {
-          return (
-            <React.Fragment key={i}>
-              <StyledInput
-                type="radio"
-                id={element}
-                value={element}
-                checked={coinState.option === element}
-                onChange={handleChange}
-              />
-              <StyledLabel htmlFor={element}>{element}</StyledLabel>
-            </React.Fragment>
-          );
-        })}
+        {RADIO_OPTIONS.map((element, i) => (
+          <React.Fragment key={i}>
+            <StyledInput
+              type="radio"
+              id={element}
+              value={element}
+              checked={coinState.option === element}
+              onChange={handleChange}
+            />
+            <StyledLabel htmlFor={element}>{element}</StyledLabel>
+          </React.Fragment>
+        ))}
       </Wrapper>
       <GraphWrapper>
         <Chart

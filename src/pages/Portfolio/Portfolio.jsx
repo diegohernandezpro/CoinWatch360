@@ -1,7 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { PortfolioTable, AssetPopUp } from "@/components";
-import { getPortfolioSelector } from "@/store/Portfolio";
-import { tooglePopUpOn } from "@/store/Portfolio/actions";
+import {
+  getPortfolioSelector,
+  // tooglePopUpOn,
+} from "@/modernStore/features/portfolio/portfolioSlice";
 import { Container, StyledButton } from "./Portfolio.styles";
 
 export const Portfolio = () => {
@@ -9,8 +12,12 @@ export const Portfolio = () => {
   const portfolio = useSelector(getPortfolioSelector);
 
   const handleClick = () => {
-    dispatch(tooglePopUpOn());
+    // dispatch(tooglePopUpOn());
   };
+
+  useEffect(() => {
+    console.log("componentDidMount Portfolio");
+  }, []);
 
   return (
     <Container>
