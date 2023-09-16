@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { IconWrapper, Icon } from "@/components";
 import {
-  handleRemoveAsset,
+  removeAsset,
   getPortfolioSelector,
 } from "@/modernStore/features/portfolio/portfolioSlice";
 
@@ -21,17 +22,19 @@ import {
 
 export const PortfolioTable = () => {
   const dispatch = useDispatch();
-  const { assets } = useSelector(getPortfolioSelector);
+  const portfolio = useSelector(getPortfolioSelector);
 
-  const handleClick = (key) => {
-    dispatch(handleRemoveAsset(key));
-  };
+  const handleClick = (key) => dispatch(removeAsset(key));
+
+  useEffect(() => {
+    console.log("componentDidMount PortfolioTable");
+  }, []);
 
   return (
     <>
       <StatisticsDiv>
-        {assets?.length > 0 && <p>Your Statistics:</p>}
-        {assets?.map((coin) => (
+        {portfolio.assets.length > 0 && <p>Your Statistics:</p>}
+        {portfolio.assets.map((coin) => (
           <NewCoinDiv key={coin.key}>
             <CoinDisplayDiv>
               <CoinDisplay>
