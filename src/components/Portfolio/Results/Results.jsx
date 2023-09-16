@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import {
-  handleSelectPortfolioCoin,
+  selectCoin,
   getPortfolioSelector,
 } from "@/modernStore/features/portfolio/portfolioSlice";
 
@@ -11,9 +12,11 @@ export const Results = () => {
   const dispatch = useDispatch();
   const { hasError, results, isLoading } = useSelector(getPortfolioSelector);
 
-  const handleClick = (name) => {
-    dispatch(handleSelectPortfolioCoin(name));
-  };
+  const handleClick = (name) => dispatch(selectCoin(name));
+
+  useEffect(() => {
+    console.log("componentDidMount Results");
+  }, []);
 
   return (
     <>

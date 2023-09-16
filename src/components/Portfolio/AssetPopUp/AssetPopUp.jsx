@@ -1,12 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { nanoid } from "@reduxjs/toolkit";
 import { format } from "date-fns";
 import {
   togglePopUpOff,
   getCoins,
-  handlePortfolioCoin,
-  handlePurchasedAmount,
-  handleDate,
-  getSelectedCoin,
+  setCoin,
+  setAmount,
+  setDate,
+  addAsset,
   getPortfolioSelector,
 } from "@/modernStore/features/portfolio/portfolioSlice";
 import { Results, SelectedCoin } from "@/components/Portfolio";
@@ -31,38 +33,42 @@ export const AssetPopUp = () => {
 
   const handleSubmitCoin = (e) => {
     e.preventDefault();
-    dispatch(getCoins(portfolio.coin));
+    dispatch(getCoins({ coinName: portfolio.coin }));
   };
 
-  const handleCoinChange = (e) => {
-    dispatch(handlePortfolioCoin(e.target.value));
-  };
+  const handleCoinChange = (e) => dispatch(setCoin(e.target.value));
 
-  const handleAmountChange = (e) => {
-    dispatch(handlePurchasedAmount(e.target.value));
-  };
+  const handleAmountChange = (e) =>
+    dispatch(
+      setAmount({
+        amount: e.target.value,
+        numericAmount: parseFloat(e.target.value),
+      })
+    );
 
   const currentDate = new Date();
   const formattedCurrentDate = format(currentDate, "yyyy-MM-dd");
 
-  const handleDateChange = (e) => {
-    dispatch(handleDate(e.target.value));
-  };
+  const handleDateChange = (e) => dispatch(setDate(e.target.value));
 
   const handleClick = () => {
     const coinData = {
       id: portfolio.coin,
-      key: Math.random(),
-      date: portfolio.date,
       amount: portfolio.numericAmount,
+      date: portfolio.date,
+      key: nanoid(),
     };
 
-    dispatch(getSelectedCoin(coinData));
+    dispatch(addAsset({ coinData }));
   };
 
   const handleCloseWindow = () => {
-    dispatch(tooglePopUpOff());
+    dispatch(togglePopUpOff());
   };
+
+  useEffect(() => {
+    console.log("componentDidMount AssetPopUp");
+  }, []);
 
   return (
     <Container>

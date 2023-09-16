@@ -5,7 +5,6 @@ import {
   formatAssetPrice,
   formatDateStandard,
   formatDate,
-  formatNum,
 } from "@/utils";
 
 import { FETCHING_STATE } from "../fetchingStates";
@@ -23,30 +22,30 @@ const initialState = {
   assets: [],
 };
 
-// Async Thunk
 export const getCoins = createAsyncThunk(
   "portfolio/getCoins",
-  async (coinName) => {
+  async ({ coinName }) => {
     const { data } = await api("/search", `?query=${coinName}`);
     return { results: data.coins, coin: coinName };
   }
 );
 
-export const getSelectedCoin = createAsyncThunk(
-  "portfolio/getSelectedCoin",
-  async (coinData, { getState }) => {
+export const addAsset = createAsyncThunk(
+  "portfolio/addAsset",
+  async ({ coinData }, { getState }) => {
     const { portfolio, currency } = getState();
     const newArr = [...portfolio.assets, coinData];
-
-    return await getData(newArr, currency);
+    const newAsset = await getData(newArr, currency);
+    const assetsArr = [];
+    return newAsset;
   }
 );
 
-// Helper function
 const getData = async (assets, currency) => {
   const currencyType = currency.type.toLowerCase();
   const currencySymbol = currency.symbol;
-  const pricedCoinObject = await Promise.all(
+
+  await Promise.all(
     assets.map(async (key) => {
       const { data } = await api(`/coins/${key.id.toLowerCase()}`);
 
@@ -54,7 +53,6 @@ const getData = async (assets, currency) => {
       key.circulatingSupply = data.market_data.circulating_supply;
       key.totalSupply = data.market_data.total_supply;
       key.marketCap = data.market_data.market_cap[currencyType];
-      key.totalVolume = data.market_data.total_volume[currencyType];
       key.priceChange24h = data.market_data.price_change_24h;
       key.image = data.image.large;
     })
@@ -62,6 +60,7 @@ const getData = async (assets, currency) => {
 
   const newAssetsArr = await Promise.all(
     assets.map(async (coin) => {
+      console.log("🚀 ~ file: portfolioSlice.js:64 ~ assets.map ~ coin:", coin);
       const formattedDate = formatDate(coin.date);
 
       const { data } = await api(
@@ -69,18 +68,10 @@ const getData = async (assets, currency) => {
         `?date=${formattedDate}`
       );
 
-      const marketCapVsVolume = (
-        Math.abs(coin.marketCap / coin.totalVolume) * 100
-      ).toFixed(2);
-
-      const formattedMarketCap = formatNum(coin.marketCap, currencySymbol);
-
       const circulatingVsTotalSupply = (
         (coin.circulatingSupply / coin.totalSupply) *
         100
       ).toFixed(2);
-
-      const formattedMarVsVolPer = formatPercentage(marketCapVsVolume, true);
 
       const formattedCirVsTotPer = formatPercentage(
         circulatingVsTotalSupply,
@@ -116,22 +107,15 @@ const getData = async (assets, currency) => {
       return {
         ...coin,
         formattedDateStandard,
-        formattedMarketCap,
         currentPrice,
         formattedCurrentPrice,
         formattedPriceChange24h,
-        id: data.name,
         amountValue,
         formattedAmountValue,
-        priceInSelectedDate: data.market_data.current_price[currencyType],
         priceChange,
         formattedPriceChange,
-        marketCapVsVolume,
-        formattedMarVsVolPer,
         circulatingVsTotalSupply,
         formattedCirVsTotPer,
-        isBigger:
-          data.market_data.current_price[currencyType] > coin.currentPrice,
       };
     })
   );
@@ -153,22 +137,22 @@ const portfolioSlice = createSlice({
       state.popup = false;
       state.isVisible = false;
     },
-    handlePortfolioCoin: (state, action) => {
+    setCoin: (state, action) => {
       state.coin = action.payload;
     },
-    handleSelectPortfolioCoin: (state, action) => {
+    selectCoin: (state, action) => {
       state.popup = true;
       state.isVisible = false;
       state.coin = action.payload;
     },
-    handlePurchasedAmount: (state, action) => {
+    setAmount: (state, action) => {
       state.purchasedAmount = action.payload.amount;
       state.numericAmount = action.payload.numericAmount;
     },
-    handleRemoveAsset: (state, action) => {
+    removeAsset: (state, action) => {
       state.assets = state.assets.filter((el) => el.key !== action.payload);
     },
-    handleDate: (state, action) => {
+    setDate: (state, action) => {
       state.date = action.payload;
     },
   },
@@ -177,7 +161,7 @@ const portfolioSlice = createSlice({
       .addCase(getCoins.pending, (state, action) => {
         state.popup = true;
         state.status = FETCHING_STATE.PENDING;
-        state.coin = action.meta.arg;
+        // state.coin = action.meta.arg;
       })
       .addCase(getCoins.fulfilled, (state, action) => {
         state.popup = true;
@@ -193,9 +177,18 @@ const portfolioSlice = createSlice({
         state.coin = "";
         state.errorMsg = "Error retrieving coins.";
       })
-      .addCase(getSelectedCoin.fulfilled, (state, action) => {
+
+      .addCase(addAsset.fulfilled, (state, action) => {
         state.popup = false;
         state.assets = action.payload;
+        state.results = [];
+        state.purchasedAmount = "";
+        state.date = "";
+        state.coin = "";
+      })
+      .addCase(addAsset.rejected, (state, action) => {
+        state.popup = false;
+        state.errorMsg = `Error retrieving coins, ${action.payload}`; //change later
         state.results = [];
         state.purchasedAmount = "";
         state.date = "";
@@ -207,11 +200,11 @@ const portfolioSlice = createSlice({
 export const {
   togglePopUpOn,
   togglePopUpOff,
-  handlePortfolioCoin,
-  handleSelectPortfolioCoin,
-  handlePurchasedAmount,
-  handleRemoveAsset,
-  handleDate,
+  setCoin,
+  selectCoin,
+  setAmount,
+  removeAsset,
+  setDate,
 } = portfolioSlice.actions;
 
 export const getPortfolioSelector = (state) => state.portfolio;
