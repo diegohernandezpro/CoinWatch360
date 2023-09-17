@@ -20,10 +20,6 @@ export const SelectedCoin = ({ coinName, results }) => {
     getCoinDisplay(results);
   }, [coinName]);
 
-  useEffect(() => {
-    console.log("componentDidMount SelectedCoin");
-  }, []);
-
   return (
     <CoinDisplay>
       <IconWrapper>{image && <Icon src={image} width="4rem" />}</IconWrapper>
