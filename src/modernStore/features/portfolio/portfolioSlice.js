@@ -144,6 +144,7 @@ const portfolioSlice = createSlice({
     selectCoin: (state, action) => {
       state.popup = true;
       state.isVisible = false;
+      state.statusResults = FETCHING_STATE.IDLE;
       state.coin = action.payload;
     },
     setAmount: (state, action) => {
@@ -155,6 +156,16 @@ const portfolioSlice = createSlice({
     },
     setDate: (state, action) => {
       state.date = action.payload;
+    },
+    disappearResultsError: (state) => {
+      state.isVisible = false;
+    },
+    setStatusToIdle: (state) => {
+      state.statusCoin = FETCHING_STATE.IDLE;
+    },
+    setStatusCoinToSuccess: (state) => {
+      state.statusCoin = FETCHING_STATE.SUCCESS;
+      state.errorMsg = "";
     },
   },
   extraReducers: (builder) => {
@@ -187,6 +198,8 @@ const portfolioSlice = createSlice({
         state.assets = action.payload;
         state.results = [];
         state.purchasedAmount = "";
+        state.numericAmount = "";
+        state.errorMsg = "";
         state.date = "";
         state.coin = "";
       })
@@ -196,6 +209,7 @@ const portfolioSlice = createSlice({
         state.errorMsg = "Error retreiving coin.";
         state.results = [];
         state.purchasedAmount = "";
+        state.numericAmount = "";
         state.date = "";
         state.coin = "";
       });
@@ -210,6 +224,9 @@ export const {
   setAmount,
   removeAsset,
   setDate,
+  disappearResultsError,
+  setStatusToIdle,
+  setStatusCoinToSuccess,
 } = portfolioSlice.actions;
 
 export const getPortfolioSelector = (state) => state.portfolio;
