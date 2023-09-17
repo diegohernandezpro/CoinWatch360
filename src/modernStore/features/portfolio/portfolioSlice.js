@@ -5,6 +5,7 @@ import {
   formatAssetPrice,
   formatDateStandard,
   formatDate,
+  formatNum,
 } from "@/utils";
 
 import { FETCHING_STATE } from "../fetchingStates";
@@ -50,6 +51,7 @@ const getData = async (coin, currencyType) => {
     coin.circulatingSupply = data.market_data.circulating_supply;
     coin.totalSupply = data.market_data.total_supply;
     coin.marketCap = data.market_data.market_cap[currencyType];
+    console.log("testing", coin.marketCap);
     coin.priceChange24h = data.market_data.price_change_24h;
     coin.image = data.image.large;
     return coin;
@@ -92,9 +94,11 @@ const getHistoryData = async (coin, currencyType, currencySymbol) => {
       currencySymbol
     );
     const formattedDateStandard = formatDateStandard(coin.date);
+    const formattedMarketCap = formatNum(coin.marketCap, currencySymbol);
 
     return {
       formattedDateStandard,
+      formattedMarketCap,
       currentPrice,
       formattedCurrentPrice,
       formattedPriceChange24h,
