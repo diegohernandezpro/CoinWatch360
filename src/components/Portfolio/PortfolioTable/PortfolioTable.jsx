@@ -8,6 +8,8 @@ import { ErrorP } from "@/pages";
 import {
   removeAsset,
   getPortfolioSelector,
+  setStatusToIdle,
+  setStatusCoinToSuccess,
 } from "@/modernStore/features/portfolio/portfolioSlice";
 import { FETCHING_STATE } from "@/modernStore/features/fetchingStates";
 
@@ -26,74 +28,99 @@ import {
 
 export const PortfolioTable = () => {
   const dispatch = useDispatch();
-  const portfolio = useSelector(getPortfolioSelector);
+  const { assets, statusCoin, errorMsg } = useSelector(getPortfolioSelector);
   const [showError, setShowError] = useState(false);
+  const [previousAssets, setPreviousAssets] = useState([]);
 
-  const handleClick = (key) => dispatch(removeAsset(key));
+  const handleClick = (key, coinName) => {
+    const isConfirmed = window.confirm(
+      `Are you sure you want to remove ${coinName}?`
+    );
+    if (isConfirmed) {
+      dispatch(removeAsset(key));
+    }
+  };
+
+  const renderAssets = (arr) => {
+    return (
+      <>
+        <p>Your Statistics:</p>
+        {arr.map((coin) => (
+          <NewCoinDiv key={coin.key}>
+            <CoinDisplayDiv>
+              <CoinDisplay>
+                <IconWrapper>
+                  {coin.image && <Icon src={coin.image} width="4rem" />}
+                </IconWrapper>
+                <NameDiv>{coin.id}</NameDiv>
+              </CoinDisplay>
+              <ClosingButton onClick={() => handleClick(coin.key, coin.id)}>
+                <FontAwesomeIcon icon={faX} />
+              </ClosingButton>
+            </CoinDisplayDiv>
+
+            <CoinInfoDiv>
+              <SytyledP>Market Price:</SytyledP>
+              <MarketPriceRow coin={coin} />
+
+              <SytyledP>Your Coin:</SytyledP>
+              <UserCoinPriceRow coin={coin} />
+            </CoinInfoDiv>
+          </NewCoinDiv>
+        ))}
+      </>
+    );
+  };
+
+  const determineContent = () => {
+    if (showError) return <ErrorP msg={errorMsg}>{errorMsg}</ErrorP>;
+
+    if (previousAssets.length > 0) return renderAssets(previousAssets);
+
+    if (statusCoin === FETCHING_STATE.PENDING)
+      return (
+        <Flex>
+          <LoadingCircle width="3rem" />
+        </Flex>
+      );
+  };
 
   useEffect(() => {
-    if (portfolio.statusCoin === FETCHING_STATE.ERROR) {
-      setShowError(true);
-
-      const timer = setTimeout(() => {
-        setShowError(false);
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [portfolio.statusCoin]);
-
-  let content = "";
-
-  if (showError) {
-    content = <ErrorP msg={portfolio.errorMsg}>{portfolio.errorMsg}</ErrorP>;
-  } else {
-    switch (portfolio.statusCoin) {
-      case FETCHING_STATE.PENDING:
-        content = (
-          <Flex>
-            <LoadingCircle width="3rem" />
-          </Flex>
-        );
+    switch (statusCoin) {
+      case FETCHING_STATE.IDLE:
+        setPreviousAssets(assets);
         break;
       case FETCHING_STATE.SUCCESS:
-        content = (
-          <>
-            {portfolio.assets.length > 0 && <p>Your Statistics:</p>}
-            {portfolio.assets.map((coin) => (
-              <NewCoinDiv key={coin.key}>
-                <CoinDisplayDiv>
-                  <CoinDisplay>
-                    <IconWrapper>
-                      {coin.image && <Icon src={coin.image} width="4rem" />}
-                    </IconWrapper>
-                    <NameDiv>{coin.id}</NameDiv>
-                  </CoinDisplay>
-                  <ClosingButton onClick={() => handleClick(coin.key)}>
-                    <FontAwesomeIcon icon={faX} />
-                  </ClosingButton>
-                </CoinDisplayDiv>
-
-                <CoinInfoDiv>
-                  <SytyledP>Market Price:</SytyledP>
-                  <MarketPriceRow coin={coin} />
-
-                  <SytyledP>Your Coin:</SytyledP>
-                  <UserCoinPriceRow coin={coin} />
-                </CoinInfoDiv>
-              </NewCoinDiv>
-            ))}
-          </>
-        );
+        setPreviousAssets(assets);
+        dispatch(setStatusToIdle());
         break;
-      default:
-        content = <></>;
+      case FETCHING_STATE.ERROR:
+        setShowError(true);
+        const timer = setTimeout(() => {
+          setShowError(false);
+          dispatch(setStatusCoinToSuccess());
+        }, 3000);
+        return () => clearTimeout(timer);
     }
-  }
 
-  return (
-    <>
-      <StatisticsDiv>{content}</StatisticsDiv>
-    </>
-  );
+    // if (statusCoin === FETCHING_STATE.ERROR) {
+    //   setShowError(true);
+    //   const timer = setTimeout(() => {
+    //     setShowError(false);
+    //     dispatch(setStatusCoinToSuccess());
+    //   }, 3000);
+    //   return () => clearTimeout(timer);
+    // }
+
+    // if (statusCoin === FETCHING_STATE.SUCCESS) {
+    //   setPreviousAssets(assets);
+    //   dispatch(setStatusToIdle());
+    // }
+
+    // if (statusCoin === FETCHING_STATE.IDLE) {
+    //   setPreviousAssets(assets);
+    // }
+  }, [statusCoin, assets]);
+
+  return <StatisticsDiv>{determineContent()}</StatisticsDiv>;
 };
