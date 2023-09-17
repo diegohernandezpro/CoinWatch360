@@ -16,9 +16,9 @@ export const ErrorP = styled.p`
   color: #ff0000;
   padding: ${({ msg }) => {
     if (msg !== "") {
-      return "10px";
+      return "1.2rem";
     }
-    return "0px";
+    return "0rem";
   }};
   border-radius: 4px;
   overflow: scroll;

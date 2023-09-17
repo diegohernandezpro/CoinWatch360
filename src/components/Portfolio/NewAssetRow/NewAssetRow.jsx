@@ -1,13 +1,8 @@
 import { TextNSlider } from "@/components";
-import { useEffect } from "react";
 import { UpArrowGreen, DownArrowRed } from "@/styles";
 import { RowDiv, RowItemDiv, Item } from "./NewAssetRow.styles";
 
 export const MarketPriceRow = ({ coin }) => {
-  useEffect(() => {
-    console.log("componentDidMount NewAssetRow");
-  }, []);
-
   return (
     <RowDiv>
       <RowItemDiv>

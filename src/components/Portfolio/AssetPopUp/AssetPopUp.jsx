@@ -66,10 +66,6 @@ export const AssetPopUp = () => {
     dispatch(togglePopUpOff());
   };
 
-  useEffect(() => {
-    console.log("componentDidMount AssetPopUp");
-  }, []);
-
   return (
     <Container>
       <StyledP>Select Coin</StyledP>
