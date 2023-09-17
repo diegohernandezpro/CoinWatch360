@@ -52,6 +52,11 @@ export const AssetPopUp = () => {
   const handleDateChange = (e) => dispatch(setDate(e.target.value));
 
   const handleClick = () => {
+    if (!portfolio.coin || !portfolio.date || !portfolio.numericAmount) {
+      alert("Please fill in all the fields to continue.");
+      return;
+    }
+
     const coinData = {
       id: portfolio.coin,
       amount: portfolio.numericAmount,
