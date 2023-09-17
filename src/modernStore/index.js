@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import { persistStore, persistReducer } from "redux-persist";
-// import storage from "redux-persist/lib/storage";
+import { persistStore, persistReducer } from "redux-persist";
+import { combineReducers } from "redux";
+import storage from "redux-persist/lib/storage";
 
 import chartReducer from "./features/charts/chartsSlice";
 import currencyReducer from "./features/currency/currencySlice";
@@ -10,14 +11,26 @@ import infographicsReducer from "./features/infographic/infographicSlice";
 import tableReducer from "./features/table/tableSlice";
 import portfolioReducer from "./features/portfolio/portfolioSlice";
 
-export default configureStore({
-  reducer: {
-    currency: currencyReducer,
-    charts: chartReducer,
-    theme: themeReducer,
-    coinPage: coinPageReducer,
-    infographic: infographicsReducer,
-    table: tableReducer,
-    portfolio: portfolioReducer,
-  },
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["theme", "currency", "portfolio"],
+};
+
+const rootReducer = combineReducers({
+  currency: currencyReducer,
+  charts: chartReducer,
+  theme: themeReducer,
+  coinPage: coinPageReducer,
+  infographic: infographicsReducer,
+  table: tableReducer,
+  portfolio: portfolioReducer,
 });
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+});
+
+export const persistor = persistStore(store);
