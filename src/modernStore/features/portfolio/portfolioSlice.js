@@ -23,6 +23,15 @@ export const addAsset = createAsyncThunk(
   async ({ coinData }, { getState }) => {
     const { portfolio, currency } = getState();
     const newAsset = await getAsset(coinData, currency);
+
+    const existingAssetIndex = portfolio.assets.findIndex(
+      (asset) => asset.key === newAsset.key
+    );
+
+    if (existingAssetIndex !== -1) {
+      portfolio.assets[existingAssetIndex] = newAsset;
+    }
+
     return [...portfolio.assets, newAsset];
   }
 );
@@ -39,8 +48,8 @@ const getAsset = async (coinData, currency) => {
     currencySymbol
   );
 
-  const asset = Object.assign(data, historyData);
-  return asset;
+  const assets = Object.assign(data, historyData);
+  return assets;
 };
 
 const getData = async (coin, currencyType) => {
@@ -51,12 +60,11 @@ const getData = async (coin, currencyType) => {
     coin.circulatingSupply = data.market_data.circulating_supply;
     coin.totalSupply = data.market_data.total_supply;
     coin.marketCap = data.market_data.market_cap[currencyType];
-    console.log("testing", coin.marketCap);
     coin.priceChange24h = data.market_data.price_change_24h;
     coin.image = data.image.large;
     return coin;
   } catch (error) {
-    console.error();
+    console.log("error in getData portfolioSlice", error);
   }
 };
 
@@ -110,7 +118,7 @@ const getHistoryData = async (coin, currencyType, currencySymbol) => {
       formattedCirVsTotPer,
     };
   } catch (error) {
-    console.error();
+    console.log("error in getHistoryData portfolioSlice", error);
   }
 };
 

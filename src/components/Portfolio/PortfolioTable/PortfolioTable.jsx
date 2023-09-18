@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { IconWrapper, Icon } from "@/components";
@@ -10,7 +10,9 @@ import {
   getPortfolioSelector,
   setStatusToIdle,
   setStatusCoinToSuccess,
+  addAsset,
 } from "@/modernStore/features/portfolio/portfolioSlice";
+import { getCurrencySelector } from "@/modernStore/features/currency/currencySlice";
 import { FETCHING_STATE } from "@/modernStore/features/fetchingStates";
 
 import { MarketPriceRow, UserCoinPriceRow } from "../NewAssetRow/NewAssetRow";
@@ -29,6 +31,7 @@ import {
 export const PortfolioTable = () => {
   const dispatch = useDispatch();
   const { assets, statusCoin, errorMsg } = useSelector(getPortfolioSelector);
+  const currency = useSelector(getCurrencySelector);
   const [showError, setShowError] = useState(false);
   const [previousAssets, setPreviousAssets] = useState([]);
 
@@ -102,25 +105,7 @@ export const PortfolioTable = () => {
         }, 3000);
         return () => clearTimeout(timer);
     }
-
-    // if (statusCoin === FETCHING_STATE.ERROR) {
-    //   setShowError(true);
-    //   const timer = setTimeout(() => {
-    //     setShowError(false);
-    //     dispatch(setStatusCoinToSuccess());
-    //   }, 3000);
-    //   return () => clearTimeout(timer);
-    // }
-
-    // if (statusCoin === FETCHING_STATE.SUCCESS) {
-    //   setPreviousAssets(assets);
-    //   dispatch(setStatusToIdle());
-    // }
-
-    // if (statusCoin === FETCHING_STATE.IDLE) {
-    //   setPreviousAssets(assets);
-    // }
-  }, [statusCoin, assets]);
+  }, [statusCoin, dispatch, assets]);
 
   return <StatisticsDiv>{determineContent()}</StatisticsDiv>;
 };

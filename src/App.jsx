@@ -1,6 +1,4 @@
-// import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
 import { GlobalProvider } from "@/contexts";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { CoinList, CoinPage, Portfolio, ErrorAPICallPage } from "@/pages";

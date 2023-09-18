@@ -3,8 +3,6 @@ import { UpArrowGreen, DownArrowRed } from "@/styles";
 import { RowDiv, RowItemDiv, Item } from "./NewAssetRow.styles";
 
 export const MarketPriceRow = ({ coin }) => {
-  console.log("🚀 ~ file: NewAssetRow.jsx:6 ~ MarketPriceRow ~ coin:", coin);
-
   return (
     <RowDiv>
       <RowItemDiv>
