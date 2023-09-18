@@ -91,13 +91,16 @@ export const PortfolioTable = () => {
   useEffect(() => {
     switch (statusCoin) {
       case FETCHING_STATE.IDLE:
+        // console.log("useEFFECT status Coin IDLE");
         setPreviousAssets(assets);
         break;
       case FETCHING_STATE.SUCCESS:
+        // console.log("useEFFECT status Coin SUCCES");
         setPreviousAssets(assets);
         dispatch(setStatusToIdle());
         break;
       case FETCHING_STATE.ERROR:
+        // console.log("useEFFECT status Coin ERROR");
         setShowError(true);
         const timer = setTimeout(() => {
           setShowError(false);
@@ -105,7 +108,16 @@ export const PortfolioTable = () => {
         }, 3000);
         return () => clearTimeout(timer);
     }
-  }, [statusCoin, dispatch, assets]);
+  }, [statusCoin, dispatch, assets]); //removed assets dependency.
+
+  // useEffect(() => {
+  //   if (assets.length > 0) {
+  //     console.log(
+  //       "assets.length > 0 USEEFECT dispatching updates assets to new currency"
+  //     );
+  //     assets.forEach((asset) => dispatch(addAsset({ coinData: asset })));
+  //   }
+  // }, [currency.type, dispatch]); //removed assets dependency.
 
   return <StatisticsDiv>{determineContent()}</StatisticsDiv>;
 };
