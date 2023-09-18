@@ -22,6 +22,7 @@ export const addAsset = createAsyncThunk(
   "portfolio/addAsset",
   async ({ coinData }, { getState }) => {
     const { portfolio, currency } = getState();
+    console.log("🚀 ~ file: portfolioSlice.js:25 ~ currency:", currency);
     const newAsset = await getAsset(coinData, currency);
 
     const existingAssetIndex = portfolio.assets.findIndex(
@@ -29,6 +30,9 @@ export const addAsset = createAsyncThunk(
     );
 
     if (existingAssetIndex !== -1) {
+      console.log(
+        "there is a duplicate element in assets, UPDATING, addAsset()"
+      );
       portfolio.assets[existingAssetIndex] = newAsset;
     }
 
@@ -53,9 +57,14 @@ const getAsset = async (coinData, currency) => {
 };
 
 const getData = async (coin, currencyType) => {
+  console.log(
+    "🚀 ~ file: portfolioSlice.js:60 ~ getData ~ currencyType:",
+    currencyType
+  );
   try {
     const { data } = await api(`/coins/${coin.id.toLowerCase()}`);
 
+    console.log("🚀 ~ file: portfolioSlice.js:63 ~ getData ~ data:", data);
     coin.previousPrice = data.market_data.current_price[currencyType];
     coin.circulatingSupply = data.market_data.circulating_supply;
     coin.totalSupply = data.market_data.total_supply;

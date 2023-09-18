@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { api } from "@/utils";
+import { api, formatNum } from "@/utils";
 import { getCurrencySelector } from "../currency/currencySlice";
 import { FETCHING_STATE } from "../fetchingStates";
 
@@ -7,27 +7,45 @@ export const getCoinInfo = createAsyncThunk(
   "infographic/getCoinInfo",
   async (_, { getState }) => {
     const currency = getCurrencySelector(getState());
-
-    const { data } = await api("/global");
+    const currencyType = currency.type.toLowerCase();
 
     const {
-      active_cryptocurrencies: numCoins,
-      markets: numExchange,
-      total_market_cap: totalMarketCap,
-      total_volume: totalVolume,
-      market_cap_percentage: marketCapPercent,
-    } = data;
+      data: {
+        active_cryptocurrencies: numCoins,
+        markets: numExchange,
+        total_market_cap: totalMarketCap,
+        total_volume: totalVolume,
+        market_cap_percentage: marketCapPercent,
+      },
+    } = await api("/global");
 
-    const coinsData = {
+    const formattedMarketCap = formatNum(
+      totalMarketCap[currencyType],
+      currency.symbol
+    );
+
+    const formattedCoinVolume = formatNum(
+      totalVolume[currencyType],
+      currency.symbol
+    );
+    const formattedBitCap = Math.round(marketCapPercent.btc);
+    const formattedEthCap = Math.round(marketCapPercent.eth);
+    const volumeVsMarketCap = (
+      (totalVolume[currencyType] / totalMarketCap[currencyType]) *
+      100
+    ).toFixed(2);
+
+    const infographicData = {
       numCoins,
       numExchange,
-      marketCap: totalMarketCap[currency.type?.toLowerCase()],
-      volume: totalVolume[currency.type?.toLowerCase()],
-      bitCap: marketCapPercent.btc,
-      ethCap: marketCapPercent.eth,
+      formattedMarketCap,
+      formattedCoinVolume,
+      formattedBitCap,
+      formattedEthCap,
+      volumeVsMarketCap,
     };
 
-    return coinsData;
+    return infographicData;
   }
 );
 
@@ -38,15 +56,21 @@ const infographicSlice = createSlice({
     errorMsg: "",
     coinsData: [],
   },
-  reducers: {},
+  reducers: {
+    disappearError: (state) => {
+      state.errorMsg = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCoinInfo.pending, (state) => {
         state.status = FETCHING_STATE.PENDING;
+        state.errorMsg = "";
       })
       .addCase(getCoinInfo.fulfilled, (state, action) => {
         state.status = FETCHING_STATE.SUCCESS;
         state.coinsData = action.payload;
+        state.errorMsg = "";
       })
       .addCase(getCoinInfo.rejected, (state) => {
         state.status = FETCHING_STATE.ERROR;
@@ -55,6 +79,8 @@ const infographicSlice = createSlice({
       });
   },
 });
+
+export const { disappearError } = infographicSlice.actions;
 
 export const getInfographicSelector = (state) => state.infographic;
 

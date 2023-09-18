@@ -17,10 +17,10 @@ export const Results = () => {
 
   useEffect(() => {
     if (statusResults === FETCHING_STATE.ERROR) {
-      showError(true);
+      setShowError(true);
 
       const timer = setTimeout(() => {
-        showError(false);
+        setShowError(false);
         dispatch(disappearResultsError());
       }, 3000);
 
