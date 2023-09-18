@@ -3,7 +3,6 @@ import { api } from "@/utils";
 import { getCurrencySelector } from "../currency/currencySlice";
 import { FETCHING_STATE } from "../fetchingStates";
 
-// Async Action Creator
 export const getCoinInfo = createAsyncThunk(
   "infographic/getCoinInfo",
   async (_, { getState }) => {
