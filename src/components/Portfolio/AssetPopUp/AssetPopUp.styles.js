@@ -77,6 +77,26 @@ export const StyledInput = styled.input`
   &:hover::placeholder {
     opacity: 0.6;
   }
+
+  &[type="date"]::-webkit-calendar-picker-indicator {
+    border: 2px solid ${({ theme }) => theme.nested.active};
+    border-radius: 50%;
+  }
+
+  &[type="date"]::-moz-calendar-picker-indicator {
+    border: 2px solid ${({ theme }) => theme.nested.active};
+    border-radius: 50%;
+  }
+
+  &[type="date"]::-webkit-calendar-picker-indicator:hover {
+    border: 2px solid ${({ theme }) => theme.nested.background};
+    cursor: pointer;
+  }
+
+  &[type="date"]::-moz-calendar-picker-indicator:hover {
+    border: 2px solid ${({ theme }) => theme.nested.background};
+    cursor: pointer;
+  }
 `;
 
 export const InputContainer = styled.div`
