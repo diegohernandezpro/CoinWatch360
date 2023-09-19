@@ -113,7 +113,7 @@ export const Infographic = () => {
   }, [infographic.status]);
 
   useEffect(() => {
-    if (infographic.status === FETCHING_STATE.IDLE) {
+    if (infographic.status === FETCHING_STATE.SUCCESS) {
       dispatch(getCoinInfo());
     }
   }, [currency.type]);
