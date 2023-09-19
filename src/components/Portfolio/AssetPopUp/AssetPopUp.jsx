@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { format } from "date-fns";
 import {
@@ -49,7 +48,9 @@ export const AssetPopUp = () => {
   const currentDate = new Date();
   const formattedCurrentDate = format(currentDate, "yyyy-MM-dd");
 
-  const handleDateChange = (e) => dispatch(setDate(e.target.value));
+  const handleDateChange = (e) => {
+    dispatch(setDate(e.target.value));
+  };
 
   const handleClick = () => {
     if (!portfolio.coin || !portfolio.date || !portfolio.numericAmount) {

@@ -105,7 +105,7 @@ export const PortfolioTable = () => {
         }, 3000);
         return () => clearTimeout(timer);
     }
-  }, [statusCoin]);
+  }, [statusCoin, assets]);
 
   return <StatisticsDiv>{determineContent()}</StatisticsDiv>;
 };
