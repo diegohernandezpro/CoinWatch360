@@ -64,7 +64,7 @@ const getData = async (coin, currencyType) => {
     coin.image = data.image.large;
     return coin;
   } catch (error) {
-    console.error();
+    console.error(error);
   }
 };
 
@@ -76,6 +76,10 @@ const getHistoryData = async (coin, currencyType, currencySymbol) => {
       `/coins/${coin.id.toLowerCase()}/history`,
       `?date=${formattedDate}`
     );
+
+    if (!data.market_data) {
+      throw new Error(`${coinName} not available at that date. Try Again.`);
+    }
 
     const circulatingVsTotalSupply = (
       (coin.circulatingSupply / coin.totalSupply) *
@@ -118,7 +122,8 @@ const getHistoryData = async (coin, currencyType, currencySymbol) => {
       formattedCirVsTotPer,
     };
   } catch (error) {
-    console.error();
+    alert(error.message);
+    console.error(errror);
   }
 };
 
