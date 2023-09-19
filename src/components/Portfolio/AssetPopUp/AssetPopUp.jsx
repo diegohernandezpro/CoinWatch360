@@ -12,7 +12,7 @@ import {
 } from "@/modernStore/features/portfolio/portfolioSlice";
 import { Results, SelectedCoin } from "@/components/Portfolio";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import { faX, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import {
   Container,
   StyledP,
