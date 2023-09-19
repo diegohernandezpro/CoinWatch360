@@ -9,9 +9,9 @@ import {
   getPrice,
   getCoin,
 } from "@/modernStore/features/coinPage/coinPageSlice";
+import { FETCHING_STATE } from "@/modernStore/features/fetchingStates";
 import { ErrorAPICallPage } from "../ErrorPage";
 import { Container, Wrapper, PageContainer } from "./CoinPage.styles";
-import { FETCHING_STATE } from "@/modernStore/features/fetchingStates";
 
 export const CoinPage = () => {
   const dispatch = useDispatch();
@@ -20,6 +20,7 @@ export const CoinPage = () => {
 
   const { id: coinName } = useParams();
 
+  let content = "";
   let graphFooter = "";
 
   switch (coinState.priceStatus) {
@@ -31,13 +32,7 @@ export const CoinPage = () => {
       );
       break;
     case FETCHING_STATE.SUCCESS:
-      graphFooter = (
-        <CoinFooter
-          coinName={coinName}
-          currency={currency.type}
-          coinState={coinState}
-        />
-      );
+      graphFooter = <CoinFooter coinName={coinName} coinState={coinState} />;
       break;
     case FETCHING_STATE.ERROR:
       graphFooter = <Container></Container>;
@@ -46,8 +41,6 @@ export const CoinPage = () => {
       graphFooter = <></>;
       break;
   }
-
-  let content = "";
 
   switch (coinState.coinStatus) {
     case FETCHING_STATE.PENDING:
@@ -94,7 +87,6 @@ export const CoinPage = () => {
       dispatch(
         getPrice({
           coinName,
-          currencyType: currency.type,
           option: coinState.option,
         })
       );
@@ -103,10 +95,10 @@ export const CoinPage = () => {
 
   useEffect(() => {
     dispatch(getCoin(coinName));
+
     dispatch(
       getPrice({
         coinName,
-        currencyType: currency.type,
         option: coinState.option,
       })
     );

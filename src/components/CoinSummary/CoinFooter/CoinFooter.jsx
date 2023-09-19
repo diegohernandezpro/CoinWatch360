@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import {
   Container,
   Wrapper,
@@ -10,7 +10,7 @@ import {
 import { Chart } from "@/components";
 import { getPrice } from "@/modernStore/features/coinPage/coinPageSlice";
 
-export const CoinFooter = ({ coinName, currency, coinState }) => {
+export const CoinFooter = ({ coinName, coinState }) => {
   const dispatch = useDispatch();
   const RADIO_OPTIONS = ["1d", "7d", "30d", "90d", "1y", "Max"];
 
@@ -18,7 +18,6 @@ export const CoinFooter = ({ coinName, currency, coinState }) => {
     dispatch(
       getPrice({
         coinName,
-        currencyType: currency.type,
         option: e.target.value,
       })
     );
