@@ -1,18 +1,13 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-export const Wrapper = styled.header`
+export const Container = styled.header`
   color: ${({ theme }) => theme.color};
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  // border: 2px solid red;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
 `;
 
 export const Navigation = styled.div`
@@ -23,27 +18,6 @@ export const Navigation = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  // border: 2px solid pink;
-
-  @media (max-width: 768px) {
-    flex-direction: row;
-    justify-content: space-around;
-    height: auto;
-  }
-`;
-
-export const MobileNavButton = styled.button`
-  display: none;
-
-  @media (max-width: 768px) {
-    display: block;
-    background-color: ${({ theme }) => theme.background};
-    color: ${({ theme }) => theme.color};
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    // border: 2px solid lightgreen;
-  }
 `;
 
 export const RightNav = styled.div`
@@ -51,12 +25,6 @@ export const RightNav = styled.div`
   margin-right: 1.75rem;
   justify-content: space-between;
   gap: 1.5rem;
-  // border: 2px solid blue;
-
-  @media (max-width: 768px) {
-    margin-right: 0;
-    gap: 1rem;
-  }
 `;
 
 export const LeftNav = styled.div`
@@ -64,12 +32,6 @@ export const LeftNav = styled.div`
   margin-left: 5.625rem;
   align-items: center;
   gap: 1.75rem;
-  // border: 2px solid green;
-
-  @media (max-width: 768px) {
-    margin-left: 0;
-    gap: 1rem;
-  }
 `;
 
 export const StyledNavLink = styled(NavLink)`
@@ -104,8 +66,38 @@ export const StyledDiv = styled.div`
   border: 0.5rem solid ${({ theme }) => theme.nested.background};
   border-bottom: 0px solid transparent;
   border-top: 0px solid transparent;
+`;
 
-  @media (max-width: 768px) {
-    border: 0.25rem solid ${({ theme }) => theme.nested.background};
-  }
+////  MOBILE styles
+
+export const StyledP = styled.p`
+  font-size: 2rem;
+`;
+
+export const MobileContainer = styled.header`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: ${({ theme }) => theme.nested.background};
+  color: ${({ theme }) => theme.color};
+  border: none;
+  cursor: pointer;
+`;
+
+export const MobileNavHeader = styled.header`
+  display: block;
+  border: 2px solid yellow;
+  background-color: ${({ theme }) => theme.background};
+`;
+
+export const MobileNavButton = styled.button`
+  display: none;
+
+  display: block;
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.color};
+  border: none;
+  // padding: 0.5rem 1rem;
+  cursor: pointer;
 `;

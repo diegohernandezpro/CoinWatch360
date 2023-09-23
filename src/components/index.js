@@ -7,3 +7,5 @@ export { Charts, Chart } from "./MainCharts";
 export { CoinSummary, CoinFooter, IconWrapper, Icon } from "./CoinSummary";
 
 export { PortfolioTable, AssetPopUp, Results } from "./Portfolio";
+
+export { MobileNavBar as MobileHeader } from "./MobileHeader";

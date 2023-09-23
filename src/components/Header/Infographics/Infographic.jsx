@@ -18,23 +18,18 @@ import {
   Flex,
 } from "./Infographic.styles"; // Import mobile styles as well
 import { FETCHING_STATE } from "@/modernStore/features/fetchingStates";
+import { getMobileSelector } from "@/modernStore";
 
 export const Infographic = () => {
   const dispatch = useDispatch();
   const [showError, setShowError] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // New state to detect mobile
   const infographic = useSelector(getInfographicSelector);
+  const { isMobile } = useSelector(getMobileSelector);
+  console.log(
+    "🚀 ~ file: Infographic.jsx:28 ~ Infographic ~ isMobile:",
+    isMobile
+  );
   const currency = useSelector(getCurrencySelector);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const {
     numCoins,
@@ -69,9 +64,11 @@ export const Infographic = () => {
       case FETCHING_STATE.SUCCESS:
         content = (
           <Wrapper>
-            <CoinWrapper>Coins {numCoins}</CoinWrapper>
-            <CoinWrapper>Exchange {numExchange}</CoinWrapper>
-            <MarketCap>
+            <CoinWrapper isMobile={isMobile}>Coins {numCoins}</CoinWrapper>
+            <CoinWrapper isMobile={isMobile}>
+              Exchange {numExchange}
+            </CoinWrapper>
+            <MarketCap isMobile={isMobile}>
               <NeutralDot color={({ theme }) => theme.infographic.base} />
               <span>{formattedMarketCap}</span>
               <UpArrowGreen />
