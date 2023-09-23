@@ -12,10 +12,8 @@ import {
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 import { barChart, lineChart, backgroundChartOptions } from "../ChartOptions";
-import { Wrapper, StyledDiv } from "./Chart.styles";
+import { Wrapper } from "./Chart.styles";
 import { useTheme } from "styled-components";
-import beTarask from "date-fns/esm/locale/be-tarask/index.js";
-import { faBreadSlice } from "@fortawesome/free-solid-svg-icons";
 
 ChartJS.register(
   CategoryScale,
@@ -109,7 +107,7 @@ export const Chart = ({ label, data, type, ...rest }) => {
 
   return (
     <>
-      <StyledDiv>{rest.children}</StyledDiv>
+      <>{rest.children}</>
       <Wrapper>{content}</Wrapper>
     </>
   );

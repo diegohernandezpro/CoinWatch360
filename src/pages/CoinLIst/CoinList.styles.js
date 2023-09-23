@@ -9,6 +9,10 @@ export const Container = styled.div`
   justify-content: center;
   padding: 1rem 2rem;
   color: ${({ theme }) => theme.color};
+
+  @media (max-width: 930px){
+    padding: 1rem;
+  }
 `;
 
 export const Wrapper = styled.div`
