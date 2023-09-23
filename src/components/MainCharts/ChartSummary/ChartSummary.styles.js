@@ -5,17 +5,24 @@ export const Container = styled.div`
   height: 5rem;
   display: flex;
   flex-direction: column;
+  // border: 2px solid blue;
 
-  div {
-    font-weight: 300;
-    margin: 0;
-    line-height: 2rem;
+  @media (max-width: 930px) {
+    overflow: auto;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
+`;
 
-  h2 {
-    font-weight: 300;
-    font-size: 1.8rem;
-    margin: 0;
-    line-height: 2rem;
-  }
+export const StyledDiv = styled.div`
+  overflow: autor;
+  font-size: ${({ font }) => {
+    if (font) {
+      return "1.8rem";
+    }
+    return "1.0rem";
+  }};
 `;
