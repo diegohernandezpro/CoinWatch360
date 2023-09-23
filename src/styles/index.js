@@ -7,4 +7,4 @@ export {
   NeutralDot,
 } from "./Arrows";
 
-export { StyledDiv } from "./StyledDiv";
+export { Wrapper } from "./WrapperStyles";

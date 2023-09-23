@@ -10,6 +10,7 @@ import coinPageReducer from "./features/coinPage/coinPageSlice";
 import infographicsReducer from "./features/infographic/infographicSlice";
 import tableReducer from "./features/table/tableSlice";
 import portfolioReducer from "./features/portfolio/portfolioSlice";
+import mobileReducer from "./features/mobile/mobileSlice";
 
 const persistConfig = {
   key: "root",
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   infographic: infographicsReducer,
   table: tableReducer,
   portfolio: portfolioReducer,
+  mobile: mobileReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -34,3 +36,6 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+//Selectors
+export const getMobileSelector = (state) => state.mobile;
