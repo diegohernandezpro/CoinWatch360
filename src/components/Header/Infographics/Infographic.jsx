@@ -11,19 +11,30 @@ import { UpArrowGreen, NeutralDot } from "@/styles";
 import { TextNSlider } from "./TextNSlider";
 import {
   Container,
+  MobileContainer,
   CoinWrapper,
   MarketCap,
   Icon,
   Flex,
-} from "./Infographic.styles";
-
+} from "./Infographic.styles"; // Import mobile styles as well
 import { FETCHING_STATE } from "@/modernStore/features/fetchingStates";
 
 export const Infographic = () => {
   const dispatch = useDispatch();
   const [showError, setShowError] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // New state to detect mobile
   const infographic = useSelector(getInfographicSelector);
   const currency = useSelector(getCurrencySelector);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const {
     numCoins,
@@ -40,22 +51,24 @@ export const Infographic = () => {
 
   let content = "";
 
+  const Wrapper = isMobile ? MobileContainer : Container; // Choose between mobile and desktop container
+
   if (showError) {
     content = <p>{infographic.errorMsg}</p>;
   } else {
     switch (infographic.status) {
       case FETCHING_STATE.PENDING:
         content = (
-          <Container>
+          <Wrapper>
             <Flex>
               <LoadingCircle width="1rem" />
             </Flex>
-          </Container>
+          </Wrapper>
         );
         break;
       case FETCHING_STATE.SUCCESS:
         content = (
-          <Container>
+          <Wrapper>
             <CoinWrapper>Coins {numCoins}</CoinWrapper>
             <CoinWrapper>Exchange {numExchange}</CoinWrapper>
             <MarketCap>
@@ -67,7 +80,9 @@ export const Infographic = () => {
               text={formattedCoinVolume}
               percentage={volumeVsMarketCap}
             >
-              <NeutralDot color={({ theme }) => theme.infographic.filler} />
+              {!isMobile && (
+                <NeutralDot color={({ theme }) => theme.infographic.filler} />
+              )}
             </TextNSlider>
             <TextNSlider
               text={`${formattedBitCap}%`}
@@ -83,10 +98,9 @@ export const Infographic = () => {
             >
               <Icon src={getIcon("ethereum")} />
             </TextNSlider>
-          </Container>
+          </Wrapper>
         );
         break;
-
       default:
         content = <></>;
         break;
