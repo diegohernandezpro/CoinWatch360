@@ -11,10 +11,26 @@ export const Container = styled.div`
   font-size: 0.9rem;
 `;
 
+// Newly added MobileContainer for mobile views
+export const MobileContainer = styled(Container)`
+  @media (max-width: 768px) {
+    width: 100%; // Use the full width for mobile
+    flex-direction: row; // Stack the items vertically
+    height: auto; // Auto-adjust the height based on content
+    padding: 1rem; // Add padding to avoid content sticking to the edges
+    font-size: 0.8rem; // Slightly reduce the font size
+    background: ${({ theme }) => theme.nested.active};
+  }
+`;
+
 export const CoinWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const MarketCap = styled.div`
@@ -22,6 +38,10 @@ export const MarketCap = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Icon = styled.img`
