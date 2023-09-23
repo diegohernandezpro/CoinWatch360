@@ -25,10 +25,7 @@ export const Infographic = () => {
   const [showError, setShowError] = useState(false);
   const infographic = useSelector(getInfographicSelector);
   const { isMobile } = useSelector(getMobileSelector);
-  console.log(
-    "🚀 ~ file: Infographic.jsx:28 ~ Infographic ~ isMobile:",
-    isMobile
-  );
+
   const currency = useSelector(getCurrencySelector);
 
   const {
