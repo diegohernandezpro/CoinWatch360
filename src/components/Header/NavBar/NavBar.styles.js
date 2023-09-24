@@ -51,7 +51,7 @@ export const StyledNavLink = styled(NavLink)`
     background-color: ${({ theme }) => theme.nested.active};
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
     height: 2.5rem;
     width: 5rem;
     font-size: 0.875rem;

@@ -21,7 +21,7 @@ export const ChartWrapper = styled.div`
   padding: 2rem;
   overflow: hidden;
 
-  @media (max-width: 930px) {
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
     padding: 1rem;
   }
 `;

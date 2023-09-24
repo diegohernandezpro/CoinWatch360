@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
-  TableVolume,
   SliderWrapper,
   SliderFill,
   ValuesSpan,
   Values,
   StyledText,
 } from "./Slider.styles";
+import { TableVolume } from "../NewRow/NewRow.styles";
 import { NeutralDot, sliderColors } from "@/styles";
 import { formatNum } from "@/utils";
+import { getMobileSelector } from "@/modernStore";
 
 export const Slider = ({ base, fill, rank, currencySymbol }) => {
+  const { isMobile } = useSelector(getMobileSelector);
   const [baseSlider, setBaseSlider] = useState(() =>
     formatNum(base, currencySymbol)
   );
@@ -42,11 +45,11 @@ export const Slider = ({ base, fill, rank, currencySymbol }) => {
     <TableVolume>
       <ValuesSpan>
         <Values>
-          <NeutralDot color={fillColor} />
+          {!isMobile && <NeutralDot color={fillColor} />}
           <StyledText color={fillColor}>{baseFiller}</StyledText>
         </Values>
         <Values>
-          <NeutralDot color={baseColor} />
+          {!isMobile && <NeutralDot color={baseColor} />}
           <StyledText color={baseColor}>{baseSlider}</StyledText>
         </Values>
       </ValuesSpan>

@@ -1,26 +1,37 @@
+import { useSelector } from "react-redux";
+import { getMobileSelector } from "@/modernStore";
 import {
+  TableRow,
   TableName,
   TablePrice,
   TableTimeChange,
-  TableVolume,
   TableSparkline,
   TableNum,
-} from "./Heading.styles";
-
-import { HeadingTableRow } from "./Heading.styles";
+  TableVolume,
+} from "../NewRow/NewRow.styles";
 
 export const Heading = () => {
+  const { isMobile } = useSelector(getMobileSelector);
   return (
-    <HeadingTableRow>
+    <TableRow>
       <TableNum>#</TableNum>
       <TableName>Name</TableName>
       <TablePrice>Price</TablePrice>
       <TableTimeChange>1h%</TableTimeChange>
       <TableTimeChange>24h%</TableTimeChange>
       <TableTimeChange>7d%</TableTimeChange>
-      <TableVolume>24h Volume/Market Cap</TableVolume>
-      <TableVolume>Circulating/Total Supply</TableVolume>
+      {isMobile ? (
+        <TableVolume>24h Vol/Mar Cap</TableVolume>
+      ) : (
+        <TableVolume>24h Volume/Market Cap</TableVolume>
+      )}
+
+      {isMobile ? (
+        <TableVolume>Cir/Tot Supply</TableVolume>
+      ) : (
+        <TableVolume>Circulating/Total Supply</TableVolume>
+      )}
       <TableSparkline>Last 7d</TableSparkline>
-    </HeadingTableRow>
+    </TableRow>
   );
 };

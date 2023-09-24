@@ -9,7 +9,7 @@ export const StyledDiv = styled.div`
 
 // Mobile-specific styles
 export const MobileStyledDiv = styled(StyledDiv)`
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
     flex-direction: row;
     gap: 0.2rem;
   }
