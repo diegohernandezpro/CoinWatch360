@@ -4,13 +4,7 @@ import {
   getCurrencySelector,
 } from "@/modernStore/features/currency/currencySlice";
 
-import {
-  Wrapper,
-  Icon,
-  Container,
-  StyledSelect,
-  Flex,
-} from "./CurrencySelector.styles";
+import { Icon, Container, StyledSelect } from "./CurrencySelector.styles";
 
 export const CurrencySelector = () => {
   const dispatch = useDispatch();
@@ -21,15 +15,13 @@ export const CurrencySelector = () => {
   return (
     <Container>
       <Icon>{currency.symbol}</Icon>
-      <Wrapper>
-        <StyledSelect value={currency.type} onChange={handleSelectChange}>
-          <option value="USD">USD</option>
-          <option value="GBP">GBP</option>
-          <option value="EUR">EUR</option>
-          <option value="BTC">BTC</option>
-          <option value="ETH">ETH</option>
-        </StyledSelect>
-      </Wrapper>
+      <StyledSelect value={currency.type} onChange={handleSelectChange}>
+        <option value="USD">USD</option>
+        <option value="GBP">GBP</option>
+        <option value="EUR">EUR</option>
+        <option value="BTC">BTC</option>
+        <option value="ETH">ETH</option>
+      </StyledSelect>
     </Container>
   );
 };
