@@ -9,6 +9,13 @@ export const CoinDisplay = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
+
+
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size; ${({ theme }) => theme.mobile.font};
+    height: 12rem;
+  }
 `;
 
 export const NameDiv = styled.div`
