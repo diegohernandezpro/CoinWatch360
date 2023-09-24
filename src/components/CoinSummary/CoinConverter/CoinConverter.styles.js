@@ -20,18 +20,10 @@ export const LinkWrapper = styled.span`
   align-items: center;
   justify-content: space-between;
   overflow: auto;
-`;
 
-export const IconWrapper = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0rem 1rem;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.5;
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: ${({ theme }) => theme.mobile.font};
+    width: 100%;
   }
 `;
 
@@ -48,6 +40,25 @@ export const ConvertIcon = styled.div`
   }
 `;
 
+export const IconWrapper = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0rem 1rem;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: ${({ theme }) => theme.mobile.font};
+    width: 1rem;
+    margin: 0;
+  }
+`;
+
 export const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -61,6 +72,26 @@ export const StyledLink = styled(Link)`
     opacity: 0.5;
   }
   text-align: center;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: ${({ theme }) => theme.mobile.font};
+    width: 80%;
+    margin: 0;
+  }
+`;
+
+export const StyledLinkIcon = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+  text-align: center;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 export const ConverterContainer = styled.div`
@@ -70,6 +101,11 @@ export const ConverterContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: ${({ theme }) => theme.mobile.font};
+    flex-wrap: wrap;
+  }
 `;
 
 export const ConverterWrapper = styled.div`
@@ -80,6 +116,11 @@ export const ConverterWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: ${({ theme }) => theme.mobile.font};
+    width: 16rem;
+  }
 `;
 
 export const CurrencyHolder = styled.div`

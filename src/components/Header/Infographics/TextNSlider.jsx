@@ -4,10 +4,10 @@ import {
   MobileStyledDiv,
   SliderWrapper,
   Slider,
-} from "./TextNSlider.styles"; // Import mobile styles
+} from "./TextNSlider.styles";
 
 export function TextNSlider({ text, percentage, ...rest }) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // New state to detect mobile
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
     const handleResize = () => {
@@ -19,7 +19,7 @@ export function TextNSlider({ text, percentage, ...rest }) {
     };
   }, []);
 
-  const Wrapper = isMobile ? MobileStyledDiv : StyledDiv; // Choose between mobile and desktop styled div
+  const Wrapper = isMobile ? MobileStyledDiv : StyledDiv;
 
   return (
     <Wrapper>

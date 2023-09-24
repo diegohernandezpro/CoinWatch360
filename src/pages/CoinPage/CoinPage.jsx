@@ -17,7 +17,6 @@ export const CoinPage = () => {
   const dispatch = useDispatch();
   const coinState = useSelector(getCoinPageSelector);
   const currency = useSelector(getCurrencySelector);
-
   const { id: coinName } = useParams();
 
   let content = "";

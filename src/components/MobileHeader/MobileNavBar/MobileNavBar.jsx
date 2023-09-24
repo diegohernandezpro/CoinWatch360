@@ -7,45 +7,76 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { nanoid } from "@reduxjs/toolkit";
 import {
-  SearchBar,
-  CurrencySelector,
-  ThemeSelector,
-  Infographic,
-} from "@/components/Header";
-import { Container, Child, IconWrapper } from "./MobileNavBar.styles";
+  Container,
+  Child,
+  IconWrapper,
+  StyledNavLink,
+} from "./MobileNavBar.styles";
 
 export function MobileNavBar() {
   let content = "";
   const OPTIONS_HEADER = {
     overview: {
+      name: "overview",
       icon: faChartSimple,
       key: nanoid(),
+      link: "/",
     },
     portfolio: {
+      name: "portfolio",
       icon: faFolderPlus,
       key: nanoid(),
+      link: "/portfolio",
     },
     search: {
+      name: "search",
       icon: faMagnifyingGlass,
       key: nanoid(),
     },
     currency: {
+      name: "currency",
       icon: faDollarSign,
       key: nanoid(),
     },
   };
 
-  const navIcons = Object.values(OPTIONS_HEADER).map((el) => {
-    return (
-      <Child key={el.key}>
-        <IconWrapper>
-          <FontAwesomeIcon icon={el.icon} />
-        </IconWrapper>
-      </Child>
-    );
-  });
+  const getNavBar = (el) => {
+    let content = "";
 
-  content = navIcons;
+    switch (el.name) {
+      case "overview":
+      case "portfolio":
+        content = (
+          <StyledNavLink exact="true" to={el.link}>
+            <IconWrapper>
+              <FontAwesomeIcon icon={el.icon} />
+            </IconWrapper>
+          </StyledNavLink>
+        );
+        break;
+      case "search":
+        content = (
+          <IconWrapper>
+            <FontAwesomeIcon icon={el.icon} />
+          </IconWrapper>
+        );
+        break;
+      case "currency":
+        content = (
+          <IconWrapper>
+            <FontAwesomeIcon icon={el.icon} />
+          </IconWrapper>
+        );
+        break;
+
+      default:
+        content = <></>;
+    }
+
+    return <Child key={el.key}>{content}</Child>;
+  };
+
+  content = Object.values(OPTIONS_HEADER).map((el) => getNavBar(el));
 
   return <Container>{content}</Container>;
 }

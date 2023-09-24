@@ -10,6 +10,7 @@ import {
   CurrencyHolder,
   StyledInput,
   StyledDiv,
+  StyledLinkIcon,
 } from "./CoinConverter.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -92,11 +93,11 @@ export const CoinConverter = ({
         {Object.values(links).map((element, i) => {
           return (
             <LinkWrapper key={i}>
-              <StyledLink to={element}>
-                <IconWrapper>
+              <IconWrapper>
+                <StyledLinkIcon to={element}>
                   <FontAwesomeIcon icon={faLink} />
-                </IconWrapper>
-              </StyledLink>
+                </StyledLinkIcon>
+              </IconWrapper>
               <StyledLink to={element}>{element}</StyledLink>
               <IconWrapper>
                 <FontAwesomeIcon

@@ -9,7 +9,6 @@ export const CoinBullets = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  gap: 0.3rem;
 
   ul {
     li {
@@ -28,11 +27,27 @@ export const CoinBullets = styled.div`
       }
     }
   }
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: ${({ theme }) => theme.mobile.font};
+    width: 16.5rem;
+    margin: 0;
+
+    ul {
+      li {
+        margin-left: 0rem;
+      }
+    }
+  }
 `;
 
 export const FormatBullet = styled.div`
   color: ${({ theme }) => theme.infographic.base};
   font-size: 1.2rem;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: Calc(${({ theme }) => theme.mobile.font} + 0.2rem);
+  }
 `;
 
 export const FactWrapper = styled.div`
@@ -40,4 +55,11 @@ export const FactWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: ${({ theme }) => theme.mobile.font};
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
 `;

@@ -9,6 +9,10 @@ export const Container = styled.div`
   align-items: flex-start;
   margin-top: 3rem;
   gap: 2.5rem;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: ${({ theme }) => theme.mobile.font};
+  }
 `;
 
 export const Wrapper = styled.div`
