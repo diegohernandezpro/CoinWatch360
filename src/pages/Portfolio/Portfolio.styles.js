@@ -11,6 +11,7 @@ export const Container = styled.div`
   align-items: center;
   padding: 1rem 2rem;
   color: ${({ theme }) => theme.color};
+  overflow: auto;
 `;
 
 export const StyledButton = styled.button`
@@ -20,11 +21,16 @@ export const StyledButton = styled.button`
   border: none;
   width: 40rem;
 
-  max-width: 23rem;
+  min-width: 23rem;
   height: 3.4rem;
   border-radius: 1rem;
 
   &:hover {
     cursor: pointer;
+  }
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    width: 10rem;
+    min-width: 8rem;
   }
 `;

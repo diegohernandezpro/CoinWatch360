@@ -51,6 +51,9 @@ export const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+  }
 `;
 
 export const Icon = styled.img`
