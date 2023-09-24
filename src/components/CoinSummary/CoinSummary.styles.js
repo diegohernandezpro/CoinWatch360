@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border: 2px solid red;
 `;
 
 export const StyledP = styled.p``;

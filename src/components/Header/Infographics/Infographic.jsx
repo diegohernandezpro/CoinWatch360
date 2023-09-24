@@ -16,7 +16,7 @@ import {
   MarketCap,
   Icon,
   Flex,
-} from "./Infographic.styles"; // Import mobile styles as well
+} from "./Infographic.styles";
 import { FETCHING_STATE } from "@/modernStore/features/fetchingStates";
 import { getMobileSelector } from "@/modernStore";
 
@@ -43,7 +43,7 @@ export const Infographic = () => {
 
   let content = "";
 
-  const Wrapper = isMobile ? MobileContainer : Container; // Choose between mobile and desktop container
+  const Wrapper = isMobile ? MobileContainer : Container;
 
   if (showError) {
     content = <p>{infographic.errorMsg}</p>;

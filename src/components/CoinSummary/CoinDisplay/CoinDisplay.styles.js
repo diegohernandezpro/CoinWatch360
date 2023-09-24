@@ -16,14 +16,19 @@ export const StyledLink = styled(Link)`
   &:nth-child(2) {
     margin-right: 1rem;
   }
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+  }
 `;
 
 export const CoinDisplayWrapper = styled.div`
   width: 16.5rem;
-  height: 100%;
+  height: 18rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  gap: 0.5rem;
 `;
 
 export const CoinDiv = styled.div`
@@ -64,7 +69,7 @@ export const CoinName = styled.div`
   align-items: center;
   font-size: 1.2rem;
   overflow: auto;
-  padding: 0 0.5rem;
+  padding: 0.5rem 1rem;
 `;
 
 export const CoinLinkDiv = styled.div`

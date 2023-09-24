@@ -4,15 +4,20 @@ export const CoinPriceWrapper = styled.div`
   background: ${({ theme }) => theme.nested.background};
   border-radius: 0.6rem;
   width: 25.3rem;
-  height: 100%;
+  height: 18rem;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: ${({ theme }) => theme.mobile.font};
+    width: 16.5rem;
+  }
 `;
 
 export const PriceFactsDiv = styled.div`
   width: 100%;
-  height: 90%;
+  height: 100%;
   border-radius: 0.6rem;
   display: flex;
   justify-content: space-around;
@@ -51,6 +56,7 @@ export const StyledDiv = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  
 
   span {
     height: 100%

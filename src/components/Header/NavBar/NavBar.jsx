@@ -1,6 +1,4 @@
 import { useSelector } from "react-redux";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { getMobileSelector } from "@/modernStore";
 import {
   SearchBar,
@@ -47,7 +45,10 @@ export function NavBar() {
       );
       break;
     case true:
-      content = <StyledP>Overview:</StyledP>;
+      content = <StyledP>Overview</StyledP>;
+      break;
+    default:
+      content = null;
       break;
   }
 

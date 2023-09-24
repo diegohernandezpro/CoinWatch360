@@ -12,11 +12,11 @@ export const Container = styled.div`
 `;
 
 export const MobileContainer = styled(Container)`
-  width: 100%; // Use the full width for mobile
-  flex-direction: row; // Stack the items vertically
-  height: auto; // Auto-adjust the height based on content
-  padding: 1rem; // Add padding to avoid content sticking to the edges
-  font-size: 0.8rem; // Slightly reduce the font size
+  width: 100%;
+  flex-direction: row;
+  height: auto;
+  padding: 1rem;
+  font-size: 0.8rem;
   background: ${({ theme }) => theme.nested.active};
   display: flex;
   flex-wrap: wrap;

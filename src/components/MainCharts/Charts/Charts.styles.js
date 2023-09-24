@@ -49,14 +49,11 @@ export const ErrorP = styled.p`
   overflow: scroll;
 `;
 
-//mobile styles
-
 export const MobileContainer = styled.div`
   display: flex;
   height: 14rem;
   width: 100%;
   overflow: auto;
-  // border: 2px solid red;
 `;
 
 export const NextPageButton = styled.button`

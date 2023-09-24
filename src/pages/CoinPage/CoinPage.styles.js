@@ -12,10 +12,15 @@ export const Container = styled.div`
   flex-direction: row;
   padding: 1rem 2rem;
   color: ${({ theme }) => theme.color};
+
+  
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
+  overflow: auto;
 `;
 
-export const PageContainer = styled.div``;
+export const PageContainer = styled.div`
+  overflow: auto;
+`;

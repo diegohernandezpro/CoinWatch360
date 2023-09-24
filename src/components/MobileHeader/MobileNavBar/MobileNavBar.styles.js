@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export const Container = styled.header`
   height: 10vh;
@@ -34,3 +35,5 @@ export const IconWrapper = styled.div`
     cursor: pointer;
   }
 `;
+
+export const StyledNavLink = styled(NavLink)``;

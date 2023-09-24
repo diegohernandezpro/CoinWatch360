@@ -6,7 +6,6 @@ export const Wrapper = styled.div`
   overflow: visible;
 
   @media (max-width: ${({ theme }) => theme.mobile.width}) {
-    // border: 2px solid red;
     height: 80%;
   }
 `;

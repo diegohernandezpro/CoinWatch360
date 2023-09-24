@@ -68,10 +68,13 @@ export const StyledDiv = styled.div`
   border-top: 0px solid transparent;
 `;
 
-////  MOBILE styles
-
 export const StyledP = styled.p`
   font-size: 2rem;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: 1.5rem;
+    margin: 0.5rem;
+  }
 `;
 
 export const MobileContainer = styled.header`
@@ -87,7 +90,6 @@ export const MobileContainer = styled.header`
 
 export const MobileNavHeader = styled.header`
   display: block;
-  border: 2px solid yellow;
   background-color: ${({ theme }) => theme.background};
 `;
 
@@ -98,6 +100,5 @@ export const MobileNavButton = styled.button`
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.color};
   border: none;
-  // padding: 0.5rem 1rem;
   cursor: pointer;
 `;

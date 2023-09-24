@@ -7,7 +7,6 @@ export const StyledDiv = styled.div`
   gap: 0.4rem;
 `;
 
-// Mobile-specific styles
 export const MobileStyledDiv = styled(StyledDiv)`
   @media (max-width: ${({ theme }) => theme.mobile.width}) {
     flex-direction: row;
