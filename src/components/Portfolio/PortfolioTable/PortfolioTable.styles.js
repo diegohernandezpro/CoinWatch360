@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+export const PortfolioTableContainer = styled.div``;
+
 export const StatisticsDiv = styled.div`
   width: 100%;
   height: 100%;
@@ -14,6 +16,12 @@ export const NewCoinDiv = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    height: auto;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 `;
 
 export const CoinDisplayDiv = styled.div`
@@ -23,6 +31,12 @@ export const CoinDisplayDiv = styled.div`
   background: ${({ theme }) => theme.nested.background};
   border-radius: 0.5rem;
   position: relative;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    height: Calc(20% - 2 * 0.6rem);
+    margin-bottom: 2rem;
+    height: 13.5rem;
+  }
 `;
 
 export const CoinInfoDiv = styled.div`
@@ -32,10 +46,23 @@ export const CoinInfoDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: auto;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    padding: 0;
+    height: auto;
+    width: 100%;
+    margin: 0;
+  }
 `;
 
 export const SytyledP = styled.p`
   width: 100%;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: ${({ theme }) => theme.mobile.font};
+    margin-bottom: 1rem;
+  }
 `;
 
 export const CoinDisplay = styled.div`
@@ -74,6 +101,12 @@ export const ClosingButton = styled.button`
   &:hover {
     cursor: pointer;
     color: ${({ theme }) => theme.money.red};
+  }
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    bottom: 0rem;
+    left: 6rem;
+    transform: translate(-50%, -50%);
   }
 `;
 

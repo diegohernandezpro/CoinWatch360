@@ -12,16 +12,12 @@ export const Container = styled.div`
   align-items: center;
   position: relative;
 
-  // border: 2px solid lightgreen;
-
-
   @media (max-width: ${({ theme }) => theme.mobile.width}) {
     font-size; ${({ theme }) => theme.mobile.font};
     min-width: 8rem;
     width: 100%;
     height: 100%;
     justify-content: space-around;
-
 
   }
 
@@ -48,7 +44,6 @@ export const StyledP = styled.p`
   font-size: 1.2rem;
   color: ${({ theme }) => theme.color};
 
-  // border: 2px solid green;
   margin: 0;
 
   @media (max-width: ${({ theme }) => theme.mobile.width}) {
@@ -62,16 +57,11 @@ export const CoinWrapper = styled.div`
   display: flex;
   gap: 1rem;
   overflow: auto;
-
-  // border: 2px solid cyan;
   margin:0;
 
-
-  
   @media (max-width: ${({ theme }) => theme.mobile.width}) {
     font-size; ${({ theme }) => theme.mobile.font};
     flex-direction: column;
-    // overflow: visible;
     height: 80%;
     justify-content: center;
     align-items: center;
@@ -85,7 +75,7 @@ export const SelectorsDiv = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-
+  overflow: auto;
 
   @media (max-width: ${({ theme }) => theme.mobile.width}) {
     font-size; ${({ theme }) => theme.mobile.font};
@@ -165,6 +155,7 @@ export const StyledButton = styled.button`
   font-size: 1rem;
   border: none;
 
+
   &:hover {
     cursor: pointer;
     opacity: 0.5;
@@ -184,7 +175,6 @@ export const ButtonWrapper = styled.div`
   width: 100%;
   gap: 1rem;
 
-  // border: 2px solid blue;
   margin: 0;
 
 
