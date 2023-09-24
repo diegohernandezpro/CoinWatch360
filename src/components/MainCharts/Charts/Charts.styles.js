@@ -23,6 +23,9 @@ export const ChartWrapper = styled.div`
 
   @media (max-width: ${({ theme }) => theme.mobile.width}) {
     padding: 1rem;
+    margin: 0;
+    padding: 0;
+    height: 100%;
   }
 `;
 
@@ -51,9 +54,11 @@ export const ErrorP = styled.p`
 
 export const MobileContainer = styled.div`
   display: flex;
-  height: 14rem;
+  flex-direction: column;
+  height: 30vh;
   width: 100%;
   overflow: auto;
+  position: relative;
 `;
 
 export const NextPageButton = styled.button`
@@ -75,9 +80,11 @@ export const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  position: absolute;
+  top: 3rem;
+  right: 0;
 `;
 
 export const ButtonOutline = styled.div`
   border-radius: 5rem;
-  background: ${({ theme }) => theme.nested.active};
 `;

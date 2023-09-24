@@ -13,11 +13,13 @@ export const Container = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    width: Calc(100% - 1rem);
+    padding: 0rem 0.5rem;
   }
 `;
 
 export const StyledDiv = styled.div`
-  overflow: autor;
+  overflow: auto;
   font-size: ${({ font }) => {
     if (font) {
       return "1.8rem";

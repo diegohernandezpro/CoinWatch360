@@ -106,17 +106,17 @@ export const Charts = () => {
           <>
             <MobileContainer>
               <ChartWrapper>{graphContent}</ChartWrapper>
+              <ButtonWrapper>
+                <ButtonOutline>
+                  <NextPageButton onClick={() => handleClick("main")}>
+                    <FontAwesomeIcon icon={faChevronLeft} />
+                  </NextPageButton>
+                  <NextPageButton onClick={() => handleClick("secondary")}>
+                    <FontAwesomeIcon icon={faChevronRight} />
+                  </NextPageButton>
+                </ButtonOutline>
+              </ButtonWrapper>
             </MobileContainer>
-            <ButtonWrapper>
-              <ButtonOutline>
-                <NextPageButton onClick={() => handleClick("main")}>
-                  <FontAwesomeIcon icon={faChevronLeft} />
-                </NextPageButton>
-                <NextPageButton onClick={() => handleClick("secondary")}>
-                  <FontAwesomeIcon icon={faChevronRight} />
-                </NextPageButton>
-              </ButtonOutline>
-            </ButtonWrapper>
           </>
         );
       } else {
