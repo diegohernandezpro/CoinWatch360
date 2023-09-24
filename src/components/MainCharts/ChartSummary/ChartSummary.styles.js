@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   // border: 2px solid blue;
 
-  @media (max-width: 930px) {
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
     overflow: auto;
     height: 20%;
     display: flex;

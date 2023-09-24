@@ -7,6 +7,7 @@ export const StyledP = styled.p`
 `;
 
 export const TableContainer = styled.div`
+  // border: 2px solid red;
   margin: 2rem 0rem 4rem;
   height: 40.5rem;
   padding: 1rem;
@@ -17,6 +18,12 @@ export const TableContainer = styled.div`
   border-radius: 0.5rem;
   overflow: auto;
   position: relative;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    height: 20rem;
+    margin: 0rem;
+    // margin-top: 1rem;
+  }
 `;
 
 export const TableWrapper = styled.div`

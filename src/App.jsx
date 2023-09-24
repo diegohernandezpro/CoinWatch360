@@ -9,12 +9,12 @@ import { GlobalStyle, Wrapper } from "@/styles";
 import { setMobile } from "@/modernStore/features/mobile/mobileSlice";
 
 const App = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 930);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1200);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 930);
+      setIsMobile(window.innerWidth <= 1200);
     };
     window.addEventListener("resize", handleResize);
     return () => {

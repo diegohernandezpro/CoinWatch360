@@ -27,6 +27,10 @@ export const theme = {
       red: "#FE1040",
       background: "#191B1F",
     },
+    mobile: {
+      font: "0.8rem",
+      width: "60rem",
+    },
   },
   light: {
     background: "#fff",
@@ -56,6 +60,10 @@ export const theme = {
 
       red: "#F04E42",
       background: "#ADBBC2",
+    },
+    mobile: {
+      font: "0.8rem",
+      width: "60rem",
     },
   },
 };

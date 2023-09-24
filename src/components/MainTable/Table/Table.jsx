@@ -10,14 +10,56 @@ import {
   getTableDataSelector,
   getCoinList,
 } from "@/modernStore/features/table/tableSlice";
+import { getMobileSelector } from "@/modernStore";
+
 import { FETCHING_STATE } from "@/modernStore/features/fetchingStates";
 
 export const Table = () => {
   const dispatch = useDispatch();
   const currency = useSelector(getCurrencySelector);
+  const { isMobile } = useSelector(getMobileSelector);
   const { status, errorMsg, data } = useSelector(getTableDataSelector);
-
   let content = "";
+  let tableContent = "";
+
+  if (!isMobile) {
+    tableContent = (
+      <>
+        <StyledP>Your Overview</StyledP>
+        <TableContainer>
+          <TableWrapper>
+            <Heading />
+            {data.map((coin) => {
+              return (
+                <NewRow
+                  key={coin.id}
+                  coin={coin}
+                  currencySymbol={currency.symbol}
+                />
+              );
+            })}
+          </TableWrapper>
+        </TableContainer>
+      </>
+    );
+  } else {
+    tableContent = (
+      <TableContainer>
+        <TableWrapper>
+          <Heading />
+          {data.map((coin) => {
+            return (
+              <NewRow
+                key={coin.id}
+                coin={coin}
+                currencySymbol={currency.symbol}
+              />
+            );
+          })}
+        </TableWrapper>
+      </TableContainer>
+    );
+  }
 
   switch (status) {
     case FETCHING_STATE.PENDING:
@@ -30,25 +72,7 @@ export const Table = () => {
       );
       break;
     case FETCHING_STATE.SUCCESS:
-      content = (
-        <>
-          <StyledP>Your Overview</StyledP>
-          <TableContainer>
-            <Heading />
-            <TableWrapper>
-              {data.map((coin) => {
-                return (
-                  <NewRow
-                    key={coin.id}
-                    coin={coin}
-                    currencySymbol={currency.symbol}
-                  />
-                );
-              })}
-            </TableWrapper>
-          </TableContainer>
-        </>
-      );
+      content = tableContent;
       break;
     case FETCHING_STATE.ERROR:
       content = <ErrorP msg={errorMsg}>{errorMsg}</ErrorP>;
