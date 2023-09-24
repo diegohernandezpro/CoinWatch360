@@ -25,21 +25,6 @@ export const Icon = styled.div`
   font-size: 1rem;
 `;
 
-export const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 1rem;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  :hover {
-    cursor: pointer;
-  }
-`;
-
 export const StyledSelect = styled.select`
   width: 3.5rem;
   height: 2rem;
@@ -48,12 +33,19 @@ export const StyledSelect = styled.select`
   color: inherit;
   font-size: 1rem;
   outline: none;
-`;
+  text-align: center;
 
-export const Flex = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    background: ${({ theme }) => theme.chart.color};
+    padding: 0.5rem;
+    color: ${({ theme }) => theme.color};
+    border-radius: 6rem;
+    // border: 2px solid red;
+    width: 100%;
+    height: 100%;
+  }
 `;
