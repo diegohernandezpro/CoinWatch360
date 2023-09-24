@@ -11,7 +11,12 @@ export const DropDownUl = styled.ul`
   position: absolute;
   top: 3.8rem;
   overflow-y: auto;
-  z-index: 2;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: ${({ theme }) => theme.mobile.font};
+    width: 100%;
+    height: 250%;
+  }
 `;
 
 export const ResultRowLi = styled.li`

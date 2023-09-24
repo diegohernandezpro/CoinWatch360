@@ -19,13 +19,9 @@ export const CoinDisplay = styled.div`
 `;
 
 export const NameDiv = styled.div`
-  height: 2rem;
   border-radius: 0.5rem;
-  padding: 0 0.5rem;
   background: ${({ theme }) => theme.nested.active};
   color: ${({ theme }) => theme.color};
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  padding: 0.3rem 0.6rem;
 `;

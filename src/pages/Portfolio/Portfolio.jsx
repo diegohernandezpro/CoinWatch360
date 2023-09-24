@@ -4,7 +4,8 @@ import {
   getPortfolioSelector,
   togglePopUpOn,
 } from "@/modernStore/features/portfolio/portfolioSlice";
-import { Container, StyledButton } from "./Portfolio.styles";
+import { Container } from "./Portfolio.styles";
+import { StyledButton } from "@/components/Portfolio/AssetPopUp/AssetPopUp.styles";
 
 export const Portfolio = () => {
   const dispatch = useDispatch();

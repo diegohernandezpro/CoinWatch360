@@ -26,6 +26,7 @@ import {
   NameDiv,
   ClosingButton,
   Flex,
+  PortfolioTableContainer,
 } from "./PortfolioTable.styles";
 
 export const PortfolioTable = () => {
@@ -46,7 +47,7 @@ export const PortfolioTable = () => {
 
   const renderAssets = (arr) => {
     return (
-      <>
+      <PortfolioTableContainer>
         <p>Your Statistics:</p>
         {arr.map((coin) => (
           <NewCoinDiv key={coin.key}>
@@ -71,7 +72,7 @@ export const PortfolioTable = () => {
             </CoinInfoDiv>
           </NewCoinDiv>
         ))}
-      </>
+      </PortfolioTableContainer>
     );
   };
 

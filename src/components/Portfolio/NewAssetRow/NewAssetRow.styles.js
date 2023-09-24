@@ -8,6 +8,18 @@ export const RowDiv = styled.div`
   justify-content: space-around;
   background: ${({ theme }) => theme.nested.background};
   border-radius: 0.5rem;
+
+  overflow; auto;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    height: auto;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    
+  }
 `;
 
 export const RowItemDiv = styled.div`
@@ -17,6 +29,17 @@ export const RowItemDiv = styled.div`
   align-items: center;
   font-size: 0.9rem;
   gap: 0.6rem;
+
+  @media (max-width: ${({ theme }) => theme.mobile.width}) {
+    font-size: ${({ theme }) => theme.mobile.font};
+    width: Calc(100% - 1rem);
+    border-radius: 0.5rem;
+    background: ${({ theme }) => theme.nested.active};
+    padding-left: 1rem;
+    justify-content: flex-start;
+    height: 3rem;
+    text-align: start;
+  }
 `;
 
 export const Item = styled.span`
@@ -26,4 +49,5 @@ export const Item = styled.span`
     }
     return props.theme.money.red;
   }};
+  text-align: start;
 `;
