@@ -40,7 +40,6 @@ export const StyledNavLink = styled(NavLink)``;
 
 export const CurrencyDiv = styled.div`
   display: flex;
-  // border: 2px solid yellow;
   align-items: center;
   width: 100%;
   height: 70%;

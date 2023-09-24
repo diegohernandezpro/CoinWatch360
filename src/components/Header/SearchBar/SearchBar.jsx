@@ -18,11 +18,8 @@ export const SearchBar = () => {
     setSearch(searchQuery);
   };
 
-  const handleFocus = () => {
-    setIsVisible(true);
-  };
-
   const handleSubmit = (e) => {
+    setIsVisible(true);
     e.preventDefault();
     getCoins(searchTerm);
   };
@@ -63,7 +60,6 @@ export const SearchBar = () => {
           placeholder="Search..."
           value={searchTerm}
           onChange={handleChange}
-          onFocus={handleFocus}
         />
       </Form>
       {isVisible && (

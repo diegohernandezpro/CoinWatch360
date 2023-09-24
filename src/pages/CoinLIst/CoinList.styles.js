@@ -17,7 +17,6 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
   width: 100%;
-  // border: 2px solid lightgreen;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
