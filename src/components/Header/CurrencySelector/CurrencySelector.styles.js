@@ -44,7 +44,6 @@ export const StyledSelect = styled.select`
     padding: 0.5rem;
     color: ${({ theme }) => theme.color};
     border-radius: 6rem;
-    // border: 2px solid red;
     width: 100%;
     height: 100%;
   }
