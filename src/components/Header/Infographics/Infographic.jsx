@@ -19,6 +19,7 @@ import {
 } from "./Infographic.styles";
 import { FETCHING_STATE } from "@/modernStore/features/fetchingStates";
 import { getMobileSelector } from "@/modernStore";
+import { theme } from "@/styles";
 
 export const Infographic = () => {
   const dispatch = useDispatch();
@@ -66,7 +67,7 @@ export const Infographic = () => {
               Exchange {numExchange}
             </CoinWrapper>
             <MarketCap isMobile={isMobile}>
-              <NeutralDot color={({ theme }) => theme.infographic.base} />
+              <NeutralDot color={"#ffffff"} />
               <span>{formattedMarketCap}</span>
               <UpArrowGreen />
             </MarketCap>
@@ -74,9 +75,7 @@ export const Infographic = () => {
               text={formattedCoinVolume}
               percentage={volumeVsMarketCap}
             >
-              {!isMobile && (
-                <NeutralDot color={({ theme }) => theme.infographic.filler} />
-              )}
+              {!isMobile && <NeutralDot color={"#2172e5"} />}
             </TextNSlider>
             <TextNSlider
               text={`${formattedBitCap}%`}
@@ -120,11 +119,11 @@ export const Infographic = () => {
     return () => clearTimeout(timer);
   }, [infographic.status]);
 
-  useEffect(() => {
-    if (infographic.status === FETCHING_STATE.SUCCESS) {
-      dispatch(getCoinInfo());
-    }
-  }, [currency.type]);
+  // useEffect(() => {
+  //   if (infographic.status === FETCHING_STATE.SUCCESS) {
+  //     dispatch(getCoinInfo());
+  //   }
+  // }, [currency.type]);
 
   return <>{content}</>;
 };
