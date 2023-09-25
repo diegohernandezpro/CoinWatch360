@@ -20,13 +20,14 @@ import {
 import { FETCHING_STATE } from "@/modernStore/features/fetchingStates";
 import { getMobileSelector } from "@/modernStore";
 import { theme } from "@/styles";
+import { getThemeSelector } from "@/modernStore/features/theme/themeSlice";
 
 export const Infographic = () => {
   const dispatch = useDispatch();
   const [showError, setShowError] = useState(false);
   const infographic = useSelector(getInfographicSelector);
   const { isMobile } = useSelector(getMobileSelector);
-
+  const { isDark } = useSelector(getThemeSelector);
   const currency = useSelector(getCurrencySelector);
 
   const {
@@ -45,6 +46,13 @@ export const Infographic = () => {
   let content = "";
 
   const Wrapper = isMobile ? MobileContainer : Container;
+
+  const getDotColor = () => {
+    if (isDark) {
+      return [theme.dark.infographic.filler, theme.dark.infographic.base];
+    }
+    return [theme.light.infographic.filler, theme.light.infographic.base];
+  };
 
   if (showError) {
     content = <p>{infographic.errorMsg}</p>;
@@ -67,7 +75,7 @@ export const Infographic = () => {
               Exchange {numExchange}
             </CoinWrapper>
             <MarketCap isMobile={isMobile}>
-              <NeutralDot color={"#ffffff"} />
+              <NeutralDot color={getDotColor()[0]} />
               <span>{formattedMarketCap}</span>
               <UpArrowGreen />
             </MarketCap>
@@ -75,7 +83,7 @@ export const Infographic = () => {
               text={formattedCoinVolume}
               percentage={volumeVsMarketCap}
             >
-              {!isMobile && <NeutralDot color={"#2172e5"} />}
+              {!isMobile && <NeutralDot color={getDotColor()[1]} />}
             </TextNSlider>
             <TextNSlider
               text={`${formattedBitCap}%`}
