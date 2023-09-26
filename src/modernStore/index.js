@@ -29,14 +29,12 @@ const rootReducer = combineReducers({
   mobile: mobileReducer,
 });
 
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  // reducer: persistedReducer,
-  reducer: rootReducer,
+  reducer: persistedReducer,
 });
 
-// export const persistor = persistStore(store);
+export const persistor = persistStore(store);
 
-//Selectors
 export const getMobileSelector = (state) => state.mobile;
