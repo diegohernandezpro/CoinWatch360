@@ -190,9 +190,6 @@ Use this space to list resources you find helpful and would like to give credit 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/diegohernandezpro/CoinWatch360.svg?style=for-the-badge
 [contributors-url]: https://github.com/diegohernandezpro/CoinWatch360/graphs/contributors?from=2023-09-17&to=2023-09-25&type=c
 [forks-shield]: https://img.shields.io/github/forks/diegohernandezpro/CoinWatch360.svg?style=for-the-badge
