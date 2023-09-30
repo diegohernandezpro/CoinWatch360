@@ -177,8 +177,6 @@ Project Link - [CoinWatch360](https://CoinWatch360.com)
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
 * [NPM](https://www.npmjs.com/)
 * [StackOverFlow](https://stackoverflow.com/)
 * [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
