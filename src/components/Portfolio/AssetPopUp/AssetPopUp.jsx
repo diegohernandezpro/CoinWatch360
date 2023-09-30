@@ -1,17 +1,18 @@
 import { useSelector, useDispatch } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
 import { format } from "date-fns";
-import { getPortfolioSelector } from "@/store/Portfolio";
 import {
-  tooglePopUpOff,
+  togglePopUpOff,
   getCoins,
-  handlePortfolioCoin,
-  handlePurchasedAmount,
-  handleDate,
-  getSelectedCoin,
-} from "@/store/Portfolio/actions";
+  setCoin,
+  setAmount,
+  setDate,
+  addAsset,
+  getPortfolioSelector,
+} from "@/modernStore/features/portfolio/portfolioSlice";
 import { Results, SelectedCoin } from "@/components/Portfolio";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import { faX, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import {
   Container,
   StyledP,
@@ -31,37 +32,44 @@ export const AssetPopUp = () => {
 
   const handleSubmitCoin = (e) => {
     e.preventDefault();
-    dispatch(getCoins(portfolio.coin));
+    dispatch(getCoins({ coinName: portfolio.coin }));
   };
 
-  const handleCoinChange = (e) => {
-    dispatch(handlePortfolioCoin(e.target.value));
-  };
+  const handleCoinChange = (e) => dispatch(setCoin(e.target.value));
 
-  const handleAmountChange = (e) => {
-    dispatch(handlePurchasedAmount(e.target.value));
-  };
+  const handleAmountChange = (e) =>
+    dispatch(
+      setAmount({
+        amount: e.target.value,
+        numericAmount: parseFloat(e.target.value),
+      })
+    );
 
   const currentDate = new Date();
   const formattedCurrentDate = format(currentDate, "yyyy-MM-dd");
 
   const handleDateChange = (e) => {
-    dispatch(handleDate(e.target.value));
+    dispatch(setDate(e.target.value));
   };
 
   const handleClick = () => {
+    if (!portfolio.coin || !portfolio.date || !portfolio.numericAmount) {
+      alert("Please fill in all the fields to continue.");
+      return;
+    }
+
     const coinData = {
       id: portfolio.coin,
-      key: Math.random(),
-      date: portfolio.date,
       amount: portfolio.numericAmount,
+      date: portfolio.date,
+      key: nanoid(),
     };
 
-    dispatch(getSelectedCoin(coinData));
+    dispatch(addAsset({ coinData }));
   };
 
   const handleCloseWindow = () => {
-    dispatch(tooglePopUpOff());
+    dispatch(togglePopUpOff());
   };
 
   return (

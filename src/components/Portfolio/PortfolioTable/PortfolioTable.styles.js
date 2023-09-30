@@ -76,3 +76,9 @@ export const ClosingButton = styled.button`
     color: ${({ theme }) => theme.money.red};
   }
 `;
+
+export const Flex = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

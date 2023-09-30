@@ -14,6 +14,8 @@ import { Line, Bar } from "react-chartjs-2";
 import { barChart, lineChart, backgroundChartOptions } from "../ChartOptions";
 import { Wrapper, StyledDiv } from "./Chart.styles";
 import { useTheme } from "styled-components";
+import beTarask from "date-fns/esm/locale/be-tarask/index.js";
+import { faBreadSlice } from "@fortawesome/free-solid-svg-icons";
 
 ChartJS.register(
   CategoryScale,
@@ -67,35 +69,48 @@ export const Chart = ({ label, data, type, ...rest }) => {
     ],
   };
 
+  let content = "";
+
+  switch (type) {
+    case "line":
+      content = (
+        <Line
+          data={dataPoints}
+          options={lineChart}
+          width={"415"}
+          height={"250"}
+        />
+      );
+      break;
+    case "bar":
+      content = (
+        <Bar
+          data={dataPoints}
+          options={barChart}
+          width={"415"}
+          height={"250"}
+        />
+      );
+      break;
+    case "backgroundLine":
+      content = (
+        <Line
+          data={dataPoints}
+          options={backgroundChartOptions}
+          width={"415"}
+          height={"150"}
+        />
+      );
+      break;
+    default:
+      content = <></>;
+      break;
+  }
+
   return (
     <>
       <StyledDiv>{rest.children}</StyledDiv>
-      <Wrapper>
-        {type === "line" && (
-          <Line
-            data={dataPoints}
-            options={lineChart}
-            width={"415"}
-            height={"250"}
-          />
-        )}
-        {type === "bar" && (
-          <Bar
-            data={dataPoints}
-            options={barChart}
-            width={"415"}
-            height={"250"}
-          />
-        )}
-        {type === "backgroundLine" && (
-          <Line
-            data={dataPoints}
-            options={backgroundChartOptions}
-            width={"415"}
-            height={"150"}
-          />
-        )}
-      </Wrapper>
+      <Wrapper>{content}</Wrapper>
     </>
   );
 };

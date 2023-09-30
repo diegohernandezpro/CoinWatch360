@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useGlobalContext } from "@/contexts";
-import { formatNum, LoadingCircle } from "@/utils";
-import { getCoinInfo } from "@/store/infographic/actions";
-import { getInfographicSelector } from "@/store/infographic";
+import { LoadingCircle } from "@/utils";
+import {
+  getInfographicSelector,
+  getCoinInfo,
+  disappearError,
+} from "@/modernStore/features/infographic/infographicSlice";
+import { getCurrencySelector } from "@/modernStore/features/currency/currencySlice";
 import { UpArrowGreen, NeutralDot } from "@/styles";
 import { TextNSlider } from "./TextNSlider";
 import {
@@ -14,80 +17,106 @@ import {
   Flex,
 } from "./Infographic.styles";
 
+import { FETCHING_STATE } from "@/modernStore/features/fetchingStates";
+
 export const Infographic = () => {
   const dispatch = useDispatch();
+  const [showError, setShowError] = useState(false);
   const infographic = useSelector(getInfographicSelector);
-  const { currency } = useGlobalContext();
+  const currency = useSelector(getCurrencySelector);
 
-  const getIcon = (icon) => {
-    if (icon === "bitcoin") {
-      return "/icons/bitcoin.svg";
+  const {
+    numCoins,
+    numExchange,
+    formattedMarketCap,
+    formattedCoinVolume,
+    formattedBitCap,
+    formattedEthCap,
+    volumeVsMarketCap,
+  } = infographic.coinsData;
+
+  const getIcon = (icon) =>
+    icon === "bitcoin" ? "/icons/bitcoin.svg" : "/icons/ethereum.svg";
+
+  let content = "";
+
+  if (showError) {
+    content = <p>{infographic.errorMsg}</p>;
+  } else {
+    switch (infographic.status) {
+      case FETCHING_STATE.PENDING:
+        content = (
+          <Container>
+            <Flex>
+              <LoadingCircle width="1rem" />
+            </Flex>
+          </Container>
+        );
+        break;
+      case FETCHING_STATE.SUCCESS:
+        content = (
+          <Container>
+            <CoinWrapper>Coins {numCoins}</CoinWrapper>
+            <CoinWrapper>Exchange {numExchange}</CoinWrapper>
+            <MarketCap>
+              <NeutralDot color={({ theme }) => theme.infographic.base} />
+              <span>{formattedMarketCap}</span>
+              <UpArrowGreen />
+            </MarketCap>
+            <TextNSlider
+              text={formattedCoinVolume}
+              percentage={volumeVsMarketCap}
+            >
+              <NeutralDot color={({ theme }) => theme.infographic.filler} />
+            </TextNSlider>
+            <TextNSlider
+              text={`${formattedBitCap}%`}
+              percentage={formattedBitCap}
+              icon="bitcoin"
+            >
+              <Icon src={getIcon("bitcoin")} />
+            </TextNSlider>
+            <TextNSlider
+              text={`${formattedEthCap}%`}
+              percentage={formattedEthCap}
+              icon="ethereum"
+            >
+              <Icon src={getIcon("ethereum")} />
+            </TextNSlider>
+          </Container>
+        );
+        break;
+
+      default:
+        content = <></>;
+        break;
     }
-    return "/icons/ethereum.svg";
-  };
-
-  const { numCoins, numExchange, volume, marketCap, bitCap, ethCap } =
-    infographic.coinsData;
-  const coinMarketCap = formatNum(marketCap, currency.symbol);
-  const coinVolume = formatNum(volume, currency.symbol);
-  const coinBitCap = Math.round(bitCap);
-  const coinEthCap = Math.round(ethCap);
-  const volumeVsMarketCap = ((volume / marketCap) * 100).toFixed(2);
+  }
 
   useEffect(() => {
-    dispatch(getCoinInfo());
+    let timer;
+
+    switch (infographic.status) {
+      case FETCHING_STATE.IDLE:
+        dispatch(getCoinInfo());
+        break;
+      case FETCHING_STATE.ERROR:
+        setShowError(true);
+        timer = setTimeout(() => {
+          setShowError(false);
+          dispatch(disappearError());
+        }, 5000);
+        break;
+    }
+
+    return () => clearTimeout(timer);
+  }, [infographic.status]);
+
+  useEffect(() => {
+    if (infographic.status === FETCHING_STATE.SUCCESS) {
+      dispatch(getCoinInfo());
+    }
   }, [currency.type]);
 
-  return (
-    <>
-      {!infographic.hasError ? (
-        <>
-          {!infographic.isLoading ? (
-            <>
-              {
-                <Container>
-                  <CoinWrapper>Coins {numCoins}</CoinWrapper>
-                  <CoinWrapper>Exchange {numExchange}</CoinWrapper>
-                  <MarketCap>
-                    <NeutralDot color={({ theme }) => theme.infographic.base} />
-                    <span>{coinMarketCap}</span>
-                    <UpArrowGreen />
-                  </MarketCap>
-                  <TextNSlider text={coinVolume} percentage={volumeVsMarketCap}>
-                    <NeutralDot
-                      color={({ theme }) => theme.infographic.filler}
-                    />
-                  </TextNSlider>
-                  <TextNSlider
-                    text={`${coinBitCap}%`}
-                    percentage={coinBitCap}
-                    icon="bitcoin"
-                  >
-                    <Icon src={getIcon("bitcoin")} />
-                  </TextNSlider>
-                  <TextNSlider
-                    text={`${coinEthCap}%`}
-                    percentage={coinEthCap}
-                    icon="ethereum"
-                  >
-                    <Icon src={getIcon("etherum")} />
-                  </TextNSlider>
-                </Container>
-              }
-            </>
-          ) : (
-            <Container>
-              <Flex>
-                <LoadingCircle width="1rem" />
-              </Flex>
-            </Container>
-          )}
-        </>
-      ) : (
-        <>
-          <p>{infographic.errorMsg}</p>
-        </>
-      )}
-    </>
-  );
+  return <>{content}</>;
 };

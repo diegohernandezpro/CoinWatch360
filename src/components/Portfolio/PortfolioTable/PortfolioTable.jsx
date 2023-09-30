@@ -1,9 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-import { getPortfolioSelector } from "@/store/portfolio";
 import { IconWrapper, Icon } from "@/components";
-import { handleRemoveAsset } from "@/store/portfolio/actions";
+import { LoadingCircle } from "@/utils";
+import { ErrorP } from "@/pages";
+import {
+  removeAsset,
+  getPortfolioSelector,
+  setStatusToIdle,
+  setStatusCoinToSuccess,
+  addAsset,
+} from "@/modernStore/features/portfolio/portfolioSlice";
+import { getCurrencySelector } from "@/modernStore/features/currency/currencySlice";
+import { FETCHING_STATE } from "@/modernStore/features/fetchingStates";
 
 import { MarketPriceRow, UserCoinPriceRow } from "../NewAssetRow/NewAssetRow";
 import {
@@ -15,21 +25,30 @@ import {
   CoinDisplay,
   NameDiv,
   ClosingButton,
+  Flex,
 } from "./PortfolioTable.styles";
 
 export const PortfolioTable = () => {
   const dispatch = useDispatch();
-  const { assets } = useSelector(getPortfolioSelector);
+  const { assets, statusCoin, errorMsg } = useSelector(getPortfolioSelector);
+  const currency = useSelector(getCurrencySelector);
+  const [showError, setShowError] = useState(false);
+  const [previousAssets, setPreviousAssets] = useState([]);
 
-  const handleClick = (key) => {
-    dispatch(handleRemoveAsset(key));
+  const handleClick = (key, coinName) => {
+    const isConfirmed = window.confirm(
+      `Are you sure you want to remove ${coinName}?`
+    );
+    if (isConfirmed) {
+      dispatch(removeAsset(key));
+    }
   };
 
-  return (
-    <>
-      <StatisticsDiv>
-        {assets?.length > 0 && <p>Your Statistics:</p>}
-        {assets?.map((coin) => (
+  const renderAssets = (arr) => {
+    return (
+      <>
+        <p>Your Statistics:</p>
+        {arr.map((coin) => (
           <NewCoinDiv key={coin.key}>
             <CoinDisplayDiv>
               <CoinDisplay>
@@ -38,7 +57,7 @@ export const PortfolioTable = () => {
                 </IconWrapper>
                 <NameDiv>{coin.id}</NameDiv>
               </CoinDisplay>
-              <ClosingButton onClick={() => handleClick(coin.key)}>
+              <ClosingButton onClick={() => handleClick(coin.key, coin.id)}>
                 <FontAwesomeIcon icon={faX} />
               </ClosingButton>
             </CoinDisplayDiv>
@@ -52,7 +71,41 @@ export const PortfolioTable = () => {
             </CoinInfoDiv>
           </NewCoinDiv>
         ))}
-      </StatisticsDiv>
-    </>
-  );
+      </>
+    );
+  };
+
+  const determineContent = () => {
+    if (showError) return <ErrorP msg={errorMsg}>{errorMsg}</ErrorP>;
+
+    if (previousAssets.length > 0) return renderAssets(previousAssets);
+
+    if (statusCoin === FETCHING_STATE.PENDING)
+      return (
+        <Flex>
+          <LoadingCircle width="3rem" />
+        </Flex>
+      );
+  };
+
+  useEffect(() => {
+    switch (statusCoin) {
+      case FETCHING_STATE.IDLE:
+        setPreviousAssets(assets);
+        break;
+      case FETCHING_STATE.SUCCESS:
+        setPreviousAssets(assets);
+        dispatch(setStatusToIdle());
+        break;
+      case FETCHING_STATE.ERROR:
+        setShowError(true);
+        const timer = setTimeout(() => {
+          setShowError(false);
+          dispatch(setStatusCoinToSuccess());
+        }, 3000);
+        return () => clearTimeout(timer);
+    }
+  }, [statusCoin, assets]);
+
+  return <StatisticsDiv>{determineContent()}</StatisticsDiv>;
 };
