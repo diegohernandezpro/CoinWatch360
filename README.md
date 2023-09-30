@@ -2,8 +2,8 @@
 
 
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
+[![Contributors](https://img.shields.io/github/contributors/diegohernandezpro/CoinWatch360.svg?style=for-the-badge)][contributors-url]
+[![Forks](https://img.shields.io/github/forks/diegohernandezpro/CoinWatch360.svg?style=for-the-badge)][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
