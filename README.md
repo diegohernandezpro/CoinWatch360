@@ -15,7 +15,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/diegohernandezpro/crypto-app1">
-    <img src="images/logo512.png" alt="Logo" width="80" height="80">
+    <img src="public/images/logo512.png" alt="Logo" width="80" height="80">
   </a>
 
 
@@ -65,7 +65,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]]
 
 Effortlessly manage your digital assets with our user-friendly crypto tracker. Get real-time updates and advanced analytics in a secure environment. Perfect for traders of all skill levels who want to make informed decisions.
 
@@ -202,7 +202,7 @@ Use this space to list resources you find helpful and would like to give credit 
 [license-url]: https://github.com/diegohernandezpro/crypto-app1/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/diegohernandezpro/
-[product-screenshot]: images/ReadMecrypto-app1image.png
+[product-screenshot]: public/images/ReadMeCoinWatch360image.png
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
