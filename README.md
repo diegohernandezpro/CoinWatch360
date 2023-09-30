@@ -25,7 +25,7 @@
     Instant Crypto Insights: Analytics Made Easy for Everyone.
     <br />
     <br />
-    <a href="https://crypto-app1.com">View Demo</a>
+    <a href="https://coinwatch360.com">View Demo</a>
     ·
     <a href="https://github.com/diegohernandezpro/crypto-app1/issues">Report Bug</a>
     ·
