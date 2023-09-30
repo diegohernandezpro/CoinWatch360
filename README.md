@@ -14,7 +14,7 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/diegohernandezpro/crypto-app1">
+  <a href="https://github.com/diegohernandezpro/CoinWatch360">
     <img src="public/images/logo512.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -27,9 +27,9 @@
     <br />
     <a href="https://coinwatch360.com">View Demo</a>
     ·
-    <a href="https://github.com/diegohernandezpro/crypto-app1/issues">Report Bug</a>
+    <a href="https://github.com/diegohernandezpro/CoinWatch360/issues">Report Bug</a>
     ·
-    <a href="https://github.com/diegohernandezpro/crypto-app1/issues">Request Feature</a>
+    <a href="https://github.com/diegohernandezpro/CoinWatch360/issues">Request Feature</a>
   </p>
 </div>
 
@@ -102,7 +102,7 @@ To get a local copy up and running follow these simple example steps.
 
 2. Clone the repo
    ```sh
-   git clone https://github.com/diegohernandezpro/crypto-app1.git
+   git clone https://github.com/diegohernandezpro/CoinWatch360.git
    ```
 3. Install NPM packages
    ```sh
@@ -168,7 +168,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Diego Hernandez - [connect@diegohernandezpro.com](connect@diegohernandezpro.com)
 
-Project Link - [crypto-app1](https://crypto-app1.com)
+Project Link - [CoinWatch360](https://CoinWatch360.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -190,16 +190,16 @@ Use this space to list resources you find helpful and would like to give credit 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-[contributors-shield]: https://img.shields.io/github/contributors/diegohernandezpro/crypto-app1.svg?style=for-the-badge
-[contributors-url]: https://github.com/diegohernandezpro/crypto-app1/graphs/contributors?from=2023-09-17&to=2023-09-25&type=c
-[forks-shield]: https://img.shields.io/github/forks/diegohernandezpro/crypto-app1.svg?style=for-the-badge
-[forks-url]: https://github.com/diegohernandezpro/crypto-app1/forks
-[stars-shield]: https://img.shields.io/github/stars/diegohernandezpro/crypto-app1.svg?style=for-the-badge
-[stars-url]: https://github.com/diegohernandezpro/crypto-app1/stargazers
-[issues-shield]: https://img.shields.io/github/issues/diegohernandezpro/crypto-app1.svg?style=for-the-badge
-[issues-url]: https://github.com/diegohernandezpro/crypto-app1/issues
-[license-shield]: https://img.shields.io/github/license/diegohernandezpro/crypto-app1.svg?style=for-the-badge
-[license-url]: https://github.com/diegohernandezpro/crypto-app1/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/diegohernandezpro/CoinWatch360.svg?style=for-the-badge
+[contributors-url]: https://github.com/diegohernandezpro/CoinWatch360/graphs/contributors?from=2023-09-17&to=2023-09-25&type=c
+[forks-shield]: https://img.shields.io/github/forks/diegohernandezpro/CoinWatch360.svg?style=for-the-badge
+[forks-url]: https://github.com/diegohernandezpro/CoinWatch360/forks
+[stars-shield]: https://img.shields.io/github/stars/diegohernandezpro/CoinWatch360.svg?style=for-the-badge
+[stars-url]: https://github.com/diegohernandezpro/CoinWatch360/stargazers
+[issues-shield]: https://img.shields.io/github/issues/diegohernandezpro/CoinWatch360.svg?style=for-the-badge
+[issues-url]: https://github.com/diegohernandezpro/CoinWatch360/issues
+[license-shield]: https://img.shields.io/github/license/diegohernandezpro/CoinWatch360.svg?style=for-the-badge
+[license-url]: https://github.com/diegohernandezpro/CoinWatch360/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/diegohernandezpro/
 [product-screenshot]: public/images/ReadMeCoinWatch360image.png
