@@ -129,7 +129,7 @@ export const Charts = () => {
                 type="line"
               >
                 <ChartSummary
-                  heading="HELLO"
+                  heading="Bitcoin"
                   price={data.avgLine}
                   symbol={currency.symbol}
                   date={data.today}
