@@ -19,7 +19,6 @@ export const Container = styled.div`
 `;
 
 export const StyledDiv = styled.div`
-  overflow: auto;
   font-size: ${({ font }) => {
     if (font) {
       return "1.8rem";
