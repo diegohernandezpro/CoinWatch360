@@ -65,7 +65,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]]
+![Product Name Screen Shot][product-screenshot]
 
 Effortlessly manage your digital assets with our user-friendly crypto tracker. Get real-time updates and advanced analytics in a secure environment. Perfect for traders of all skill levels who want to make informed decisions.
 
