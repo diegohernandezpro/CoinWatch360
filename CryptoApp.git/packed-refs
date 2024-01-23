@@ -1,0 +1,20 @@
+# pack-refs with: peeled fully-peeled sorted 
+8a7b7e879ae090791d08a3ed0244e55bbdf467f1 refs/heads/Adding-LocalStorage
+bd9d7fa72b00c483ee7dbd88f7d5d70abe276fcf refs/heads/Adding-Redux
+69bbed926eabc09892f7104f609da54c04802151 refs/heads/Coin-Page
+00939c21189526df5c5ab08753932930799ffede refs/heads/Header-Component
+a65f9772d012fdd53e8a019fe418c792d5c87f19 refs/heads/Header-Infographic-Design
+8d9b0c4a78a09b3e71fd2ec4a87e42bedc5438ec refs/heads/Infographic-functionality
+34a1bea35d2b90427e263201aba8c04f762b29ed refs/heads/Landing-Page-Charts
+d2a1edeaf983d886e9519178fd592f20e38f2c0c refs/heads/Landing-Page-Charts-Clean-up
+5a5da0f8c0bf34e7deccd9067dd18ff13d4f71b7 refs/heads/Landing-Page-Currency
+8050f287c60b1e902a66d496c582fc0286583340 refs/heads/Landing-Page-SearchBar
+dd758038bf569a01230bc563b4fbc3fa44e2c08f refs/heads/Landing-Page-Table
+19595854b1322893ed272c3f7b1bc552af4a88ec refs/heads/Landing-Page-Theme-Change
+2c8368e78f0e7d80bc491dc33fe27de11b84fec5 refs/heads/Landing-Page-To-Hooks
+3826fa757fd7c4c48030cfbb779ec29792eb6253 refs/heads/Portfolio-Page
+b0c997f936b21b97f282b93707d35004ec557318 refs/heads/clean-code
+83954f66dd1d8ec10c78f5f434510e1c0bce57ff refs/heads/main
+234d58d4f0b4ee452fcc486a6e6376ab394ad027 refs/heads/master
+03fb1a6eaba0a8badbcc37e2d460f0d25722e8e1 refs/heads/mobile-version
+4a4c0f217d0bb0ba3721f605645c4b000055ea97 refs/heads/modern-redux
